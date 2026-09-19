@@ -129,7 +129,8 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
     <div class="card"><div class="n">05</div><h3>📊 Campanhas</h3><p>Cada campanha do briefing ao pagamento, com status e valor.</p></div>
     <div class="card"><div class="n">06</div><h3>✅ Checklist</h3><p>O checklist do portfólio, pra você saber o que ainda falta.</p></div>
     <div class="card"><div class="n">07</div><h3>🗂️ Marcas</h3><p>A sua base de prospecção: as empresas que você foi atrás, com origem e status de cada uma.</p></div>
-    <div class="card"><div class="n">08</div><h3>🚀 Prospecção</h3><p>De onde sai o e-mail pra dezenas de marcas com um clique. Você liga no domingo.</p></div>
+    <div class="card"><div class="n">08</div><h3>🎬 Referências</h3><p>Cola o link de um vídeo e ele fica aqui tocando, com a transcrição da fala.</p></div>
+    <div class="card"><div class="n">09</div><h3>🚀 Prospecção</h3><p>De onde sai o e-mail pra dezenas de marcas com um clique. Você liga no domingo.</p></div>
   </div>
 
   <h2 class="bloco">Antes de colar</h2>
@@ -289,6 +290,7 @@ Tabelas:
 - visitas: para as métricas do portfólio (data, página, de onde veio)
 - marcas: nome da marca, site, instagram, seguidores, e-mail, whatsapp, pessoa de contato, nicho, origem (onde eu encontrei), status, observação e data
 - envios: para qual marca, para qual e-mail, assunto, quando saiu e se deu erro
+- referencias: título, autor, link do vídeo, plataforma, transcrição e data
 
 IMPORTANTE, não pule isso: ligue o RLS (Row Level Security) em TODAS as tabelas. A regra é que só o meu usuário logado pode ler e escrever os meus dados, e ninguém deslogado pode ler nada. A única exceção é a tabela leads, onde qualquer pessoa pode INSERIR (porque é o formulário do meu site que escreve lá), mas só eu posso LER. As tabelas marcas e envios são as mais sensíveis, porque guardam o contato de dezenas de empresas: ninguém deslogado pode chegar nelas de jeito nenhum.
 
@@ -330,7 +332,18 @@ As abas, nesta ordem:
    No topo da aba, um contador com o total de marcas e quantas estão em cada status.
    No fim, me explique em português simples como eu importo a planilha.
 
-7. PROSPECÇÃO
+7. REFERÊNCIAS DE VÍDEO
+   É onde eu guardo vídeo que me inspira, meu ou de outra creator, pra estudar o formato depois.
+   Eu colo o link de um vídeo do YouTube ou de um reel do Instagram e ele fica salvo ali.
+   - Mostre o vídeo TOCANDO dentro da página, não só um link: YouTube pelo embed do youtube-nocookie, em pé quando for Shorts, e reel do Instagram pelo embed dele. A capa do card do YouTube você pega de graça em img.youtube.com/vi/ID/hqdefault.jpg.
+   - Quando eu colar um link do YouTube, busque o nome do vídeo e o nome do canal sozinho, pelo oembed do YouTube (www.youtube.com/oembed?format=json&url=...). Não precisa de chave nenhuma.
+   - TRANSCRIÇÃO: em cada vídeo, um botão que transcreve a fala e guarda o texto junto da referência, com botão de copiar. Use a API da Supadata (api.supadata.ai/v1/transcript), chamada direto do navegador com o header x-api-key. Os parâmetros lang=pt, mode=auto e text=true são obrigatórios: sem mode=auto, reel do Instagram quase nunca volta, e sem lang=pt ela traduz pro inglês.
+   - A transcrição demora: se a resposta vier com jobId em vez do texto, fique consultando api.supadata.ai/v1/transcript/{jobId} a cada 5 segundos, até uns 7 minutos, mostrando na tela que está trabalhando.
+   - A minha chave da Supadata eu mesma vou colar numa telinha de configuração, e ela fica guardada no meu navegador. Não escreva chave nenhuma no código.
+   - Eu também quero poder escrever ou colar a transcrição na mão, pra vídeo que a ferramenta não der conta.
+   - Me explique no fim, em duas linhas, como eu crio a minha conta gratuita na Supadata e onde eu colo a chave.
+
+8. PROSPECÇÃO
    É daqui que eu mando e-mail pras marcas da aba Marcas, várias de uma vez.
    O envio vai pelo Resend. A chave do Resend é SECRETA: ela fica guardada como segredo dentro de uma função do Supabase, e o admin só chama essa função. Essa chave não pode aparecer no site, no meu repositório nem em arquivo nenhum do projeto.
    Eu ainda não tenho a conta do Resend, então deixe tudo pronto e me explique no fim, em passos curtos, onde eu colo a chave quando criar a minha conta.
