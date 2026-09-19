@@ -118,7 +118,7 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 <header class="capa">
   <div class="selo">Dia 1 · Tarde</div>
   <h1 class="titulo">Sua página de admin sai de um prompt só.</h1>
-  <p class="sub">Preencha os campos da direita, copie o prompt e cole no seu Claude Code, na mesma pasta do seu portfólio. Ele constrói tudo e te explica cada passo no caminho.</p>
+  <p class="sub">Preencha os campos da direita, copie o prompt e cole no seu Claude Code, na mesma pasta do seu portfólio. Ele constrói tudo e te explica cada passo no caminho. Esse é o admin completo, com as abas dos dois dias.</p>
 
   <h2 class="bloco">O que ele vai construir</h2>
   <div class="cards">
@@ -128,6 +128,8 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
     <div class="card"><div class="n">04</div><h3>🗓️ Calendário</h3><p>O que você grava, edita e posta, por semana, com prazo de cada marca.</p></div>
     <div class="card"><div class="n">05</div><h3>📊 Campanhas</h3><p>Cada campanha do briefing ao pagamento, com status e valor.</p></div>
     <div class="card"><div class="n">06</div><h3>✅ Checklist</h3><p>O checklist do portfólio, pra você saber o que ainda falta.</p></div>
+    <div class="card"><div class="n">07</div><h3>🗂️ Marcas</h3><p>A sua base de prospecção: as empresas que você foi atrás, com origem e status de cada uma.</p></div>
+    <div class="card"><div class="n">08</div><h3>🚀 Prospecção</h3><p>De onde sai o e-mail pra dezenas de marcas com um clique. Você liga no domingo.</p></div>
   </div>
 
   <h2 class="bloco">Antes de colar</h2>
@@ -285,8 +287,10 @@ Tabelas:
 - campanhas: marca, briefing, prazo de entrega, status (em produção, enviado, aprovado, pago), valor e observação
 - checklist: item, seção do portfólio e se está feito
 - visitas: para as métricas do portfólio (data, página, de onde veio)
+- marcas: nome da marca, site, instagram, seguidores, e-mail, whatsapp, pessoa de contato, nicho, origem (onde eu encontrei), status, observação e data
+- envios: para qual marca, para qual e-mail, assunto, quando saiu e se deu erro
 
-IMPORTANTE, não pule isso: ligue o RLS (Row Level Security) em TODAS as tabelas. A regra é que só o meu usuário logado pode ler e escrever os meus dados, e ninguém deslogado pode ler nada. A única exceção é a tabela leads, onde qualquer pessoa pode INSERIR (porque é o formulário do meu site que escreve lá), mas só eu posso LER.
+IMPORTANTE, não pule isso: ligue o RLS (Row Level Security) em TODAS as tabelas. A regra é que só o meu usuário logado pode ler e escrever os meus dados, e ninguém deslogado pode ler nada. A única exceção é a tabela leads, onde qualquer pessoa pode INSERIR (porque é o formulário do meu site que escreve lá), mas só eu posso LER. As tabelas marcas e envios são as mais sensíveis, porque guardam o contato de dezenas de empresas: ninguém deslogado pode chegar nelas de jeito nenhum.
 
 Depois de escrever o SQL, me explique em português simples como eu testo se essa tranca funcionou de verdade.
 
@@ -319,6 +323,24 @@ As abas, nesta ordem:
 
 5. CHECKLIST DO PORTFÓLIO
    Uma lista de conferência do que o meu portfólio precisa ter, separada por seção da página, com uma barrinha de quanto já está pronto.
+
+6. MARCAS
+   Essa é a minha base de prospecção: as empresas que EU fui atrás. É diferente da aba Contatos, que guarda quem chega até mim pelo formulário.
+   Quero poder adicionar marca na mão, importar uma planilha CSV, buscar por nome, filtrar por nicho, origem e status, e mudar o status em um clique: a enviar, enviado, respondeu, proposta, fechado, sem interesse.
+   No topo da aba, um contador com o total de marcas e quantas estão em cada status.
+   No fim, me explique em português simples como eu importo a planilha.
+
+7. PROSPECÇÃO
+   É daqui que eu mando e-mail pras marcas da aba Marcas, várias de uma vez.
+   O envio vai pelo Resend. A chave do Resend é SECRETA: ela fica guardada como segredo dentro de uma função do Supabase, e o admin só chama essa função. Essa chave não pode aparecer no site, no meu repositório nem em arquivo nenhum do projeto.
+   Eu ainda não tenho a conta do Resend, então deixe tudo pronto e me explique no fim, em passos curtos, onde eu colo a chave quando criar a minha conta.
+   Na aba eu quero:
+   - escrever o modelo do e-mail, com assunto e texto, usando {marca}, {pessoa} e {conexao}, que o sistema troca sozinho pelos dados de cada marca
+   - a lista das minhas marcas com caixinha de seleção e um botão de marcar todas as que estão como "a enviar"
+   - um botão de enviar um teste só pra mim, antes de qualquer disparo
+   - o botão de disparar, que manda um e-mail de cada vez, com uma pausa entre eles
+   - depois do envio, marcar a marca como enviado com a data, e me avisar se eu tentar enviar de novo pro mesmo e-mail
+   - uma tabela com tudo que saiu: pra quem, quando e se deu erro
 
 == LIGAR O SITE AO PAINEL ==
 Isso é o que faz tudo valer a pena, então capriche:
