@@ -796,28 +796,24 @@ window.Biblioteca = {
    "emoji": "🏠",
    "ideias": [
     {
-     "t": "A gaveta que eu tinha vergonha de abrir",
-     "tipo": "antes-depois",
-     "gancho": "\"Eu vou mostrar minha gaveta de verdade. Prepara.\""
+     "t": "A gaveta da bagunça, aberta",
+     "gancho": "Pode abrir a sua gaveta da bagunça aí. Eu espero."
     },
     {
-     "t": "Montei sozinha, do zero",
-     "gancho": "\"A caixa diz que precisa de duas pessoas. Eu tinha as minhas duas mãos e uma chave de fenda.\""
+     "t": "O cômodo que você fecha quando chega visita",
+     "gancho": "Fala a verdade: quando toca a campainha, tem um cômodo que você sai correndo pra fechar a porta."
     },
     {
-     "t": "3 lugares que você não pensou em usar isso",
-     "tipo": "lista",
-     "gancho": "\"O terceiro mudou minha cozinha inteira.\""
+     "t": "Organizando de verdade, jogando fora",
+     "gancho": "Por que que a gente sempre enche a caixa organizadora com coisa que devia ir pro lixo?"
     },
     {
-     "t": "Meu canto de trabalho por menos de R$ 400",
-     "tipo": "demonstracao",
-     "gancho": "\"Tudo que está nessa mesa custou menos que um tênis.\""
+     "t": "Montando o móvel sem ler o manual",
+     "gancho": "Ninguém monta móvel lendo manual, né? A gente lê depois que sobra parafuso."
     },
     {
-     "t": "Chegou, montei e coloquei no lugar",
-     "tipo": "unboxing",
-     "gancho": "\"Chegou em 3 dias e eu não acreditei no tamanho da caixa.\""
+     "t": "O único cantinho que aparece nas fotos",
+     "gancho": "Pode confessar: tem um cantinho arrumado aí que é o único que aparece nas suas fotos."
     }
    ]
   },
@@ -827,29 +823,24 @@ window.Biblioteca = {
    "emoji": "💻",
    "ideias": [
     {
-     "t": "Usei por uma semana e o que me irritou",
-     "tipo": "depoimento",
-     "gancho": "\"Vou falar do que ninguém fala nas avaliações.\""
+     "t": "As assinaturas que você esqueceu que paga",
+     "gancho": "Pode confessar: você paga uma assinatura aí que nem lembra de usar."
     },
     {
-     "t": "Configurando do zero, sem pular etapa",
-     "tipo": "demonstracao",
-     "gancho": "\"Do jeito que uma pessoa normal faria, com as dúvidas e tudo.\""
+     "t": "A mesma senha em cinco lugares",
+     "gancho": "Pode confessar: você usa a mesma senha em uns cinco lugares, né?"
+    },
+    {
+     "t": "O que tem no termo que ninguém lê",
+     "gancho": "Ninguém lê termo de uso. A gente clica em aceitar e reza pra dar certo."
     },
     {
      "t": "O gratuito resolve ou preciso pagar?",
-     "tipo": "comparativo",
-     "gancho": "\"Testei os dois na mesma tarefa.\""
+     "gancho": "Muita ferramenta paga faz exatamente o que a versão grátis já fazia."
     },
     {
-     "t": "Como isso mudou minha semana de trabalho",
-     "tipo": "problema-solucao",
-     "gancho": "\"Eu perdia 4 horas por semana com isso.\""
-    },
-    {
-     "t": "3 funções que ninguém usa e deveria",
-     "tipo": "lista",
-     "gancho": "\"A terceira eu descobri por acidente.\""
+     "t": "O jeito fácil que eu descobri tarde demais",
+     "gancho": "Por que será que a gente só descobre que tinha um jeito mais fácil depois de fazer tudo na mão?"
     }
    ]
   },
@@ -859,29 +850,24 @@ window.Biblioteca = {
    "emoji": "🍳",
    "ideias": [
     {
-     "t": "Meu café das 6h, todo dia igual",
-     "tipo": "rotina",
-     "gancho": "\"É a única parte do meu dia que é só minha.\""
+     "t": "A receita da mãe, feita por mim",
+     "gancho": "Por que será que a receita preferida da gente só dá certo quando a nossa mãe faz?"
     },
     {
-     "t": "Fiz seguindo a embalagem contra do meu jeito",
-     "tipo": "comparativo",
-     "gancho": "\"A embalagem manda fazer assim. Eu faço assado.\""
+     "t": "Abrindo os potes perdidos da geladeira",
+     "gancho": "Sua geladeira tá cheia de pote perdido que você não faz ideia do que tem dentro."
     },
     {
-     "t": "Jantar em 12 minutos, cronometrado",
-     "tipo": "demonstracao",
-     "gancho": "\"Vou cronometrar aqui na tela, sem corte de tempo.\""
+     "t": "A compra da semana perfeita que nunca chegou",
+     "gancho": "Me fala: quantas vezes você comprou comida saudável pensando naquela semana perfeita que nunca chegou?"
     },
     {
-     "t": "Provando pela primeira vez, reação real",
-     "tipo": "unboxing",
-     "gancho": "\"Nunca provei. Não faço ideia se vou gostar.\""
+     "t": "A comida que fica melhor no dia seguinte",
+     "gancho": "Tem comida que fica melhor no dia seguinte. Eu vou morrer defendendo isso."
     },
     {
-     "t": "3 jeitos de usar essa mesma coisa",
-     "tipo": "lista",
-     "gancho": "\"Comprei pra uma receita e uso em três.\""
+     "t": "Do jeito da embalagem contra o jeito de casa",
+     "gancho": "A gente nunca segue o que tá escrito na embalagem, né? Sempre faz do jeitinho que aprendeu em casa."
     }
    ]
   },
@@ -891,29 +877,24 @@ window.Biblioteca = {
    "emoji": "🍼",
    "ideias": [
     {
-     "t": "A hora do banho aqui em casa é assim",
-     "tipo": "rotina",
-     "gancho": "\"Spoiler: alguém sempre chora. Às vezes sou eu.\""
+     "t": "Os cinco minutos de café em paz",
+     "gancho": "Pode confessar: você já fingiu que não ouviu chamarem por você só pra terminar o café."
     },
     {
-     "t": "Testei por um mês com uma criança de 2 anos",
-     "tipo": "depoimento",
-     "gancho": "\"Se sobreviveu a ela, sobrevive a qualquer coisa.\""
+     "t": "O brinquedo caro contra a caixa dele",
+     "gancho": "Por que será que a criança larga o brinquedo caro e passa a tarde brincando com a embalagem?"
+    },
+    {
+     "t": "A promessa de não dar tela",
+     "gancho": "Todo mundo jura que não vai dar tela, até o dia que precisa tomar banho sozinha. Eu jurei também."
     },
     {
      "t": "O que realmente cabe na bolsa de maternidade",
-     "tipo": "lista",
-     "gancho": "\"Eu levava 14 itens. Hoje levo 5.\""
+     "gancho": "Bolsa de maternidade a gente monta pela própria ansiedade, não pela necessidade do bebê."
     },
     {
-     "t": "Chegou o que eu mais esperava",
-     "tipo": "unboxing",
-     "gancho": "\"Eu pesquisei três meses antes de comprar isso.\""
-    },
-    {
-     "t": "Antes e depois do quarto dela",
-     "tipo": "antes-depois",
-     "gancho": "\"Gastei menos do que você imagina.\""
+     "t": "A casa antes e depois da criança",
+     "gancho": "Fala a verdade: a sua casa também já foi arrumada antes da criança nascer."
     }
    ]
   },
@@ -923,29 +904,24 @@ window.Biblioteca = {
    "emoji": "🐶",
    "ideias": [
     {
-     "t": "A reação dele foi melhor que a minha",
-     "tipo": "unboxing",
-     "gancho": "\"Ele ouviu o barulho da caixa e já veio correndo.\""
+     "t": "A ração cara contra a migalha do chão",
+     "gancho": "Por que será que o nosso pet ignora a ração cara e prefere a migalha que cai no chão?"
     },
     {
-     "t": "Testei por 15 dias no cachorro mais chato do mundo",
-     "tipo": "depoimento",
-     "gancho": "\"Ele não come nada. Nada mesmo.\""
+     "t": "A caminha nova e a caixa dela",
+     "gancho": "Por que será que a gente compra a caminha e ele dorme dentro da caixa dela?"
     },
     {
-     "t": "O pelo dele antes e depois",
-     "tipo": "antes-depois",
-     "gancho": "\"Mesma luz, mesma janela, 21 dias de diferença.\""
+     "t": "A voz que eu faço pro meu cachorro",
+     "gancho": "Pode confessar: você fala com o seu cachorro numa voz que morreria de vergonha se alguém gravasse."
+    },
+    {
+     "t": "Quem treinou quem aqui em casa",
+     "gancho": "A gente acha que treina o cachorro. Olha a sua rotina depois que ele chegou e me diz quem treinou quem."
     },
     {
      "t": "Nossa rotina da manhã",
-     "tipo": "rotina",
-     "gancho": "\"Ele acorda 20 minutos antes do meu despertador. Todo dia.\""
-    },
-    {
-     "t": "3 erros que eu cometia e ele odiava",
-     "tipo": "lista",
-     "gancho": "\"O segundo é o que quase todo mundo faz.\""
+     "gancho": "Quem manda na sua manhã: você ou ele?"
     }
    ]
   },
@@ -955,29 +931,24 @@ window.Biblioteca = {
    "emoji": "👗",
    "ideias": [
     {
-     "t": "Provando o tamanho que eu realmente visto",
-     "tipo": "depoimento",
-     "gancho": "\"Eu visto 44 e ninguém mostra 44 nesse site.\""
+     "t": "O acessório esquecido no fundo da gaveta",
+     "gancho": "Vai no seu armário agora e me conta a última vez que você usou aquele acessório do fundo da gaveta."
     },
     {
-     "t": "Uma peça, cinco produções",
-     "tipo": "lista",
-     "gancho": "\"Comprei uma peça e usei a semana inteira sem repetir look.\""
+     "t": "As cinco peças que eu uso de verdade",
+     "gancho": "Por que será que o armário tá cheio e a gente sempre usa as mesmas cinco peças?"
     },
     {
-     "t": "Lavei 10 vezes pra ver se desbota",
-     "tipo": "comparativo",
-     "gancho": "\"Todo mundo mostra a peça nova. Eu vou mostrar depois de 10 lavagens.\""
+     "t": "Usando a roupa boa num dia comum",
+     "gancho": "Por que que a gente guarda a roupa boa esperando uma ocasião que nunca chega?"
     },
     {
      "t": "Expectativa da foto contra a realidade",
-     "tipo": "antes-depois",
-     "gancho": "\"A foto do site contra o que chegou na minha casa.\""
+     "gancho": "Pode confessar: você já comprou roupa que chegou bem diferente da foto e nem deu tempo de reclamar."
     },
     {
-     "t": "Do trabalho pro jantar em 2 minutos",
-     "tipo": "demonstracao",
-     "gancho": "\"Mesma roupa, dois compromissos, dois acessórios.\""
+     "t": "Lavei 10 vezes pra ver se desbota",
+     "gancho": "Ninguém lava peça nova antes de usar, e depois a culpa é do tecido."
     }
    ]
   },
@@ -987,29 +958,24 @@ window.Biblioteca = {
    "emoji": "💪",
    "ideias": [
     {
-     "t": "30 dias tomando, com foto de todo dia",
-     "tipo": "antes-depois",
-     "gancho": "\"Eu não esperava mudança nenhuma, pra ser sincera.\""
+     "t": "O tênis de corrida que só vai ao mercado",
+     "gancho": "Pode confessar: você comprou aquele tênis de corrida e só foi no mercado com ele."
+    },
+    {
+     "t": "Começando numa quarta, de propósito",
+     "gancho": "Por que será que a gente sempre deixa pra começar as coisas na segunda-feira?"
     },
     {
      "t": "Meu treino de 20 minutos em casa",
-     "tipo": "demonstracao",
-     "gancho": "\"Sem academia, sem equipamento, sem desculpa.\""
+     "gancho": "Prefiro os 20 minutos que você faz todo dia do que o treino perfeito que você não faz nunca."
     },
     {
-     "t": "Por que eu parei de treinar em jejum",
-     "tipo": "depoimento",
-     "gancho": "\"Passei mal duas vezes até entender.\""
+     "t": "A água que eu bebo de verdade num dia",
+     "gancho": "Fala a verdade: você bebe mesmo a água que você diz que bebe?"
     },
     {
-     "t": "O que eu como num dia normal (não é dieta de foto)",
-     "tipo": "rotina",
-     "gancho": "\"Sem salada montadinha, é o que eu como de verdade.\""
-    },
-    {
-     "t": "Whey de R$ 90 contra o de R$ 250",
-     "tipo": "comparativo",
-     "gancho": "\"Preço triplo. Será que muda alguma coisa?\""
+     "t": "30 dias usando, com foto de todo dia",
+     "gancho": "Quantas coisas você comprou por causa de um vídeo e largou na terceira semana, ou nem chegou a usar?"
     }
    ]
   },
@@ -1019,29 +985,24 @@ window.Biblioteca = {
    "emoji": "💄",
    "ideias": [
     {
-     "t": "Minha pele às 6h da manhã, sem filtro",
-     "tipo": "rotina",
-     "gancho": "\"Essa é a minha pele quando ninguém está vendo.\""
+     "t": "Os produtos que eu usei mais de duas vezes",
+     "gancho": "Vai no seu banheiro e conta quantos produtos você usou mais de duas vezes."
     },
     {
-     "t": "Testei por 14 dias e fotografei todo dia",
-     "tipo": "antes-depois",
-     "gancho": "\"Dia 1 contra dia 14, mesma luz, mesma hora.\""
+     "t": "Passando protetor todo dia, por 14 dias",
+     "gancho": "Por que será que a gente passa mais tempo escolhendo protetor solar do que passando protetor solar?"
     },
     {
      "t": "A ordem certa de passar os produtos",
-     "tipo": "lista",
-     "gancho": "\"Você está passando na ordem errada e perdendo dinheiro.\""
+     "gancho": "Rotina de sete passos existe pra quem vende os sete produtos. Falei e tô de saída."
+    },
+    {
+     "t": "A noite que eu dormi de maquiagem",
+     "gancho": "Pode confessar: tem noite que você dorme de maquiagem sabendo exatamente o que vai acontecer."
     },
     {
      "t": "O caro contra o de farmácia",
-     "tipo": "comparativo",
-     "gancho": "\"R$ 260 contra R$ 39. Será que dá pra ver diferença?\""
-    },
-    {
-     "t": "Por que eu parei de usar esfoliante todo dia",
-     "tipo": "depoimento",
-     "gancho": "\"Eu estraguei minha barreira cutânea e demorei 4 meses pra recuperar.\""
+     "gancho": "Quantas vezes você comprou o caro achando que a culpa era do barato?"
     }
    ]
   }
@@ -1139,5 +1100,13 @@ window.Biblioteca = {
     }
    ]
   }
+ ],
+ "COMO_USAR": [
+  "Frase de uma ideia só. Se ela precisar de duas partes pra fazer sentido, a pessoa perde o fio antes de se identificar.",
+  "Pergunta com \"por que será que\" só funciona se você responder no próprio vídeo. Pergunta solta faz a pessoa sair.",
+  "\"Pode confessar\" e \"fala a verdade\" pedem tom de amiga. Com cara de cobrança, a pessoa se defende e some.",
+  "Depois da frase, um segundo parada olhando pra câmera. Corte rápido demais atropela a identificação.",
+  "Uma frase por vídeo. Duas em sequência cancelam uma a outra.",
+  "O produto nunca aparece no gancho. Ele entra como resposta, depois que a pessoa já se reconheceu."
  ]
 };
