@@ -257,7 +257,7 @@ var extra = (dados.extra || "").trim();
 
 return `Você vai construir a minha página de admin, dentro da mesma pasta do portfólio que a gente acabou de fazer. Não crie pasta nova.
 
-Eu não programo. Fale comigo em português simples, me avise antes de fazer qualquer coisa que muda muito o meu site, e no fim me explique o que você fez.
+Eu não programo. Fale comigo em português simples, me avise antes de fazer qualquer coisa que mude muito o meu site, e no fim me explique o que você fez.
 
 == QUEM SOU EU ==
 Nome: ${nome}
@@ -279,97 +279,93 @@ Crie duas pastas dentro do projeto, pra o endereço ficar bonito:
 - admin/index.html  (o painel, que abre em ${site}/admin)
 
 == O BANCO DE DADOS ==
-Crie um arquivo banco.sql com todo o SQL que eu vou colar no Supabase, e me diga exatamente onde colar. Comente o arquivo em português, explicando cada bloco.
+Crie um arquivo banco.sql com todo o SQL que eu vou colar no Supabase, e me diga exatamente onde colar. Comente em português, explicando cada bloco.
 
 Tabelas:
-- videos: título, link do vídeo, nicho, formato, marca, número de destaque (ex: views), ordem e se está visível
-- leads: nome, marca, email, telefone, mensagem, data, e um status (novo, respondido, fechado)
-- calendario: título, marca, tipo (gravar, editar, postar), data, status e observação
-- campanhas: marca, briefing, prazo de entrega, status (em produção, enviado, aprovado, pago), valor e observação
-- checklist: item, seção do portfólio e se está feito
-- visitas: para as métricas do portfólio (data, página, de onde veio)
-- marcas: nome da marca, site, instagram, seguidores, e-mail, whatsapp, pessoa de contato, nicho, origem (onde eu encontrei), status, observação e data
-- envios: para qual marca, para qual e-mail, assunto, quando saiu e se deu erro
-- referencias: título, autor, link do vídeo, plataforma, transcrição e data
+- videos: título, link, nicho, formato, marca, destaque (ex: "2,4M views"), ordem e visivel
+- marcas: nome, instagram, email, telefone, situacao (lead, conversando, cliente, parada), obs e ultimo_contato
+- calendario: titulo, marca, tipo (gravar, editar, postar), data e status (a fazer, feito)
+- campanhas: campanha, cliente, tipo (Conteúdo ou Publicidade), status, qtd, valor, prazo, pagamento (pendente ou pago), ativa e favorita
+- marcados: o que eu já marquei no checklist, guardado por uma chave de texto
+- visitas: data, página e de onde veio, pras métricas do portfólio
 
-IMPORTANTE, não pule isso: ligue o RLS (Row Level Security) em TODAS as tabelas. A regra é que só o meu usuário logado pode ler e escrever os meus dados, e ninguém deslogado pode ler nada. A única exceção é a tabela leads, onde qualquer pessoa pode INSERIR (porque é o formulário do meu site que escreve lá), mas só eu posso LER. As tabelas marcas e envios são as mais sensíveis, porque guardam o contato de dezenas de empresas: ninguém deslogado pode chegar nelas de jeito nenhum.
+IMPORTANTE, não pule isso: ligue o RLS (Row Level Security) em TODAS as tabelas. A regra é que só o meu usuário logado pode ler e escrever os meus dados, e ninguém deslogado pode ler nada. Duas exceções, e só essas duas: qualquer pessoa pode INSERIR em marcas quando vier do formulário do meu site, e qualquer pessoa pode INSERIR em visitas. Ler, só eu.
 
 Depois de escrever o SQL, me explique em português simples como eu testo se essa tranca funcionou de verdade.
 
+== COMO O ADMIN CHEGA PRA MIM ==
+Sem dado inventado. Cada lista começa com UMA linha de exemplo, marcada como exemplo, só pra eu entender o formato e apagar depois. Nada de nomes de marcas famosas. Os números começam em zero mesmo, porque eu ainda não tenho visita nenhuma.
+
 == A TELA DE LOGIN ==
 Em login/index.html, um cartão centralizado com e-mail, senha e o botão Entrar, usando o Supabase Auth.
-- Se a senha estiver errada, mostre "E-mail ou senha incorretos" numa faixa, nunca o erro em inglês.
-- Se já tiver sessão aberta, mande direto pro admin.
-- Tenha um "esqueci minha senha" que manda o e-mail de recuperação.
-- Coloque noindex no cabeçalho, pra essa página não aparecer no Google.
+- Senha errada mostra "E-mail ou senha incorretos" numa faixa, nunca o erro em inglês.
+- Se já tiver sessão aberta, manda direto pro admin.
+- Tem um "esqueci minha senha" que envia o e-mail de recuperação.
+- noindex no cabeçalho, pra essa página não aparecer no Google.
 
-Em admin/index.html, a primeira coisa que o script faz é conferir a sessão. Sem sessão, manda pra tela de login. A página só aparece depois dessa conferência, nunca antes.
+Em admin/index.html, a primeira coisa do script é conferir a sessão. Sem sessão, manda pro login. A página só aparece depois dessa conferência, nunca antes.
 
 == O PAINEL ==
-Menu lateral fixo à esquerda e o conteúdo à direita, com o título mudando conforme a aba. No celular o menu vira uma gaveta. No rodapé do menu, o meu e-mail e um botão Sair.
-
-As abas, nesta ordem:
+Menu lateral fixo à esquerda, com duas seções: "meu site" (Portfólio, Marcas) e "minha rotina" (Calendário, Campanhas, Checklist). Ícones de traço, não emoji. O item ativo fica com um fundo suave da cor principal, sem inverter pra preto. Conteúdo à direita, com o título mudando conforme a aba. No celular o menu vira gaveta. No rodapé do menu, o meu e-mail e um botão Sair.
 
 1. PORTFÓLIO
-   Lista dos meus vídeos, com adicionar, editar, apagar e arrastar pra mudar a ordem. Campos: título, link, nicho, formato, marca, número de destaque e visível.
-   Em cima da lista, as métricas do meu portfólio: quantas pessoas abriram o site, quantas abriram hoje, quais nichos mais olharam e de onde vieram. Use a tabela visitas.
+   Em cima, uma faixa fina dividida com: visitas em 14 dias, visitas hoje, vídeos no ar, nicho mais forte e de onde mais vêm.
+   Um gráfico de barras dos últimos 14 dias e uma lista de por onde as pessoas chegaram.
+   Embaixo, a tabela dos meus vídeos, com adicionar, editar, apagar, um olhinho pra mostrar ou esconder do site, e arrastar pela alcinha pra mudar a ordem.
 
-2. CONTATOS
-   Os leads que chegaram pelo formulário do meu site, do mais novo pro mais antigo, com nome, marca, mensagem e data. Cada um com botão de mudar o status e um link que abre o WhatsApp da pessoa, quando ela deixar o telefone.
+2. MARCAS
+   A minha base de contatos de empresa, em formato de planilha: marca, instagram, e-mail, telefone, situação, observação e último contato.
+   As situações são: Lead, Conversando, Cliente e Parada, cada uma com sua cor.
+   Tem busca por nome, @ ou e-mail, filtro por situação, botão de adicionar e botão de baixar a base em CSV que abre certinho no Excel, com acento.
+   Clicar na linha abre pra editar. Quem tem telefone ganha um botão que abre o WhatsApp, e o @ leva pro Instagram.
 
 3. CALENDÁRIO
-   Visão por semana do que eu gravo, edito e posto. Cada item com marca, tipo, data e status. Dá pra adicionar, editar e marcar como feito.
+   Visão do MÊS inteiro, em grade de segunda a domingo. Os dias do mês anterior e do seguinte aparecem apagados nas pontas. O dia de hoje fica destacado.
+   Cada dia mostra até 3 itens e, quando tem mais, um "+2 mais" que abre só aquele dia.
+   Os prazos das campanhas aparecem sozinhos no calendário, puxados da tabela campanhas, pra eu não digitar duas vezes.
+   Filtro por tipo (gravar, editar, postar), navegação de mês com setas e um botão "Este mês".
+   Passar o mouse num dia mostra um "+" pra adicionar naquele dia, e clicar no dia já abre o formulário com a data preenchida.
+   Embaixo, um bloco "Ficou pra trás" com o que passou do dia e não foi feito, dizendo há quantos dias.
 
 4. CAMPANHAS
-   Cada campanha do briefing até o pagamento, com marca, prazo, status, valor e observação. Em cima, quanto já fechei e quanto ainda está pra receber.
+   Faixa em cima com: total de campanhas, quantas estão ativas, o valor total com o ticket médio por vídeo embaixo, e o quanto tenho a receber com o já recebido embaixo.
+   Filtros Todas, Ativas e Finalizadas, busca e botão de baixar.
+   Tabela com: estrela, campanha, cliente, tipo, status, qtd, valor, prazo e pagamento.
+   Tipo e status em pílulas coloridas. Os status, nesta ordem: Briefing, Roteiro, Aprovação Roteiro, Gravação, Edição, Aprovado, Entregue.
+   TODA coluna ordena ao clicar no cabeçalho, e clicar de novo inverte. A coluna ativa mostra a seta do sentido, as outras mostram um sinal apagado. Ordenar por status tem que seguir a ordem do funil acima, nunca a ordem alfabética.
+   A estrela destaca a campanha e deixa a linha com uma tarja na lateral.
+   O prazo avisa: atrasado ganha etiqueta vermelha com quantos dias, e o que vence em até 3 dias ganha etiqueta amarela. O que já foi entregue não recebe aviso.
 
-5. CHECKLIST DO PORTFÓLIO
-   Uma lista de conferência do que o meu portfólio precisa ter, separada por seção da página, com uma barrinha de quanto já está pronto.
-
-6. MARCAS
-   Essa é a minha base de prospecção: as empresas que EU fui atrás. É diferente da aba Contatos, que guarda quem chega até mim pelo formulário.
-   Quero poder adicionar marca na mão, importar uma planilha CSV, buscar por nome, filtrar por nicho, origem e status, e mudar o status em um clique: a enviar, enviado, respondeu, proposta, fechado, sem interesse.
-   No topo da aba, um contador com o total de marcas e quantas estão em cada status.
-   No fim, me explique em português simples como eu importo a planilha.
-
-7. REFERÊNCIAS DE VÍDEO
-   É onde eu guardo vídeo que me inspira, meu ou de outra creator, pra estudar o formato depois.
-   Eu colo o link de um vídeo do YouTube ou de um reel do Instagram e ele fica salvo ali.
-   - Mostre o vídeo TOCANDO dentro da página, não só um link: YouTube pelo embed do youtube-nocookie, em pé quando for Shorts, e reel do Instagram pelo embed dele. A capa do card do YouTube você pega de graça em img.youtube.com/vi/ID/hqdefault.jpg.
-   - Quando eu colar um link do YouTube, busque o nome do vídeo e o nome do canal sozinho, pelo oembed do YouTube (www.youtube.com/oembed?format=json&url=...). Não precisa de chave nenhuma.
-   - TRANSCRIÇÃO: em cada vídeo, um botão que transcreve a fala e guarda o texto junto da referência, com botão de copiar. Use a API da Supadata (api.supadata.ai/v1/transcript), chamada direto do navegador com o header x-api-key. Os parâmetros lang=pt, mode=auto e text=true são obrigatórios: sem mode=auto, reel do Instagram quase nunca volta, e sem lang=pt ela traduz pro inglês.
-   - A transcrição demora: se a resposta vier com jobId em vez do texto, fique consultando api.supadata.ai/v1/transcript/{jobId} a cada 5 segundos, até uns 7 minutos, mostrando na tela que está trabalhando.
-   - A minha chave da Supadata eu mesma vou colar numa telinha de configuração, e ela fica guardada no meu navegador. Não escreva chave nenhuma no código.
-   - Eu também quero poder escrever ou colar a transcrição na mão, pra vídeo que a ferramenta não der conta.
-   - Me explique no fim, em duas linhas, como eu crio a minha conta gratuita na Supadata e onde eu colo a chave.
-
-8. PROSPECÇÃO
-   É daqui que eu mando e-mail pras marcas da aba Marcas, várias de uma vez.
-   O envio vai pelo Resend. A chave do Resend é SECRETA: ela fica guardada como segredo dentro de uma função do Supabase, e o admin só chama essa função. Essa chave não pode aparecer no site, no meu repositório nem em arquivo nenhum do projeto.
-   Eu ainda não tenho a conta do Resend, então deixe tudo pronto e me explique no fim, em passos curtos, onde eu colo a chave quando criar a minha conta.
-   Na aba eu quero:
-   - escrever o modelo do e-mail, com assunto e texto, usando {marca}, {pessoa} e {conexao}, que o sistema troca sozinho pelos dados de cada marca
-   - a lista das minhas marcas com caixinha de seleção e um botão de marcar todas as que estão como "a enviar"
-   - um botão de enviar um teste só pra mim, antes de qualquer disparo
-   - o botão de disparar, que manda um e-mail de cada vez, com uma pausa entre eles
-   - depois do envio, marcar a marca como enviado com a data, e me avisar se eu tentar enviar de novo pro mesmo e-mail
-   - uma tabela com tudo que saiu: pra quem, quando e se deu erro
+5. CHECKLIST PORTFÓLIO
+   Baixe este arquivo e salve como js/biblioteca.js no meu projeto:
+   https://eilaradam.github.io/admin-imersao/biblioteca.js
+   Ele traz um objeto window.Biblioteca com CHECKLIST, REFERENCIAS, TIPOS, NICHOS e REVISAO. Não invente conteúdo, não resuma e não reescreva nada: use exatamente o que está nele.
+   A aba tem 5 sub-abas no topo:
+   - Checklist do portfólio: as seções de CHECKLIST, cada uma abrindo e fechando, mostrando o "porque" e os itens com a explicação embaixo. Barrinha de quanto já está pronto por seção e no geral. O que eu marcar salva na tabela marcados.
+   - Referências de vídeo: as REFERENCIAS em grade de cartões com capa vertical, emoji, estilo, duração e marca. Clicar abre a ficha com o gancho, por que funciona, o diferencial, o erro comum, o roteiro em blocos de tempo e um botão de assistir.
+   - Roteiros: os TIPOS, cada um abrindo pra mostrar quando usar e os blocos de tempo.
+   - Ideias por nicho: os NICHOS com as ideias e os ganchos.
+   - Revisar meu roteiro: um campo pra colar o roteiro e os blocos de REVISAO pra eu conferir item por item.
 
 == LIGAR O SITE AO PAINEL ==
 Isso é o que faz tudo valer a pena, então capriche:
 - Faça o meu portfólio ler os vídeos da tabela videos em vez de ler de um arquivo fixo. Quando eu editar no admin, o site tem que mudar sozinho, sem publicar de novo.
-- Ligue o formulário de contato do meu portfólio na tabela leads.
-- Coloque no meu portfólio um registro simples de visita, que grava na tabela visitas, sem usar nenhum serviço de fora e sem pedir nada pro visitante.
+- Ligue o formulário de contato do meu portfólio na tabela marcas, entrando como situação "Lead".
+- Coloque no meu portfólio um registro simples de visita, gravando na tabela visitas, sem usar nenhum serviço de fora e sem pedir nada pro visitante.
+
+== DUAS COISAS QUE NÃO PODEM QUEBRAR ==
+1. Quando ainda não houver nenhum dado, nada de conta dividida por zero nem de "NaN" na tela. No lugar do gráfico vazio, escreva uma frase explicando o que vai aparecer ali quando as pessoas começarem a visitar.
+2. Se um dia faltar uma tabela ou um campo que o painel espera, o admin NÃO pode abrir em branco. Ele tem que continuar abrindo, avisar o que faltou e seguir funcionando no resto.
 
 == O VISUAL ==
-Siga o mesmo visual do meu portfólio: as mesmas cores, as mesmas fontes, o mesmo jeito de arredondar canto. O admin é meu, não precisa ser bonito pra marca, precisa ser rápido de usar e fácil de ler.
+Siga o mesmo visual do meu portfólio: as mesmas cores, as mesmas fontes, o mesmo jeito de arredondar canto. Uma fonte só, tamanhos pequenos e discretos, nada de título gigante. O admin é meu, não precisa impressionar marca, precisa ser rápido de usar e fácil de ler.
 Nunca use travessão em texto nenhum.
 
 == PRA TERMINAR ==
 1. Me dê um passo a passo curto, em português, de tudo que eu preciso fazer com as minhas próprias mãos: rodar o SQL, criar o usuário, publicar.
 2. Publique a versão nova no GitHub e me mande os dois endereços: o do login e o do admin.
-3. Me diga como eu testo que deu certo: adicionar um vídeo no admin e ver ele aparecer no site, e mandar o formulário e ver o contato chegar.
-${extra ? "\\n== O QUE EU AINDA QUERO ==\\n" + extra + "\\n" : ""}
+3. Me diga como eu testo que deu certo: adicionar um vídeo no admin e ver aparecer no site, e mandar o formulário e ver a marca chegar na minha base.
+${extra ? "\n== O QUE EU AINDA QUERO ==\n" + extra + "\n" : ""}
 Comece me dizendo o que você entendeu e o que vai fazer primeiro. Depois pode começar.`;
 }
 
