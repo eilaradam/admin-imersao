@@ -136,10 +136,10 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
   <h2 class="bloco">Antes de colar</h2>
   <ul class="passos">
     <li><b>Esteja na pasta do seu portfólio</b><span>A mesma pasta de manhã. Se criar pasta nova, o admin não acha o seu site.</span></li>
-    <li><b>Tenha o seu projeto do Supabase aberto</b><span>Você vai precisar copiar de lá a URL e a chave pública. É em Project Settings, depois API.</span></li>
+    <li><b>Tenha o seu projeto do Supabase aberto</b><span>Você vai precisar copiar de lá a Project URL e a Publishable key. As duas saem do botão Copy, no topo do painel do projeto. (Em projeto antigo: Project Settings, depois API.)</span></li>
     <li><b>Crie o seu usuário no Supabase</b><span>Menu <span class="mono">Authentication</span>, botão <span class="mono">Add user</span>. O e-mail e a senha que você puser ali são o seu login.</span></li>
   </ul>
-  <div class="aviso"><b>Sobre a chave:</b> use a <b>pública</b>, a que fica à mostra. A secreta nunca sai do painel do Supabase. Se você precisou clicar em algo pra revelar, é a errada.</div>
+  <div class="aviso"><b>Sobre a chave:</b> ela mudou de nome. Hoje o Supabase chama de <b>Publishable key</b> e ela começa com <b>sb_publishable_</b>. Em projeto mais antigo o nome é <b>anon public</b> e começa com <b>eyJ</b>. As duas servem, é a mesma chave pública. O caminho curto: no topo do painel do projeto, botão <b>Copy</b>, opção <b>Publishable key</b>. A secreta nunca sai do painel: se você precisou clicar em algo pra revelar, é a errada.</div>
 </header>
 
 <main class="oficina">
@@ -181,8 +181,8 @@ var CAMPOS = [
   { grupo: "Seu Supabase", itens: [
     { id:"sburl", rot:"URL do projeto", ph:"https://xxxxxxxx.supabase.co",
       ajuda:"Project Settings, API, Project URL." },
-    { id:"sbkey", rot:"Chave pública (anon)", ph:"eyJhbGciOi...", area:true,
-      ajuda:"Project Settings, API, a chave chamada anon public. Nunca a secreta." }
+    { id:"sbkey", rot:"Chave pública", ph:"sb_publishable_...   ou   eyJhbGciOi...", area:true,
+      ajuda:"No topo do painel do projeto, botão Copy, opção Publishable key. Em projeto antigo ela se chama anon public, em Project Settings, API. As duas servem. Nunca a secreta." }
   ]},
   { grupo: "Seu acesso", itens: [
     { id:"login", rot:"E-mail que vai ser o seu login", ph:"voce@email.com",
@@ -266,7 +266,7 @@ Meu portfólio já publicado: ${site}
 
 == MEU SUPABASE ==
 URL do projeto: ${sburl}
-Chave pública (anon): ${sbkey}
+Chave pública (publishable ou anon): ${sbkey}
 O e-mail que vai ser o meu login: ${login}
 
 Guarde essas duas primeiras informações uma vez só, num arquivo js/banco.js, e use em todas as páginas. Carregue o Supabase por CDN, com uma tag script. Nunca me peça a chave secreta, e nunca coloque nenhuma chave secreta em arquivo nenhum.
