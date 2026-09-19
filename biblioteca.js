@@ -791,38 +791,6 @@ window.Biblioteca = {
  ],
  "NICHOS": [
   {
-   "id": "beleza",
-   "nome": "Beleza e skincare",
-   "emoji": "💄",
-   "ideias": [
-    {
-     "t": "Minha pele às 6h da manhã, sem filtro",
-     "tipo": "rotina",
-     "gancho": "\"Essa é a minha pele quando ninguém está vendo.\""
-    },
-    {
-     "t": "Testei por 14 dias e fotografei todo dia",
-     "tipo": "antes-depois",
-     "gancho": "\"Dia 1 contra dia 14, mesma luz, mesma hora.\""
-    },
-    {
-     "t": "A ordem certa de passar os produtos",
-     "tipo": "lista",
-     "gancho": "\"Você está passando na ordem errada e perdendo dinheiro.\""
-    },
-    {
-     "t": "O caro contra o de farmácia",
-     "tipo": "comparativo",
-     "gancho": "\"R$ 260 contra R$ 39. Será que dá pra ver diferença?\""
-    },
-    {
-     "t": "Por que eu parei de usar esfoliante todo dia",
-     "tipo": "depoimento",
-     "gancho": "\"Eu estraguei minha barreira cutânea e demorei 4 meses pra recuperar.\""
-    }
-   ]
-  },
-  {
    "id": "casa",
    "nome": "Casa e decoração",
    "emoji": "🏠",
@@ -833,9 +801,8 @@ window.Biblioteca = {
      "gancho": "\"Eu vou mostrar minha gaveta de verdade. Prepara.\""
     },
     {
-     "t": "Montando sozinha, sem homem e sem chorar",
-     "tipo": "demonstracao",
-     "gancho": "\"Diz que precisa de duas pessoas. Vou provar que não.\""
+     "t": "Montei sozinha, do zero",
+     "gancho": "\"A caixa diz que precisa de duas pessoas. Eu tinha as minhas duas mãos e uma chave de fenda.\""
     },
     {
      "t": "3 lugares que você não pensou em usar isso",
@@ -855,34 +822,34 @@ window.Biblioteca = {
    ]
   },
   {
-   "id": "moda",
-   "nome": "Moda e acessórios",
-   "emoji": "👗",
+   "id": "servicos",
+   "nome": "Serviços e tecnologia",
+   "emoji": "💻",
    "ideias": [
     {
-     "t": "Provando o tamanho que eu realmente visto",
+     "t": "Usei por uma semana e o que me irritou",
      "tipo": "depoimento",
-     "gancho": "\"Eu visto 44 e ninguém mostra 44 nesse site.\""
+     "gancho": "\"Vou falar do que ninguém fala nas avaliações.\""
     },
     {
-     "t": "Uma peça, cinco produções",
-     "tipo": "lista",
-     "gancho": "\"Comprei uma peça e usei a semana inteira sem repetir look.\""
-    },
-    {
-     "t": "Lavei 10 vezes pra ver se desbota",
-     "tipo": "comparativo",
-     "gancho": "\"Todo mundo mostra a peça nova. Eu vou mostrar depois de 10 lavagens.\""
-    },
-    {
-     "t": "Expectativa da foto contra a realidade",
-     "tipo": "antes-depois",
-     "gancho": "\"A foto do site contra o que chegou na minha casa.\""
-    },
-    {
-     "t": "Do trabalho pro jantar em 2 minutos",
+     "t": "Configurando do zero, sem pular etapa",
      "tipo": "demonstracao",
-     "gancho": "\"Mesma roupa, dois compromissos, dois acessórios.\""
+     "gancho": "\"Do jeito que uma pessoa normal faria, com as dúvidas e tudo.\""
+    },
+    {
+     "t": "O gratuito resolve ou preciso pagar?",
+     "tipo": "comparativo",
+     "gancho": "\"Testei os dois na mesma tarefa.\""
+    },
+    {
+     "t": "Como isso mudou minha semana de trabalho",
+     "tipo": "problema-solucao",
+     "gancho": "\"Eu perdia 4 horas por semana com isso.\""
+    },
+    {
+     "t": "3 funções que ninguém usa e deveria",
+     "tipo": "lista",
+     "gancho": "\"A terceira eu descobri por acidente.\""
     }
    ]
   },
@@ -915,38 +882,6 @@ window.Biblioteca = {
      "t": "3 jeitos de usar essa mesma coisa",
      "tipo": "lista",
      "gancho": "\"Comprei pra uma receita e uso em três.\""
-    }
-   ]
-  },
-  {
-   "id": "fitness",
-   "nome": "Fitness e saúde",
-   "emoji": "💪",
-   "ideias": [
-    {
-     "t": "30 dias tomando, com foto de todo dia",
-     "tipo": "antes-depois",
-     "gancho": "\"Eu não esperava mudança nenhuma, pra ser sincera.\""
-    },
-    {
-     "t": "Meu treino de 20 minutos em casa",
-     "tipo": "demonstracao",
-     "gancho": "\"Sem academia, sem equipamento, sem desculpa.\""
-    },
-    {
-     "t": "Por que eu parei de treinar em jejum",
-     "tipo": "depoimento",
-     "gancho": "\"Passei mal duas vezes até entender.\""
-    },
-    {
-     "t": "O que eu como num dia normal (não é dieta de foto)",
-     "tipo": "rotina",
-     "gancho": "\"Sem salada montadinha, é o que eu como de verdade.\""
-    },
-    {
-     "t": "Whey de R$ 90 contra o de R$ 250",
-     "tipo": "comparativo",
-     "gancho": "\"Preço triplo. Será que muda alguma coisa?\""
     }
    ]
   },
@@ -1015,34 +950,98 @@ window.Biblioteca = {
    ]
   },
   {
-   "id": "servicos",
-   "nome": "Serviços e tecnologia",
-   "emoji": "💻",
+   "id": "moda",
+   "nome": "Moda e acessórios",
+   "emoji": "👗",
    "ideias": [
     {
-     "t": "Usei por uma semana e o que me irritou",
+     "t": "Provando o tamanho que eu realmente visto",
      "tipo": "depoimento",
-     "gancho": "\"Vou falar do que ninguém fala nas avaliações.\""
+     "gancho": "\"Eu visto 44 e ninguém mostra 44 nesse site.\""
     },
     {
-     "t": "Configurando do zero, sem pular etapa",
-     "tipo": "demonstracao",
-     "gancho": "\"Do jeito que uma pessoa normal faria, com as dúvidas e tudo.\""
-    },
-    {
-     "t": "O gratuito resolve ou preciso pagar?",
-     "tipo": "comparativo",
-     "gancho": "\"Testei os dois na mesma tarefa.\""
-    },
-    {
-     "t": "Como isso mudou minha semana de trabalho",
-     "tipo": "problema-solucao",
-     "gancho": "\"Eu perdia 4 horas por semana com isso.\""
-    },
-    {
-     "t": "3 funções que ninguém usa e deveria",
+     "t": "Uma peça, cinco produções",
      "tipo": "lista",
-     "gancho": "\"A terceira eu descobri por acidente.\""
+     "gancho": "\"Comprei uma peça e usei a semana inteira sem repetir look.\""
+    },
+    {
+     "t": "Lavei 10 vezes pra ver se desbota",
+     "tipo": "comparativo",
+     "gancho": "\"Todo mundo mostra a peça nova. Eu vou mostrar depois de 10 lavagens.\""
+    },
+    {
+     "t": "Expectativa da foto contra a realidade",
+     "tipo": "antes-depois",
+     "gancho": "\"A foto do site contra o que chegou na minha casa.\""
+    },
+    {
+     "t": "Do trabalho pro jantar em 2 minutos",
+     "tipo": "demonstracao",
+     "gancho": "\"Mesma roupa, dois compromissos, dois acessórios.\""
+    }
+   ]
+  },
+  {
+   "id": "fitness",
+   "nome": "Fitness e saúde",
+   "emoji": "💪",
+   "ideias": [
+    {
+     "t": "30 dias tomando, com foto de todo dia",
+     "tipo": "antes-depois",
+     "gancho": "\"Eu não esperava mudança nenhuma, pra ser sincera.\""
+    },
+    {
+     "t": "Meu treino de 20 minutos em casa",
+     "tipo": "demonstracao",
+     "gancho": "\"Sem academia, sem equipamento, sem desculpa.\""
+    },
+    {
+     "t": "Por que eu parei de treinar em jejum",
+     "tipo": "depoimento",
+     "gancho": "\"Passei mal duas vezes até entender.\""
+    },
+    {
+     "t": "O que eu como num dia normal (não é dieta de foto)",
+     "tipo": "rotina",
+     "gancho": "\"Sem salada montadinha, é o que eu como de verdade.\""
+    },
+    {
+     "t": "Whey de R$ 90 contra o de R$ 250",
+     "tipo": "comparativo",
+     "gancho": "\"Preço triplo. Será que muda alguma coisa?\""
+    }
+   ]
+  },
+  {
+   "id": "beleza",
+   "nome": "Beleza e skincare",
+   "emoji": "💄",
+   "ideias": [
+    {
+     "t": "Minha pele às 6h da manhã, sem filtro",
+     "tipo": "rotina",
+     "gancho": "\"Essa é a minha pele quando ninguém está vendo.\""
+    },
+    {
+     "t": "Testei por 14 dias e fotografei todo dia",
+     "tipo": "antes-depois",
+     "gancho": "\"Dia 1 contra dia 14, mesma luz, mesma hora.\""
+    },
+    {
+     "t": "A ordem certa de passar os produtos",
+     "tipo": "lista",
+     "gancho": "\"Você está passando na ordem errada e perdendo dinheiro.\""
+    },
+    {
+     "t": "O caro contra o de farmácia",
+     "tipo": "comparativo",
+     "gancho": "\"R$ 260 contra R$ 39. Será que dá pra ver diferença?\""
+    },
+    {
+     "t": "Por que eu parei de usar esfoliante todo dia",
+     "tipo": "depoimento",
+     "gancho": "\"Eu estraguei minha barreira cutânea e demorei 4 meses pra recuperar.\""
     }
    ]
   }
