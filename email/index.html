@@ -290,15 +290,15 @@ var PERGUNTAS_POR_ABA = {
       ajuda:"Opcional." }
   ],
   plataforma: [
-    { id:"dif", n:"01", rot:"Seus números e diferenciais",
-      ph:"criadora há 2 anos, mais de 300 marcas, mais de 500 vídeos, emito nota fiscal",
-      ajuda:"Aqui número pesa. Só os de verdade." },
-    { id:"conexao", n:"02", rot:"Você conhece ou usa esse produto?",
-      ph:"sou muito fã, compro sempre, mas não sabia que dava pra comprar individual",
-      ajuda:"Se você ama o produto, isso vale mais que número." },
-    { id:"ideia", n:"03", rot:"Ideias que você já teve pra essa campanha",
-      ph:"tenho conteúdos de receita e já pensei em como usar o produto",
-      ajuda:"Uma linha só, candidatura não é proposta." }
+    { id:"destaque", n:"01", rot:"Seu diferencial, em uma linha",
+      ph:"+ de 500 conteúdos criados só no último ano",
+      ajuda:"É a primeira linha, a que decide se leem o resto. Um número forte ou o seu nicho." },
+    { id:"dif", n:"02", rot:"Sua apresentação",
+      ph:"criadora de conteúdo há 2 anos, mais de 300 marcas e 500 vídeos, emito nota fiscal",
+      ajuda:"Quem você é, com os números de verdade." },
+    { id:"conexao", n:"03", rot:"Sua conexão com essa marca",
+      ph:"sou cliente de vocês há anos e já tenho ideias de como usar o produto",
+      ajuda:"Por que você pra essa campanha. Se você ama o produto, isso vale mais que número." }
   ]
 };
 var PERGUNTAS = PERGUNTAS_POR_ABA.email;
@@ -338,7 +338,7 @@ try{ IA.cache = JSON.parse(localStorage.getItem("email-imersao:ia") || "{}") || 
 /* quando eu mexo no gerador, o texto velho guardado aqui vira lixo: some com ele
    pra ninguem ficar olhando um e-mail antigo achando que a pagina nao atualizou.
    As respostas dela nao se perdem, so o texto gerado. */
-var VERSAO_GERADOR = "2026-09-20-k";
+var VERSAO_GERADOR = "2026-09-20-l";
 var atualizouAgora = false;
 try{
   if(localStorage.getItem("email-imersao:v") !== VERSAO_GERADOR){
@@ -364,7 +364,7 @@ function chamarIA(estilo, formato){
       palavra: "imersao2", estilo: estilo, formato: formato || "email",
       nome: (dados.nome||"").trim(), arroba: (dados.arroba||"").trim(), site: (dados.site||"").trim(), cidade: (dados.cidade||"").trim(),
       dif: (dados.dif||"").trim(), conexao: (dados.conexao||"").trim(),
-      ideia: (dados.ideia||"").trim(), extras: (dados.extras||"").trim(), detalhe: (dados.detalhe||"").trim(), oferta: (dados.oferta||"").trim(), quando: (dados.quando||"").trim()
+      ideia: (dados.ideia||"").trim(), extras: (dados.extras||"").trim(), detalhe: (dados.detalhe||"").trim(), oferta: (dados.oferta||"").trim(), quando: (dados.quando||"").trim(), destaque: (dados.destaque||"").trim()
     })
   }).then(function(r){ return r.json(); });
 }
@@ -439,16 +439,16 @@ var MODELOS = {
   plataforma: [
     { nome: "Com números", as: "",
       ps: [
-        "Oie, equipe! Cheguei 🎬",
-        "[[dif:f|Sou criadora de conteúdo UGC]]",
+        "[[destaque:f|+ de 500 conteúdos criados só no último ano]] ✨",
+        "Oie, equipe! Cheguei 🎬 [[dif:f|Sou criadora de conteúdo UGC]]",
+        "?conexao? [[conexao:f|]]",
         "Adoraria fazer parte desse trabalho e construir algo incrível juntos!",
         "Deixo aqui meu portfólio com alguns dos meus vídeos favoritos:\n{{site}}"
       ]},
-    { nome: "Com o que você sente pelo produto", as: "",
+    { nome: "Com o que você sente pela marca", as: "",
       ps: [
-        "Olá equipe! ✨",
         "[[conexao:f|Eu uso esse produto de verdade e vim correndo quando vi essa campanha]]",
-        "?ideia? [[ideia:f|]]",
+        "Oie, equipe! [[dif:f|Sou criadora de conteúdo UGC]]",
         "To super animada pra colaborarmos juntos nessa! Fico aguardando contato.",
         "Deixo aqui meu portfólio com alguns dos meus vídeos favoritos:\n{{site}}"
       ]}
@@ -537,7 +537,7 @@ var INTRO = {
   email: "Cinco perguntas. Responde do jeito que você falaria, do resto eu cuido.",
   dm: "A DM não vende: ela pede o canal pra você mandar a proposta. Duas perguntas bastam.",
   segundo: "Aqui só interessa o que destrava a conversa. Três perguntas.",
-  plataforma: "Candidatura é rápida de ler. Três perguntas, e número só se for de verdade."
+  plataforma: "Três perguntas, e elas viram as quatro linhas da candidatura: diferencial, apresentação, conexão e o convite."
 };
 function desenharPerguntas(){
   PERGUNTAS = PERGUNTAS_POR_ABA[aba] || PERGUNTAS_POR_ABA.email;
