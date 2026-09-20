@@ -266,17 +266,17 @@ var PERGUNTAS_POR_ABA = {
   ],
   dm: [
     { id:"dif", n:"01", rot:"Quem você é, em uma linha",
-      ph:"criadora de conteúdo UGC de casa e cozinha",
+      ph:"trabalho com criação de conteúdo para marcas",
       ajuda:"Na DM ninguém lê currículo." },
-    { id:"detalhe", n:"02", rot:"O que você viu no perfil deles",
+    { id:"pedido", n:"02", rot:"O que você quer pedir",
+      ph:"um e-mail",
+      ajuda:"O objetivo da DM é só esse: conseguir o canal pra mandar a proposta." },
+    { id:"detalhe", n:"03", rot:"O que você viu no perfil deles",
       ph:"o post do lançamento de ontem",
-      ajuda:"Mostra que você não mandou pra 50 marcas iguais." },
-    { id:"conexao", n:"03", rot:"Por que essa marca, e por que agora",
-      ph:"me mudei e estou montando a cozinha do zero",
-      ajuda:"Em uma frase, na DM tudo é curto." },
-    { id:"ideia", n:"04", rot:"Sua ideia de conteúdo",
-      ph:"a chegada da caixa, o primeiro uso e a lavagem",
-      ajuda:"Só o suficiente pra ela querer saber mais." }
+      ajuda:"Opcional. Entra na versão com elogio." },
+    { id:"conexao", n:"04", rot:"Você já é cliente ou fã?",
+      ph:"sou cliente de vocês há anos",
+      ajuda:"Opcional. Entra na versão de cliente pra marca." }
   ],
   segundo: [
     { id:"ideia", n:"01", rot:"Sobre o que era o primeiro e-mail",
@@ -299,6 +299,159 @@ var PERGUNTAS_POR_ABA = {
     { id:"ideia", n:"03", rot:"Ideias que você já teve pra essa campanha",
       ph:"tenho conteúdos de receita e já pensei em como usar o produto",
       ajuda:"Uma linha só, candidatura não é proposta." }
+  ]
+};
+var PERGUNTAS = PERGUNTAS_POR_ABA.email;
+
+var FIXOS = [
+  { id:"nome",   rot:"Nome", ph:"Lara" },
+  { id:"arroba", rot:"@", ph:"@eilaradam" },
+  { id:"site",   rot:"Portfólio", ph:"seunome.github.io/portfolio" },
+  { id:"cidade", rot:"Cidade", ph:"São José dos Campos" }
+];
+
+var CHAVE = "admin-imersao:dados";
+var CHAVE_DOC = "email-imersao:doc";
+var dados = {}, edicoes = {};
+try{ dados = JSON.parse(localStorage.getItem(CHAVE) || "{}") || {}; }catch(e){ dados = {}; }
+try{ edicoes = JSON.parse(localStorage.getItem(CHAVE_DOC) || "{}") || {}; }catch(e){ edicoes = {}; }
+try{
+  var apostila = JSON.parse(localStorage.getItem("guia-imersao:aluna") || "{}") || {};
+  if(!dados.nome && apostila.nome) dados.nome = apostila.nome;
+  if(!dados.arroba && apostila.arroba) dados.arroba = apostila.arroba;
+}catch(e){}
+
+/* ═════════ os moldes ═════════
+   [[campo:modo|exemplo]]   modo f = frase inteira (maiúscula e ponto), m = no meio da frase
+   ?campo? no começo        o parágrafo só existe se ela respondeu aquilo
+   {{nome}}                 os dados dela                                                    */
+
+/* ═════════ a IA que escreve ═════════
+   A chave da OpenAI mora num segredo da função no Supabase, nunca aqui.
+   Esta chave abaixo é a PÚBLICA do projeto, a mesma que já está no site. */
+var IA = {
+  url: "https://mfrmnquvwwuxraqgemyh.supabase.co/functions/v1/escrever-email",
+  key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1mcm1ucXV2d3d1eHJhcWdlbXloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDI1NDIsImV4cCI6MjA4NzYxODU0Mn0.zmsi08dV5L1IlXJSr34vOii71w0g0OsD5_5DKio5g-o",
+  cache: {}
+};
+try{ IA.cache = JSON.parse(localStorage.getItem("email-imersao:ia") || "{}") || {}; }catch(e){ IA.cache = {}; }
+/* quando eu mexo no gerador, o texto velho guardado aqui vira lixo: some com ele
+   pra ninguem ficar olhando um e-mail antigo achando que a pagina nao atualizou.
+   As respostas dela nao se perdem, so o texto gerado. */
+var VERSAO_GERADOR = "2026-09-20-k";
+var atualizouAgora = false;
+try{
+  if(localStorage.getItem("email-imersao:v") !== VERSAO_GERADOR){
+    localStorage.removeItem("email-imersao:ia");
+    localStorage.removeItem(CHAVE_DOC);
+    localStorage.setItem("email-imersao:v", VERSAO_GERADOR);
+    edicoes = {}; IA.cache = {};
+    atualizouAgora = true;
+  }
+}catch(e){}
+
+var ESTILOS = ["direta", "ideia", "resultado", "curta"];
+var NOMES_VERSAO = ["A proposta direta", "Começando pela ideia", "A que fala de resultado", "A curtinha"];
+function nVersoes(){ return aba === "email" ? ESTILOS.length : MODELOS[aba].length; }
+
+function salvarIA(){ try{ localStorage.setItem("email-imersao:ia", JSON.stringify(IA.cache)); }catch(e){} }
+
+function chamarIA(estilo, formato){
+  return fetch(IA.url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", apikey: IA.key, Authorization: "Bearer " + IA.key },
+    body: JSON.stringify({
+      palavra: "imersao2", estilo: estilo, formato: formato || "email",
+      nome: (dados.nome||"").trim(), arroba: (dados.arroba||"").trim(), site: (dados.site||"").trim(), cidade: (dados.cidade||"").trim(),
+      dif: (dados.dif||"").trim(), conexao: (dados.conexao||"").trim(),
+      ideia: (dados.ideia||"").trim(), extras: (dados.extras||"").trim(), detalhe: (dados.detalhe||"").trim(), oferta: (dados.oferta||"").trim(), quando: (dados.quando||"").trim()
+    })
+  }).then(function(r){ return r.json(); });
+}
+
+var MODELOS = {
+  email: [
+    { nome: "Rascunho",
+      as: "Proposta de conteúdo pro [[produto|(produto)]] de vocês",
+      ps: [
+        "Oieee [[pessoa|(pessoa ou nome da marca)]], tudo bem?",
+        "Aqui é a {{nome}}, criadora de conteúdo UGC{{deCidade}} ({{arroba}}). Cheguei em vocês pesquisando [[produto|(produto)]] e acabei ficando um tempão no site, principalmente [[detalhe:m|(o que você viu no site)]].",
+        "[[conexao:f|Acabei de me mudar e estou montando a casa do zero, e o produto de vocês é o que falta aqui]] É esse aqui ó: [[link|(link do produto)]].",
+        "A ideia: [[ideia:f|gravar a chegada, o primeiro uso e o resultado, em tempo real]] Isso vira vídeo vertical e fotos pra vocês usarem, inclusive em ads, e eu documento no meu perfil com @ e link.",
+        "[[dif:f|Gravo em casa com luz natural e entrego rápido]] ?extras? [[extras:f|]]",
+        "Se fizer sentido, vai ser incrível ter vocês nesse projeto :)\nPortfólio: {{site}}",
+        "Att, {{nome}} / {{arroba}}",
+        "P.S.: independente dessa collab, me conta como funciona o processo de vocês com criativos hoje? Se tiverem lista de creators, quero entrar nela."
+      ]},
+    { nome: "Rascunho curto",
+      as: "Uma ideia de conteúdo pro [[produto|(produto)]] de vocês",
+      ps: [
+        "Oieee [[pessoa|(pessoa ou nome da marca)]], tudo bem?",
+        "Aqui é a {{nome}}, criadora de conteúdo UGC{{deCidade}} ({{arroba}}). Cheguei em vocês pesquisando [[produto|(produto)]] e fiquei um tempão no site, principalmente [[detalhe:m|(o que você viu no site)]].",
+        "[[conexao:f|Acabei de me mudar e estou montando a casa do zero]] Por isso [[link|(link do produto)]] entrou na minha lista agora.",
+        "Minha ideia: [[ideia:f|gravar a chegada, o primeiro uso e o resultado]] Vira vídeo vertical e fotos pra vocês usarem como quiserem, e eu mostro o processo no meu perfil marcando vocês.",
+        "[[dif:f|Gravo em casa com luz natural e entrego rápido]] ?extras? [[extras:f|]]",
+        "Se fizer sentido, vai ser incrível ter vocês nesse projeto :)\nPortfólio: {{site}}",
+        "Att, {{nome}} / {{arroba}}",
+        "P.S.: independente dessa collab, me conta como funciona o processo de vocês com criativos hoje? Se tiverem lista de creators, quero entrar nela."
+      ]}
+  ],
+  dm: [
+    { nome: "A educada", as: "",
+      ps: [
+        "Oi, equipe [[pessoa|(nome da marca)]]! Tudo bem?",
+        "[[dif:f|Trabalho com criação de conteúdo para marcas]] Tenho uma proposta que gostaria de enviar pra vocês. Poderiam me informar [[pedido|um e-mail]] específico para esse tipo de contato?",
+        "Agradeço desde já e fico no aguardo. Obrigada!"
+      ]},
+    { nome: "Com elogio ao perfil", as: "",
+      ps: [
+        "Oi, equipe [[pessoa|(nome da marca)]]! Tudo bem?",
+        "[[dif:f|Trabalho com criação de conteúdo para marcas]] Vi [[detalhe:m|o post do lançamento de ontem]] e tenho uma proposta que gostaria de enviar. Poderiam me informar [[pedido|um e-mail]] pra esse tipo de contato?",
+        "Agradeço desde já e fico no aguardo. Obrigada!"
+      ]},
+    { nome: "Duas linhas", as: "",
+      ps: [
+        "Oi, equipe [[pessoa|(nome da marca)]]!",
+        "[[dif:f|Trabalho com criação de conteúdo para marcas]] Poderiam me passar [[pedido|um e-mail]] pra eu enviar uma proposta? Obrigada!"
+      ]},
+    { nome: "De cliente pra marca", as: "",
+      ps: [
+        "Oi, equipe [[pessoa|(nome da marca)]]! Tudo bem?",
+        "[[conexao:f|Sou cliente de vocês há anos]] [[dif:f|Trabalho com criação de conteúdo para marcas]] e tenho uma proposta pra mandar. Poderiam me informar [[pedido|um e-mail]] pra esse contato?",
+        "Agradeço desde já e fico no aguardo. Obrigada!"
+      ]}
+  ],
+  segundo: [
+    { nome: "Com oferta nova", as: "sobre a ideia que eu mandei",
+      ps: [
+        "Oieee [[pessoa|(pessoa ou nome da marca)]], tudo bem?",
+        "Voltando rapidinho por causa [[ideia:m|da ideia que eu mandei]], [[quando|semana passada]].",
+        "[[oferta:f|Se ajudar a decidir, eu gravo um teste curto antes de qualquer acordo]]",
+        "Att, {{nome}} / {{arroba}}"
+      ]},
+    { nome: "Bem curto", as: "sobre a minha proposta",
+      ps: [
+        "Oieee [[pessoa|(pessoa ou nome da marca)]], tudo bem?",
+        "Só passando pra saber se [[ideia:m|a ideia que eu mandei]] faz sentido pra vocês. [[oferta:f|Se ajudar, eu gravo um teste curto antes de qualquer acordo]]",
+        "Att, {{nome}} / {{arroba}}"
+      ]}
+  ],
+  plataforma: [
+    { nome: "Com números", as: "",
+      ps: [
+        "Oie, equipe! Cheguei 🎬",
+        "[[dif:f|Sou criadora de conteúdo UGC]]",
+        "Adoraria fazer parte desse trabalho e construir algo incrível juntos!",
+        "Deixo aqui meu portfólio com alguns dos meus vídeos favoritos:\n{{site}}"
+      ]},
+    { nome: "Com o que você sente pelo produto", as: "",
+      ps: [
+        "Olá equipe! ✨",
+        "[[conexao:f|Eu uso esse produto de verdade e vim correndo quando vi essa campanha]]",
+        "?ideia? [[ideia:f|]]",
+        "To super animada pra colaborarmos juntos nessa! Fico aguardando contato.",
+        "Deixo aqui meu portfólio com alguns dos meus vídeos favoritos:\n{{site}}"
+      ]}
   ]
 };
 var PERGUNTAS = PERGUNTAS_POR_ABA.email;
@@ -369,86 +522,6 @@ function chamarIA(estilo, formato){
   }).then(function(r){ return r.json(); });
 }
 
-var MODELOS = {
-  email: [
-    { nome: "Rascunho",
-      as: "Proposta de conteúdo pro [[produto|(produto)]] de vocês",
-      ps: [
-        "Oieee [[pessoa|(pessoa ou nome da marca)]], tudo bem?",
-        "Aqui é a {{nome}}, criadora de conteúdo UGC{{deCidade}} ({{arroba}}). Cheguei em vocês pesquisando [[produto|(produto)]] e acabei ficando um tempão no site, principalmente [[detalhe:m|(o que você viu no site)]].",
-        "[[conexao:f|Acabei de me mudar e estou montando a casa do zero, e o produto de vocês é o que falta aqui]] É esse aqui ó: [[link|(link do produto)]].",
-        "A ideia: [[ideia:f|gravar a chegada, o primeiro uso e o resultado, em tempo real]] Isso vira vídeo vertical e fotos pra vocês usarem como UGC e em tráfego pago, e eu documento no meu perfil com @ e link.",
-        "[[dif:f|Gravo em casa com luz natural e entrego rápido]] ?extras? [[extras:f|]]",
-        "Se fizer sentido, vai ser incrível ter vocês nesse projeto :)\nPortfólio: {{site}}",
-        "Att, {{nome}} / {{arroba}}",
-        "P.S.: independente dessa collab, me conta como funciona o processo de vocês com criativos hoje? Se tiverem lista de creators, quero entrar nela."
-      ]},
-    { nome: "Rascunho curto",
-      as: "Uma ideia de conteúdo pro [[produto|(produto)]] de vocês",
-      ps: [
-        "Oieee [[pessoa|(pessoa ou nome da marca)]], tudo bem?",
-        "Aqui é a {{nome}}, criadora de conteúdo UGC{{deCidade}} ({{arroba}}). Cheguei em vocês pesquisando [[produto|(produto)]] e fiquei um tempão no site, principalmente [[detalhe:m|(o que você viu no site)]].",
-        "[[conexao:f|Acabei de me mudar e estou montando a casa do zero]] Por isso [[link|(link do produto)]] entrou na minha lista agora.",
-        "Minha ideia: [[ideia:m|gravar a chegada, o primeiro uso e o resultado]]. Vira vídeo vertical em arquivo pra vocês usarem como quiserem, e eu mostro o processo no meu perfil marcando vocês.",
-        "[[dif:f|Gravo em casa com luz natural e entrego rápido]] ?extras? [[extras:f|]]",
-        "Se fizer sentido, vai ser incrível ter vocês nesse projeto :)\nPortfólio: {{site}}",
-        "Att, {{nome}} / {{arroba}}",
-        "P.S.: independente dessa collab, me conta como funciona o processo de vocês com criativos hoje? Se tiverem lista de creators, quero entrar nela."
-      ]}
-  ],
-  dm: [
-    { nome: "A DM direta",
-      as: "",
-      ps: [
-        "Oieee! Aqui é a {{nome}}, criadora de conteúdo UGC{{deCidade}} ({{arroba}}) 👀",
-        "[[conexao:f|Acabei de me mudar e estou montando a casa do zero]]",
-        "Pensei numa ideia: [[ideia:m|gravar a chegada, o primeiro uso e o resultado]]. Vira vídeo vertical em arquivo pra vocês usarem, e eu mostro o processo no meu perfil marcando vocês.",
-        "Topam conversar? Portfólio: {{site}}"
-      ]},
-    { nome: "A DM de duas linhas",
-      as: "",
-      ps: [
-        "Oieee! Sou a {{nome}}, criadora de conteúdo UGC. Vi [[produto|(produto)]] de vocês e já pensei num conteúdo pra ele: [[ideia:m|a chegada, o primeiro uso e o resultado]].",
-        "Posso te mandar a proposta por aqui ou prefere por e-mail? Portfólio: {{site}}"
-      ]}
-  ],
-  plataforma: [
-    { nome: "Com números",
-      as: "",
-      ps: [
-        "Oie, equipe! Cheguei 🎬",
-        "[[dif:f|Sou criadora de conteúdo UGC]]",
-        "Adoraria fazer parte desse trabalho e construir algo incrível juntos!",
-        "Deixo aqui meu portfólio com alguns dos meus vídeos favoritos:\n{{site}}"
-      ]},
-    { nome: "Com o que você sente pelo produto",
-      as: "",
-      ps: [
-        "Olá equipe! ✨",
-        "[[conexao:f|Eu uso esse produto de verdade e vim correndo quando vi essa campanha]]",
-        "?ideia? [[ideia:f|]]",
-        "To super animada pra colaborarmos juntos nessa! Fico aguardando contato.",
-        "Deixo aqui meu portfólio com alguns dos meus vídeos favoritos:\n{{site}}"
-      ]}
-  ],
-  segundo: [
-    { nome: "O follow-up com oferta nova",
-      as: "sobre a ideia que eu mandei",
-      ps: [
-        "Oieee [[pessoa|(pessoa ou nome da marca)]]! Voltando rapidinho por causa da ideia que eu mandei [[quando|semana passada]].",
-        "Se ajudar a decidir, eu gravo um teste curto antes de qualquer acordo, pra vocês verem como fica com o produto de vocês na mão. Sem compromisso nenhum.",
-        "Att, {{nome}} / {{arroba}}"
-      ]},
-    { nome: "O follow-up com ideia nova",
-      as: "mais uma ideia pra vocês",
-      ps: [
-        "Oieee [[pessoa|(pessoa ou nome da marca)]]! Como eu não tive retorno da primeira, vim com outra ideia, porque eu realmente acho que dá match.",
-        "[[ideia2:f|Pensei num conteúdo curto comparando o antes e o depois com o produto de vocês]]",
-        "Se não for o momento, me diz que eu volto a falar mais pra frente, sem problema nenhum. Portfólio: {{site}}",
-        "Att, {{nome}} / {{arroba}}"
-      ]}
-  ]
-};
 
 /* ═════════ os campos na tela ═════════ */
 function campoHtml(c, comNumero){
@@ -462,7 +535,7 @@ function campoHtml(c, comNumero){
 }
 var INTRO = {
   email: "Cinco perguntas. Responde do jeito que você falaria, do resto eu cuido.",
-  dm: "DM é curta, então são quatro linhas suas. O resto some.",
+  dm: "A DM não vende: ela pede o canal pra você mandar a proposta. Duas perguntas bastam.",
   segundo: "Aqui só interessa o que destrava a conversa. Três perguntas.",
   plataforma: "Candidatura é rápida de ler. Três perguntas, e número só se for de verdade."
 };
