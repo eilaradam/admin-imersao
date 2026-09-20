@@ -289,6 +289,21 @@ var IA = {
   cache: {}
 };
 try{ IA.cache = JSON.parse(localStorage.getItem("email-imersao:ia") || "{}") || {}; }catch(e){ IA.cache = {}; }
+/* quando eu mexo no gerador, o texto velho guardado aqui vira lixo: some com ele
+   pra ninguem ficar olhando um e-mail antigo achando que a pagina nao atualizou.
+   As respostas dela nao se perdem, so o texto gerado. */
+var VERSAO_GERADOR = "2026-09-20-b";
+var atualizouAgora = false;
+try{
+  if(localStorage.getItem("email-imersao:v") !== VERSAO_GERADOR){
+    localStorage.removeItem("email-imersao:ia");
+    localStorage.removeItem(CHAVE_DOC);
+    localStorage.setItem("email-imersao:v", VERSAO_GERADOR);
+    edicoes = {}; IA.cache = {};
+    atualizouAgora = true;
+  }
+}catch(e){}
+
 var ESTILOS = ["direta", "ideia", "resultado", "curta"];
 var NOMES_VERSAO = ["A proposta direta", "Começando pela ideia", "A que fala de resultado", "A curtinha"];
 function nVersoes(){ return aba === "email" ? ESTILOS.length : MODELOS[aba].length; }
@@ -727,6 +742,13 @@ document.getElementById("btCopiar").addEventListener("click", function(){
 
 protegerSlot(doc); protegerSlot(docAs);
 desenhar();
+if(atualizouAgora){
+  setTimeout(function(){
+    aviso("Atualizei o gerador. Clica em criar modelo de e-mail pra refazer o texto com as suas respostas.");
+    btGerar.classList.add("pisca");
+    avisoGerar.textContent = "O gerador mudou. Clica aqui pra refazer o e-mail.";
+  }, 700);
+}
 
 /* ═════════ porteira ═════════ */
 var portao = document.getElementById("portao");
