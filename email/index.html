@@ -282,9 +282,9 @@ var PERGUNTAS_POR_ABA = {
     { id:"ideia", n:"01", rot:"Sobre o que era o primeiro e-mail",
       ph:"a ideia de gravar a chegada e o primeiro uso das panelas",
       ajuda:"Uma linha pra ela lembrar de você." },
-    { id:"oferta", n:"02", rot:"O que você pode oferecer agora",
-      ph:"gravo um teste curto antes de qualquer acordo",
-      ajuda:"Uma facilidade nova. É isso que destrava a conversa." },
+    { id:"contato2", n:"02", rot:"Qual segundo contato você quer pedir",
+      ph:"WhatsApp",
+      ajuda:"O objetivo desse e-mail é reabrir a conversa e conseguir outro canal." },
     { id:"quando", n:"03", rot:"Quando você mandou o primeiro",
       ph:"semana passada",
       ajuda:"Opcional." }
@@ -338,7 +338,7 @@ try{ IA.cache = JSON.parse(localStorage.getItem("email-imersao:ia") || "{}") || 
 /* quando eu mexo no gerador, o texto velho guardado aqui vira lixo: some com ele
    pra ninguem ficar olhando um e-mail antigo achando que a pagina nao atualizou.
    As respostas dela nao se perdem, so o texto gerado. */
-var VERSAO_GERADOR = "2026-09-20-m";
+var VERSAO_GERADOR = "2026-09-20-n";
 var atualizouAgora = false;
 try{
   if(localStorage.getItem("email-imersao:v") !== VERSAO_GERADOR){
@@ -364,7 +364,7 @@ function chamarIA(estilo, formato){
       palavra: "imersao2", estilo: estilo, formato: formato || "email",
       nome: (dados.nome||"").trim(), arroba: (dados.arroba||"").trim(), site: (dados.site||"").trim(), cidade: (dados.cidade||"").trim(),
       dif: (dados.dif||"").trim(), conexao: (dados.conexao||"").trim(),
-      ideia: (dados.ideia||"").trim(), extras: (dados.extras||"").trim(), detalhe: (dados.detalhe||"").trim(), oferta: (dados.oferta||"").trim(), quando: (dados.quando||"").trim(), destaque: (dados.destaque||"").trim()
+      ideia: (dados.ideia||"").trim(), extras: (dados.extras||"").trim(), detalhe: (dados.detalhe||"").trim(), oferta: (dados.oferta||"").trim(), contato2: (dados.contato2||"").trim(), quando: (dados.quando||"").trim(), destaque: (dados.destaque||"").trim()
     })
   }).then(function(r){ return r.json(); });
 }
@@ -422,18 +422,20 @@ var MODELOS = {
       ]}
   ],
   segundo: [
-    { nome: "Com oferta nova", as: "sobre a ideia que eu mandei",
+    { nome: "O modelo padrão", as: "sobre o vídeo pro [[produto|(produto)]]",
       ps: [
-        "Oieee [[pessoa|(pessoa ou nome da marca)]], tudo bem?",
-        "Voltando rapidinho por causa [[ideia:m|da ideia que eu mandei]], [[quando|semana passada]].",
-        "[[oferta:f|Se ajudar a decidir, eu gravo um teste curto antes de qualquer acordo]]",
-        "Att, {{nome}} / {{arroba}}"
+        "Oie, [[pessoa|(pessoa ou nome da marca)]]!",
+        "Passando rapidinho pra saber se vocês conseguiram dar uma olhadinha no último e-mail e se [[ideia:m|a ideia]] faz sentido pra vocês.",
+        "Se for melhor, fico à disposição para conversarmos e entender o momento do lado de vocês! Tenho certeza de que a parceria vai ser incrível.",
+        "Vocês teriam um segundo meio de contato? Se preferir posso chamar através do [[contato2|WhatsApp]].",
+        "Obrigada, fico aguardando\n{{nome}}"
       ]},
     { nome: "Bem curto", as: "sobre a minha proposta",
       ps: [
-        "Oieee [[pessoa|(pessoa ou nome da marca)]], tudo bem?",
-        "Só passando pra saber se [[ideia:m|a ideia que eu mandei]] faz sentido pra vocês. [[oferta:f|Se ajudar, eu gravo um teste curto antes de qualquer acordo]]",
-        "Att, {{nome}} / {{arroba}}"
+        "Oie, [[pessoa|(pessoa ou nome da marca)]]!",
+        "Passando rapidinho pra saber se [[ideia:m|a ideia que eu mandei]] faz sentido pra vocês.",
+        "Vocês teriam um segundo meio de contato? Se preferir posso chamar no [[contato2|WhatsApp]].",
+        "Obrigada, fico aguardando\n{{nome}}"
       ]}
   ],
   plataforma: [
@@ -535,7 +537,7 @@ function campoHtml(c, comNumero){
 var INTRO = {
   email: "Cinco perguntas. Responde do jeito que você falaria, do resto eu cuido.",
   dm: "A DM não vende: ela pede o canal pra você mandar a proposta. Duas perguntas bastam.",
-  segundo: "Aqui só interessa o que destrava a conversa. Três perguntas.",
+  segundo: "Esse e-mail não insiste na proposta: ele reabre a conversa e pede outro canal.",
   plataforma: "Três perguntas, e elas viram as quatro linhas da candidatura: diferencial, apresentação, conexão e o convite."
 };
 function desenharPerguntas(){
