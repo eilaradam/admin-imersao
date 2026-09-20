@@ -338,7 +338,7 @@ try{ IA.cache = JSON.parse(localStorage.getItem("email-imersao:ia") || "{}") || 
 /* quando eu mexo no gerador, o texto velho guardado aqui vira lixo: some com ele
    pra ninguem ficar olhando um e-mail antigo achando que a pagina nao atualizou.
    As respostas dela nao se perdem, so o texto gerado. */
-var VERSAO_GERADOR = "2026-09-20-l";
+var VERSAO_GERADOR = "2026-09-20-m";
 var atualizouAgora = false;
 try{
   if(localStorage.getItem("email-imersao:v") !== VERSAO_GERADOR){
@@ -437,12 +437,11 @@ var MODELOS = {
       ]}
   ],
   plataforma: [
-    { nome: "Com números", as: "",
+    { nome: "O modelo padrão", as: "",
       ps: [
-        "[[destaque:f|+ de 500 conteúdos criados só no último ano]] ✨",
-        "Oie, equipe! Cheguei 🎬 [[dif:f|Sou criadora de conteúdo UGC]]",
-        "?conexao? [[conexao:f|]]",
-        "Adoraria fazer parte desse trabalho e construir algo incrível juntos!",
+        "[[destaque:f|+ de XX conteúdos criados só no último ano]] ✨",
+        "Oie, equipe! Cheguei 🎬 Sou criadora de conteúdo UGC, [[dif:m|com mais de X marcas trabalhadas]] e [[conexao:m|especialista no nicho de casa e decoração]].",
+        "Adoraria fazer parte desse trabalho e construir algo incrível juntos! Animada pra iniciarmos.",
         "Deixo aqui meu portfólio com alguns dos meus vídeos favoritos:\n{{site}}"
       ]},
     { nome: "Com o que você sente pela marca", as: "",
