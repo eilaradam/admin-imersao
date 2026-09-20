@@ -123,6 +123,7 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 .papel__pe .cnt{font-family:var(--fm);font-size:12px;color:var(--muted);margin-right:auto}
 .papel__pe .cnt b{color:var(--green)}
 .papel__pe .cnt b.gordo{color:var(--red)}
+.papel__pe .cnt b.curto{color:#B07A12}
 .bt{font-family:var(--fb);font-weight:700;font-size:13.5px;padding:10px 17px;border-radius:9px;border:1px solid var(--ink);background:var(--ink);color:var(--white);cursor:pointer}
 .bt.fraco{background:var(--white);color:var(--ink)}
 .bt.feito{background:var(--green);border-color:var(--green)}
@@ -532,12 +533,15 @@ function respondidas(){
 function contar(){
   var txt = doc.innerText.replace(/\s+/g, " ").trim();
   var palavras = txt ? txt.split(" ").length : 0;
-  var gordo = aba === "email" && palavras > 200;
+  var gordo = aba === "email" && palavras > 220;
+  var curto = aba === "email" && palavras > 0 && palavras < 170;
   var faltam = [].slice.call(document.querySelectorAll(".slot")).filter(function(s){
     return s.textContent.trim() === (s.dataset.orig || "").trim();
   }).length;
-  conta.innerHTML = '<b class="' + (gordo ? "gordo" : "") + '">' + palavras + " palavras</b>"
-    + (gordo ? " · longo pra um primeiro contato, corta uma frase" : (aba === "email" ? " · bom tamanho pra ler no celular" : ""))
+  conta.innerHTML = '<b class="' + (gordo ? "gordo" : (curto ? "curto" : "")) + '">' + palavras + " palavras</b>"
+    + (gordo ? " · longo pra um primeiro contato, corta uma frase"
+       : curto ? " · ficou curto, o ideal é entre 180 e 220"
+       : (aba === "email" ? " · bom tamanho pra ler no celular" : ""))
     + (faltam ? " · " + faltam + " grifo" + (faltam > 1 ? "s" : "") + " ainda pra trocar" : " · nenhum grifo em aberto");
   var r = respondidas();
   dica.innerHTML = r < 3
