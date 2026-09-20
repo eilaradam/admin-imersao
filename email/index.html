@@ -299,7 +299,7 @@ try{ IA.cache = JSON.parse(localStorage.getItem("email-imersao:ia") || "{}") || 
 /* quando eu mexo no gerador, o texto velho guardado aqui vira lixo: some com ele
    pra ninguem ficar olhando um e-mail antigo achando que a pagina nao atualizou.
    As respostas dela nao se perdem, so o texto gerado. */
-var VERSAO_GERADOR = "2026-09-20-g";
+var VERSAO_GERADOR = "2026-09-20-h";
 var atualizouAgora = false;
 try{
   if(localStorage.getItem("email-imersao:v") !== VERSAO_GERADOR){
@@ -374,20 +374,22 @@ var MODELOS = {
       ]}
   ],
   plataforma: [
-    { nome: "Candidatura",
+    { nome: "Com números",
       as: "",
       ps: [
-        "Sou a {{nome}} ({{arroba}}), criadora de conteúdo UGC{{deCidade}}. [[conexao:f|Acabei de me mudar e estou montando a casa do zero]]",
-        "[[dif:f|Gravo em casa com luz natural e entrego rápido]]",
-        "A minha ideia pra essa campanha: [[ideia:m|gravar a chegada, o primeiro uso e o resultado, em tempo real]]. Entrego vídeo vertical e fotos em arquivo, e consigo ajustar a ideia ao briefing de vocês.",
-        "Meu portfólio: {{site}}"
+        "Oie, equipe! Cheguei 🎬",
+        "[[dif:f|Sou criadora de conteúdo UGC]]",
+        "Adoraria fazer parte desse trabalho e construir algo incrível juntos!",
+        "Deixo aqui meu portfólio com alguns dos meus vídeos favoritos:\n{{site}}"
       ]},
-    { nome: "Candidatura curta",
+    { nome: "Com o que você sente pelo produto",
       as: "",
       ps: [
-        "Sou a {{nome}} ({{arroba}}), criadora de conteúdo UGC{{deCidade}}. [[conexao:f|Acabei de me mudar e estou montando a casa do zero]]",
-        "Pra essa campanha eu faria [[ideia:m|a chegada, o primeiro uso e o resultado, em tempo real]], em vídeo vertical e fotos, ajustando ao briefing de vocês.",
-        "Meu portfólio: {{site}}"
+        "Olá equipe! ✨",
+        "[[conexao:f|Eu uso esse produto de verdade e vim correndo quando vi essa campanha]]",
+        "?ideia? [[ideia:f|]]",
+        "To super animada pra colaborarmos juntos nessa! Fico aguardando contato.",
+        "Deixo aqui meu portfólio com alguns dos meus vídeos favoritos:\n{{site}}"
       ]}
   ],
   segundo: [
