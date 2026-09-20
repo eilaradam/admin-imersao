@@ -226,7 +226,7 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
     </div>
 
     <aside class="form">
-      <p class="form__intro">Responde do jeito que você falaria. Do resto eu cuido.</p>
+      <p class="form__intro" id="introForm">Responde do jeito que você falaria. Do resto eu cuido.</p>
       <div id="camposFixos"></div>
       <div id="campos"></div>
       <button class="bt bt-gerar" id="btGerar" type="button">Criar modelo de e-mail</button>
@@ -246,23 +246,62 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 "use strict";
 
 /* ═════════ as quatro perguntas ═════════ */
-var PERGUNTAS = [
-  { id:"dif", n:"01", rot:"Seus diferenciais",
-    ph:"gravo em casa com luz natural, entrego em 5 dias, já fiz pra 20 marcas",
-    ajuda:"O que te faz diferente." },
-  { id:"detalhe", n:"02", rot:"O que você viu no site deles",
-    ph:"a linha que não solta revestimento",
-    ajuda:"Uma coisa específica. É o que prova que você olhou." },
-  { id:"conexao", n:"03", rot:"Por que essa marca, e por que agora",
-    ph:"me mudei e estou montando a cozinha do zero",
-    ajuda:"A parte que faz ela responder." },
-  { id:"ideia", n:"04", rot:"Sua ideia de conteúdo",
-    ph:"a chegada da caixa, o primeiro uso e a lavagem, em tempo real",
-    ajuda:"Quanto mais específica, melhor." },
-  { id:"extras", n:"05", rot:"Mais alguma coisa?",
-    ph:"tenho as próximas duas semanas livres",
-    ajuda:"Opcional." }
-];
+var PERGUNTAS_POR_ABA = {
+  email: [
+    { id:"dif", n:"01", rot:"Seus diferenciais",
+      ph:"gravo em casa com luz natural, entrego em 5 dias, já fiz pra 20 marcas",
+      ajuda:"O que te faz diferente." },
+    { id:"detalhe", n:"02", rot:"O que você viu no site deles",
+      ph:"a linha que não solta revestimento",
+      ajuda:"Uma coisa específica. É o que prova que você olhou." },
+    { id:"conexao", n:"03", rot:"Por que essa marca, e por que agora",
+      ph:"me mudei e estou montando a cozinha do zero",
+      ajuda:"A parte que faz ela responder." },
+    { id:"ideia", n:"04", rot:"Sua ideia de conteúdo",
+      ph:"a chegada da caixa, o primeiro uso e a lavagem, em tempo real",
+      ajuda:"Quanto mais específica, melhor." },
+    { id:"extras", n:"05", rot:"Mais alguma coisa?",
+      ph:"tenho as próximas duas semanas livres",
+      ajuda:"Opcional." }
+  ],
+  dm: [
+    { id:"dif", n:"01", rot:"Quem você é, em uma linha",
+      ph:"criadora de conteúdo UGC de casa e cozinha",
+      ajuda:"Na DM ninguém lê currículo." },
+    { id:"detalhe", n:"02", rot:"O que você viu no perfil deles",
+      ph:"o post do lançamento de ontem",
+      ajuda:"Mostra que você não mandou pra 50 marcas iguais." },
+    { id:"conexao", n:"03", rot:"Por que essa marca, e por que agora",
+      ph:"me mudei e estou montando a cozinha do zero",
+      ajuda:"Em uma frase, na DM tudo é curto." },
+    { id:"ideia", n:"04", rot:"Sua ideia de conteúdo",
+      ph:"a chegada da caixa, o primeiro uso e a lavagem",
+      ajuda:"Só o suficiente pra ela querer saber mais." }
+  ],
+  segundo: [
+    { id:"ideia", n:"01", rot:"Sobre o que era o primeiro e-mail",
+      ph:"a ideia de gravar a chegada e o primeiro uso das panelas",
+      ajuda:"Uma linha pra ela lembrar de você." },
+    { id:"oferta", n:"02", rot:"O que você pode oferecer agora",
+      ph:"gravo um teste curto antes de qualquer acordo",
+      ajuda:"Uma facilidade nova. É isso que destrava a conversa." },
+    { id:"quando", n:"03", rot:"Quando você mandou o primeiro",
+      ph:"semana passada",
+      ajuda:"Opcional." }
+  ],
+  plataforma: [
+    { id:"dif", n:"01", rot:"Seus números e diferenciais",
+      ph:"criadora há 2 anos, mais de 300 marcas, mais de 500 vídeos, emito nota fiscal",
+      ajuda:"Aqui número pesa. Só os de verdade." },
+    { id:"conexao", n:"02", rot:"Você conhece ou usa esse produto?",
+      ph:"sou muito fã, compro sempre, mas não sabia que dava pra comprar individual",
+      ajuda:"Se você ama o produto, isso vale mais que número." },
+    { id:"ideia", n:"03", rot:"Ideias que você já teve pra essa campanha",
+      ph:"tenho conteúdos de receita e já pensei em como usar o produto",
+      ajuda:"Uma linha só, candidatura não é proposta." }
+  ]
+};
+var PERGUNTAS = PERGUNTAS_POR_ABA.email;
 
 var FIXOS = [
   { id:"nome",   rot:"Nome", ph:"Lara" },
@@ -299,7 +338,7 @@ try{ IA.cache = JSON.parse(localStorage.getItem("email-imersao:ia") || "{}") || 
 /* quando eu mexo no gerador, o texto velho guardado aqui vira lixo: some com ele
    pra ninguem ficar olhando um e-mail antigo achando que a pagina nao atualizou.
    As respostas dela nao se perdem, so o texto gerado. */
-var VERSAO_GERADOR = "2026-09-20-h";
+var VERSAO_GERADOR = "2026-09-20-i";
 var atualizouAgora = false;
 try{
   if(localStorage.getItem("email-imersao:v") !== VERSAO_GERADOR){
@@ -325,7 +364,7 @@ function chamarIA(estilo, formato){
       palavra: "imersao2", estilo: estilo, formato: formato || "email",
       nome: (dados.nome||"").trim(), arroba: (dados.arroba||"").trim(), site: (dados.site||"").trim(), cidade: (dados.cidade||"").trim(),
       dif: (dados.dif||"").trim(), conexao: (dados.conexao||"").trim(),
-      ideia: (dados.ideia||"").trim(), extras: (dados.extras||"").trim(), detalhe: (dados.detalhe||"").trim()
+      ideia: (dados.ideia||"").trim(), extras: (dados.extras||"").trim(), detalhe: (dados.detalhe||"").trim(), oferta: (dados.oferta||"").trim(), quando: (dados.quando||"").trim()
     })
   }).then(function(r){ return r.json(); });
 }
@@ -421,7 +460,18 @@ function campoHtml(c, comNumero){
     + '<label for="c_' + c.id + '">' + c.rot + '</label>' + entrada
     + (c.ajuda ? '<div class="ajuda">' + c.ajuda + '</div>' : '') + '</div>';
 }
-document.getElementById("campos").innerHTML = PERGUNTAS.map(function(c){ return campoHtml(c, true); }).join("");
+var INTRO = {
+  email: "Cinco perguntas. Responde do jeito que você falaria, do resto eu cuido.",
+  dm: "DM é curta, então são quatro linhas suas. O resto some.",
+  segundo: "Aqui só interessa o que destrava a conversa. Três perguntas.",
+  plataforma: "Candidatura é rápida de ler. Três perguntas, e número só se for de verdade."
+};
+function desenharPerguntas(){
+  PERGUNTAS = PERGUNTAS_POR_ABA[aba] || PERGUNTAS_POR_ABA.email;
+  var el = document.getElementById("introForm");
+  if(el) el.textContent = INTRO[aba] || INTRO.email;
+  document.getElementById("campos").innerHTML = PERGUNTAS.map(function(c){ return campoHtml(c, true); }).join("");
+}
 document.getElementById("camposFixos").innerHTML = FIXOS.map(function(c){ return campoHtml(c, false); }).join("");
 
 var salvoEl = document.getElementById("salvo"), relogio;
@@ -453,6 +503,7 @@ document.getElementById("btnLimpar").addEventListener("click", function(){
 
 /* ═════════ montar o texto ═════════ */
 var aba = "email", indice = { email:0, dm:0, segundo:0, plataforma:0 };
+desenharPerguntas();
 var doc = document.getElementById("doc"), docAs = document.getElementById("docAs");
 var conta = document.getElementById("conta"), dica = document.getElementById("dica");
 var qual = document.getElementById("qualVersao"), linhaAs = document.getElementById("linhaAs");
@@ -570,7 +621,7 @@ function atualizarSlots(){
 }
 
 function respondidas(){
-  return PERGUNTAS.filter(function(p){ return (dados[p.id] || "").trim(); }).length;
+  return (PERGUNTAS_POR_ABA[aba] || []).filter(function(p){ return (dados[p.id] || "").trim(); }).length;
 }
 
 function contar(){
@@ -656,6 +707,7 @@ function guardar(){
     [].slice.call(document.querySelectorAll(".aba")).forEach(function(x){ x.classList.remove("on"); });
     b.classList.add("on");
     aba = b.dataset.aba;
+    desenharPerguntas();
     desenhar();
     /* aba nova sem texto escrito ainda: escreve na hora */
     if(respondidas() >= 2 && !IA.cache[chaveIA()] && !edicoes[id()]){
