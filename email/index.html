@@ -198,6 +198,7 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
           <button class="aba on" data-aba="email" type="button">E-mail</button>
           <button class="aba" data-aba="dm" type="button">Versão de DM</button>
           <button class="aba" data-aba="segundo" type="button">Segundo e-mail</button>
+          <button class="aba" data-aba="plataforma" type="button">Seu Influencer</button>
         </div>
       </div>
 
@@ -298,7 +299,7 @@ try{ IA.cache = JSON.parse(localStorage.getItem("email-imersao:ia") || "{}") || 
 /* quando eu mexo no gerador, o texto velho guardado aqui vira lixo: some com ele
    pra ninguem ficar olhando um e-mail antigo achando que a pagina nao atualizou.
    As respostas dela nao se perdem, so o texto gerado. */
-var VERSAO_GERADOR = "2026-09-20-f";
+var VERSAO_GERADOR = "2026-09-20-g";
 var atualizouAgora = false;
 try{
   if(localStorage.getItem("email-imersao:v") !== VERSAO_GERADOR){
@@ -372,6 +373,23 @@ var MODELOS = {
         "Posso te mandar a proposta por aqui ou prefere por e-mail? Portfólio: {{site}}"
       ]}
   ],
+  plataforma: [
+    { nome: "Candidatura",
+      as: "",
+      ps: [
+        "Sou a {{nome}} ({{arroba}}), criadora de conteúdo UGC{{deCidade}}. [[conexao:f|Acabei de me mudar e estou montando a casa do zero]]",
+        "[[dif:f|Gravo em casa com luz natural e entrego rápido]]",
+        "A minha ideia pra essa campanha: [[ideia:m|gravar a chegada, o primeiro uso e o resultado, em tempo real]]. Entrego vídeo vertical e fotos em arquivo, e consigo ajustar a ideia ao briefing de vocês.",
+        "Meu portfólio: {{site}}"
+      ]},
+    { nome: "Candidatura curta",
+      as: "",
+      ps: [
+        "Sou a {{nome}} ({{arroba}}), criadora de conteúdo UGC{{deCidade}}. [[conexao:f|Acabei de me mudar e estou montando a casa do zero]]",
+        "Pra essa campanha eu faria [[ideia:m|a chegada, o primeiro uso e o resultado, em tempo real]], em vídeo vertical e fotos, ajustando ao briefing de vocês.",
+        "Meu portfólio: {{site}}"
+      ]}
+  ],
   segundo: [
     { nome: "O follow-up com oferta nova",
       as: "sobre a ideia que eu mandei",
@@ -432,7 +450,7 @@ document.getElementById("btnLimpar").addEventListener("click", function(){
 });
 
 /* ═════════ montar o texto ═════════ */
-var aba = "email", indice = { email:0, dm:0, segundo:0 };
+var aba = "email", indice = { email:0, dm:0, segundo:0, plataforma:0 };
 var doc = document.getElementById("doc"), docAs = document.getElementById("docAs");
 var conta = document.getElementById("conta"), dica = document.getElementById("dica");
 var qual = document.getElementById("qualVersao"), linhaAs = document.getElementById("linhaAs");
@@ -496,7 +514,7 @@ function marcarSaidaIA(txt){
     .replace(/\n/g, "<br>");
 }
 function modelo(){ var L = MODELOS[aba]; return L[indice[aba] % L.length]; }
-function formatoDaAba(){ return aba === "dm" ? "dm" : aba === "segundo" ? "followup" : "email"; }
+function formatoDaAba(){ return aba === "dm" ? "dm" : aba === "segundo" ? "followup" : aba === "plataforma" ? "plataforma" : "email"; }
 function chaveIA(){ return aba + ":" + indice[aba]; }
 function id(){ return aba + ":" + indice[aba]; }
 
@@ -739,7 +757,7 @@ document.getElementById("btCopiar").addEventListener("click", function(){
   var txt = (modelo().as && docAs.innerText.trim() ? "Assunto: " + docAs.innerText.trim() + "\n\n" : "") + corpo;
   function ok(){
     b.textContent = "Copiado ✓"; b.classList.add("feito");
-    aviso(aba === "dm" ? "Copiado. Cola na DM da marca." : "Copiado com o assunto. Cola no seu e-mail.");
+    aviso(aba === "dm" ? "Copiado. Cola na DM da marca." : aba === "plataforma" ? "Copiado. Cola na candidatura da campanha." : "Copiado com o assunto. Cola no seu e-mail.");
     setTimeout(function(){ b.textContent = "Copiar"; b.classList.remove("feito"); }, 2400);
   }
   function velho(){
