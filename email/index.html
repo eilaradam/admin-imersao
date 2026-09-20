@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Seu E-mail de Prospecção · Imersão</title>
-<meta name="description" content="O e-mail de prospecção já escrito, pra você trocar o que está grifado e mandar.">
+<meta name="description" content="Responda uma pergunta por parágrafo e o seu e-mail de prospecção se monta, pronto pra copiar.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✍️</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -117,8 +117,8 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 .doc:focus,.doc-as:focus{background:rgba(255,240,232,.4)}
 .doc p{margin:0 0 15px}
 .doc p:last-child{margin-bottom:0}
-.slot{background:var(--butter);box-shadow:0 0 0 2px var(--butter);border-bottom:2px solid #E8D98A;border-radius:2px;cursor:text}
-.slot.mexido{background:transparent;box-shadow:none;border-bottom:2px solid rgba(200,68,26,.22)}
+.slot{background:var(--butter);border-bottom:2px solid #E8D98A;border-radius:3px;padding:0 3px;cursor:text}
+.slot.mexido{background:transparent;border-bottom:2px solid rgba(200,68,26,.25)}
 .papel__pe{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:13px 20px;border-top:1px solid var(--line);background:var(--cream)}
 .papel__pe .cnt{font-family:var(--fm);font-size:12px;color:var(--muted);margin-right:auto}
 .papel__pe .cnt b{color:var(--green)}
@@ -134,6 +134,12 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 .passo4 .t{font-family:var(--fh);font-weight:800;font-size:15.5px;margin-top:3px}
 .passo4 .d{font-size:13.5px;color:var(--muted);margin-top:3px;line-height:1.5}
 .form .mini{font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:2px 0 10px}
+.meu{border-bottom:2px solid rgba(200,68,26,.22)}
+.bt-gerar{display:block;width:100%;margin:18px 0 0;padding:15px 18px;font-size:15.5px;background:var(--red);border-color:var(--red)}
+.bt-gerar:hover{background:var(--red-dark);border-color:var(--red-dark)}
+.bt-gerar.pisca{animation:pisca 1.4s ease-in-out infinite}
+@keyframes pisca{0%,100%{box-shadow:0 0 0 0 rgba(200,68,26,.45)}50%{box-shadow:0 0 0 7px rgba(200,68,26,0)}}
+.aviso-gerar{font-size:13px;color:var(--red);line-height:1.5;margin-top:8px;min-height:1px}
 
 </style>
 </head>
@@ -154,18 +160,18 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 
 <header class="capa">
   <div class="selo">Dia 2 · Tarde</div>
-  <h1 class="titulo">O e-mail já está escrito. Você escreve por cima.</h1>
-  <p class="sub">Isso aqui não é formulário, é um documento. O que está grifado de amarelo é o que muda de marca pra marca, e você escreve em cima. O que não está grifado você também pode mudar: apaga, acrescenta, conta a sua história. Se bagunçar, o botão volta pro original.</p>
+  <h1 class="titulo">Responde por parágrafo e o e-mail se monta.</h1>
+  <p class="sub">Do lado direito tem uma pergunta pra cada parágrafo do e-mail. Você responde com as suas palavras, clica em criar modelo de e-mail, e ele aparece montado aqui do lado. Depois você ainda pode escrever por cima: o que está grifado de amarelo é o que ainda falta ser seu.</p>
 
   <h2 class="bloco">A estrutura, que é sempre essa</h2>
   <div class="passo4">
     <div><div class="q">Parágrafo 1</div><div class="t">Quem você é</div><div class="d">O que você faz e os seus diferenciais, na sua linguagem. Com convicção, não pedindo licença.</div></div>
     <div><div class="q">Parágrafo 2</div><div class="t">A conexão</div><div class="d">O motivo real de vocês darem match. É a parte que faz a marca ler até o fim.</div></div>
-    <div><div class="q">Parágrafo 3</div><div class="t">A ideia</div><div class="d">A proposta e o vídeo que você já pensou. Nada de "quero fazer uma parceria".</div></div>
+    <div><div class="q">Parágrafo 3</div><div class="t">A ideia</div><div class="d">A proposta e o conteúdo que você já pensou. Nada de "quero fazer uma parceria".</div></div>
     <div><div class="q">Parágrafo 4</div><div class="t">A pergunta</div><div class="d">Uma pergunta que gera curiosidade e o link do seu portfólio. Nunca termine sem pedir nada.</div></div>
   </div>
 
-  <div class="aviso"><b>Escreva com vontade:</b> a marca sente quando o e-mail foi escrito por obrigação. As versões aqui são de propósito diretas, faladas e com certeza do que você entrega. Se alguma frase não for verdade pra você, troca. O que nunca pode é número inventado: se você ainda não atendeu marca nenhuma, apaga essa parte e fala do que você domina.</div>
+  <div class="aviso"><b>Escreva com vontade:</b> a marca sente quando o e-mail foi escrito por obrigação. Responda as perguntas do jeito que você contaria pra uma amiga, que o texto sai com a sua cara. O que nunca pode é número inventado: se você ainda não atendeu marca nenhuma, apaga essa parte e fala do que você domina.</div>
 </header>
 
 <main class="oficina">
@@ -203,9 +209,11 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
     </div>
 
     <aside class="form">
-      <p class="form__intro">Isso aqui entra sozinho em todas as versões. Preenche uma vez só.</p>
+      <p class="form__intro">Uma pergunta por parágrafo. Responde do jeito que você falaria, sem enfeite, e clica no botão lá embaixo.</p>
       <div id="campos"></div>
-      <button class="btn-limpar" id="btnLimpar" type="button">Limpar meus dados</button>
+      <button class="bt bt-gerar" id="btGerar" type="button">Criar modelo de e-mail</button>
+      <p class="aviso-gerar" id="avisoGerar"></p>
+      <button class="btn-limpar" id="btnLimpar" type="button">Limpar minhas respostas</button>
       <p class="salvo" id="salvo"></p>
       <div class="rodape"><strong>@eilaradam</strong><br>Imersão Claude pra Creator · Dia 2</div>
     </aside>
@@ -218,14 +226,31 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 (function(){
 "use strict";
 
-/* ═════════ os seus dados fixos ═════════ */
+/* ═════════ as perguntas ═════════ */
 var CAMPOS = [
   { grupo: "Sobre você", itens: [
     { id:"nome",   rot:"Seu nome", ph:"Lara" },
     { id:"arroba", rot:"@ do seu Instagram", ph:"@eilaradam" },
-    { id:"nicho",  rot:"O seu nicho", ph:"casa e decoração",
-      ajuda:"Complete a frase: sou especialista em ___" },
+    { id:"nicho",  rot:"O seu nicho", ph:"casa e decoração", ajuda:"Completa a frase: sou especialista em ___" },
     { id:"site",   rot:"Link do seu portfólio", ph:"seunome.github.io/portfolio" }
+  ]},
+  { grupo: "Parágrafo 1 · quem você é", itens: [
+    { id:"marcas", rot:"Já trabalhei com...", ph:"mais de 10 marcas",
+      ajuda:"Se você ainda não atendeu marca nenhuma, deixa vazio e apaga essa frase no texto." },
+    { id:"dif",    rot:"Os seus diferenciais", ph:"gravo na minha casa de verdade, com luz natural, e entrego em até 7 dias", area:true,
+      ajuda:"O que te faz diferente. Prazo, jeito de gravar, o nicho que você domina, o que você já sabe fazer sozinha." }
+  ]},
+  { grupo: "Parágrafo 2 · a conexão", itens: [
+    { id:"pessoa", rot:"Pra quem você está escrevendo", ph:"Marina, ou o nome da marca" },
+    { id:"produto", rot:"O produto de que você vai falar", ph:"fogão de indução de duas bocas" },
+    { id:"linkProduto", rot:"Link do produto (se tiver)", ph:"cole aqui o link da página do produto" },
+    { id:"conexao", rot:"Por que essa marca e não outra", ph:"estou no fim da minha transição capilar e vou cortar o cabelo esse mês, e o produto de vocês é feito justamente pra esse tipo de cabelo", area:true,
+      ajuda:"A parte mais importante do e-mail. Conta o seu momento de verdade e por que o produto entra nele." }
+  ]},
+  { grupo: "Parágrafo 3 · a ideia", itens: [
+    { id:"ideia",   rot:"A sua ideia de conteúdo", ph:"no dia que eu cortar o cabelo pra concluir a transição, usar o produto de vocês como primeiro finalizador", area:true },
+    { id:"formatos",rot:"Formatos que você entrega", ph:"pro ads e pra venda no tráfego, em vertical, com e sem legenda", area:true },
+    { id:"gancho",  rot:"Data ou campanha do momento", ph:"pra campanha de Black Friday" }
   ]}
 ];
 
@@ -240,44 +265,47 @@ try{
   if(!dados.arroba && apostila.arroba) dados.arroba = apostila.arroba;
 }catch(e){}
 
-/* ═════════ os modelos ═════════
-   [[assim]] vira um grifo que ela troca.  {{assim}} vem dos campos dela.        */
+/* ═════════ os moldes ═════════
+   [[campo|exemplo]]      o texto dela entra aqui; vazio mostra o exemplo grifado
+   [[campo:f|exemplo]]    frase inteira: começa com maiúscula e termina com ponto
+   [[campo:m|exemplo]]    entra no meio de uma frase: começa minúsculo, sem ponto no fim
+   {{nome}}               vem dos dados dela                                            */
 
 var MODELOS = {
   email: [
     { nome: "A proposta direta",
-      as: "[[Ideia de vídeo pro fogão de indução de vocês]]",
+      as: "Ideia de conteúdo pro [[produto:m|fogão de indução]] de vocês",
       ps: [
-        "Oiê, [[(pessoa ou nome da marca)]]! Aqui é a {{nome}}, sou criadora de conteúdo UGC! Já trabalhei com [[mais de 10 marcas]] e hoje eu sou especialista em {{nicho}}. Encontrei o site de vocês, dei uma olhada em tudo e saí de lá com uma ideia que eu precisava mandar 👀",
-        "Vou te contar por que eu vim falar com vocês e não com outra marca. [[Eu comecei a reforma da minha casa e nesse exato momento estou procurando um fogão de indução pra cozinha nova]]. Aí eu vi [[o modelo de duas bocas de vocês]], que é exatamente o que cabe no meu espaço: [[link do produto]]. Esse é um produto que vai aparecer em várias gravações minhas, não é um vídeo e acabou.",
-        "Por isso eu estou mandando essa proposta: [[uma parceria de conteúdo em formato UGC, em troca do produto]], pra vocês conhecerem o meu trabalho na prática. A ideia que eu já tenho é [[gravar a instalação e o dia a dia com o produto]], e a gente pode criar um conteúdo voltado pro ads e pra venda no tráfego, porque eu trabalho com vários formatos! Isso serve tanto pro feed de vocês quanto [[pra campanha de Black Friday]].",
+        "Oiê, [[pessoa|(pessoa ou nome da marca)]]! Aqui é a {{nome}}, sou criadora de conteúdo UGC! Já trabalhei com [[marcas|mais de 10 marcas]] e hoje eu sou especialista em {{nicho}}. [[dif:f|Gravo na minha casa de verdade, com luz natural, e entrego em até 7 dias]] Encontrei o site de vocês, dei uma olhada em tudo e saí de lá com uma ideia que eu precisava mandar 👀",
+        "Vou te contar por que eu vim falar com vocês e não com outra marca. [[conexao:f|Eu comecei a reforma da minha casa e nesse exato momento estou procurando um fogão de indução pra cozinha nova]] Fui na página do produto de vocês pra conferir: [[linkProduto|link do produto]]. Esse é um produto que vai aparecer em várias gravações minhas, não é um vídeo e acabou.",
+        "Por isso eu estou mandando essa proposta: uma parceria de conteúdo em formato UGC, em troca do produto, pra vocês conhecerem o meu trabalho na prática. A ideia que eu já tenho é [[ideia:m|gravar a instalação e o dia a dia com o produto]], e a gente pode criar um conteúdo voltado [[formatos:m|pro ads e pra venda no tráfego]], porque eu trabalho com vários formatos! Isso serve tanto pro feed de vocês quanto [[gancho:m|pra campanha de Black Friday]].",
         "Vocês estão abertos pra conversar sobre isso? Me conta como funciona o processo de vocês com criativos hoje, porque eu quero entrar nessa lista. Deixo aqui o meu portfólio pra você conhecer mais do meu trabalho: {{site}}",
         "Fico no aguardo! {{nome}} {{arroba}}"
       ]},
     { nome: "Começando pela ideia",
-      as: "[[Pensei num vídeo pro lançamento de vocês]]",
+      as: "Pensei num conteúdo pro [[produto:m|produto de vocês]]",
       ps: [
-        "Oiê, [[(pessoa ou nome da marca)]]! Aqui é a {{nome}}, criadora de conteúdo UGC. Antes de me apresentar direito, deixa eu te contar a ideia, porque foi ela que me fez escrever: [[um vídeo do primeiro uso do produto, na minha casa, sem estúdio e sem produção]]. Já trabalhei com [[mais de 10 marcas]] e hoje eu sou especialista em {{nicho}} 👀",
-        "Eu cheguei em vocês porque [[estou reformando a minha casa e fui atrás desse produto como cliente mesmo]]. Quando eu abri [[o site de vocês]] a ficha caiu: é exatamente o que eu ia comprar. E isso muda o vídeo inteiro, porque eu não preciso fingir que gosto.",
-        "A minha proposta é [[fechar uma parceria de conteúdo UGC em troca do produto]], pra vocês verem como fica na prática. Eu entrego [[o vídeo em vertical, com e sem legenda, em até 7 dias]], e vocês usam [[no Instagram e na página do produto]], sem prazo pra tirar do ar.",
-        "Faz sentido pra vocês? Me conta se tem campanha chegando, [[tipo Black Friday]], que eu já penso o formato certo pra ela. Meu portfólio está aqui: {{site}}",
+        "Oiê, [[pessoa|(pessoa ou nome da marca)]]! Aqui é a {{nome}}, criadora de conteúdo UGC. Antes de me apresentar direito, deixa eu te contar a ideia, porque foi ela que me fez escrever: [[ideia:m|gravar a instalação e o dia a dia com o produto]]. Já trabalhei com [[marcas|mais de 10 marcas]] e hoje eu sou especialista em {{nicho}} 👀",
+        "Eu cheguei em vocês por um motivo bem específico. [[conexao:f|Eu comecei a reforma da minha casa e nesse exato momento estou procurando um fogão de indução pra cozinha nova]] Quando eu vi o produto de vocês a ficha caiu: é exatamente o que eu já ia usar. E isso muda o conteúdo inteiro, porque eu não preciso fingir nada.",
+        "A minha proposta é fechar uma parceria de conteúdo UGC em troca do produto, pra vocês verem como fica na prática. [[dif:f|Gravo na minha casa de verdade, com luz natural, e entrego em até 7 dias]] Entrego [[formatos:m|pro ads e pra venda no tráfego, em vertical, com e sem legenda]], e vocês usam onde quiserem, sem prazo pra tirar do ar.",
+        "Faz sentido pra vocês? Me conta se tem campanha chegando, [[gancho:m|tipo Black Friday]], que eu já penso o formato certo pra ela. Meu portfólio está aqui: {{site}}",
         "Qualquer coisa é só responder esse e-mail. {{nome}} {{arroba}}"
       ]},
     { nome: "A que fala de resultado",
-      as: "[[Vídeo pra página de produto de vocês]]",
+      as: "Conteúdo pra página do [[produto:m|produto]] de vocês",
       ps: [
-        "Oiê, [[(pessoa ou nome da marca)]]! Aqui é a {{nome}}, criadora de conteúdo UGC. Eu faço o tipo de vídeo que parece feito por cliente e não por campanha: [[a pessoa usando o produto em casa, sem estúdio, com a luz que tem]]. É o formato que prende nos primeiros segundos, e é nele que eu me especializei dentro de {{nicho}}.",
-        "Vim falar com vocês por um motivo específico: [[eu vi que o produto de vocês tem foto boa e quase nenhum vídeo de gente usando]]. E como [[eu estou atrás exatamente desse produto pra minha casa agora]], a conversa fica fácil dos dois lados: eu uso de verdade e vocês ganham o vídeo que falta.",
-        "A proposta é [[eu gravar de 1 a 3 vídeos em formato UGC em troca do produto]], pra vocês testarem sem risco. A ideia que eu tenho é [[mostrar o antes e o depois do espaço com o produto instalado]], e dá pra cortar em versões curtas pros anúncios.",
+        "Oiê, [[pessoa|(pessoa ou nome da marca)]]! Aqui é a {{nome}}, criadora de conteúdo UGC, especialista em {{nicho}}. Eu faço o tipo de conteúdo que parece feito por cliente e não por campanha, que é o que costuma prender nos primeiros segundos. [[dif:f|Gravo na minha casa de verdade, com luz natural, e entrego em até 7 dias]] Já trabalhei com [[marcas|mais de 10 marcas]] 👀",
+        "Vim falar com vocês porque tem uma coisa que ninguém mais pode gravar igual a mim agora. [[conexao:f|Eu comecei a reforma da minha casa e nesse exato momento estou procurando um fogão de indução pra cozinha nova]] Ou seja: eu uso o produto de vocês de verdade, no momento certo, e isso aparece na tela.",
+        "A proposta é eu gravar de 1 a 3 conteúdos em formato UGC em troca do produto, pra vocês testarem sem risco. A ideia que eu tenho é [[ideia:m|mostrar o antes e o depois do espaço com o produto]], e dá pra usar [[formatos:m|pro ads e pra venda no tráfego]], em versões curtas pros criativos de vocês.",
         "Vocês estão testando criativo novo agora? Se estiverem, eu quero estar nesse teste. Deixo o meu portfólio pra você dar uma olhada: {{site}}",
         "Me diz se faz sentido que eu mando os formatos e os valores. {{nome}} {{arroba}}"
       ]},
     { nome: "A curtinha",
-      as: "[[Uma ideia de vídeo pra vocês]]",
+      as: "Uma ideia de conteúdo pro [[produto:m|produto]] de vocês",
       ps: [
-        "Oiê, [[(pessoa ou nome da marca)]]! Aqui é a {{nome}}, sou criadora de conteúdo UGC e hoje eu sou especialista em {{nicho}} 👀",
-        "[[Estou reformando a minha cozinha e fui atrás do produto de vocês como cliente mesmo.]] Foi assim que eu cheguei aqui.",
-        "Pensei num vídeo: [[o primeiro uso, na cozinha real, em 40 segundos]]. A proposta é [[gravar em troca do produto]] e vocês usarem onde quiserem.",
+        "Oiê, [[pessoa|(pessoa ou nome da marca)]]! Aqui é a {{nome}}, sou criadora de conteúdo UGC e hoje eu sou especialista em {{nicho}} 👀",
+        "[[conexao:f|Eu comecei a reforma da minha casa e nesse exato momento estou procurando um fogão de indução pra cozinha nova]] Foi assim que eu cheguei em vocês.",
+        "A ideia é [[ideia:m|gravar a instalação e o dia a dia com o produto]], em troca do produto, e vocês usam [[formatos:m|pro ads e pra venda no tráfego]].",
         "Faz sentido? Meu portfólio: {{site}}",
         "{{nome}} {{arroba}}"
       ]}
@@ -286,32 +314,32 @@ var MODELOS = {
     { nome: "A DM direta",
       as: "",
       ps: [
-        "Oiê! Aqui é a {{nome}}, criadora de conteúdo UGC em {{nicho}}.",
-        "[[Estou reformando a minha casa e vim atrás do produto de vocês de verdade, como cliente.]]",
-        "Pensei num vídeo: [[o primeiro uso, na cozinha real, mostrando o que ninguém mostra]]. A ideia é [[gravar em troca do produto]], pra vocês conhecerem o meu trabalho.",
+        "Oiê! Aqui é a {{nome}}, criadora de conteúdo UGC, especialista em {{nicho}} 👀",
+        "[[conexao:f|Eu comecei a reforma da minha casa e nesse exato momento estou procurando um fogão de indução pra cozinha nova]]",
+        "Pensei numa ideia: [[ideia:m|gravar a instalação e o dia a dia com o produto]]. A proposta é fechar em troca do produto, pra vocês conhecerem o meu trabalho.",
         "Topam conversar? Meu portfólio: {{site}}"
       ]},
     { nome: "A DM de duas linhas",
       as: "",
       ps: [
-        "Oiê! Sou a {{nome}}, gravo vídeo de produto em formato UGC. [[Vi o lançamento de vocês]] e já pensei num vídeo pra ele.",
-        "Posso te mandar a ideia por aqui ou prefere por e-mail? Meu portfólio: {{site}}"
+        "Oiê! Sou a {{nome}}, criadora de conteúdo UGC em {{nicho}}. Vi o produto de vocês e já pensei num conteúdo pra ele: [[ideia:m|gravar a instalação e o dia a dia com o produto]].",
+        "Posso te mandar a proposta por aqui ou prefere por e-mail? Meu portfólio: {{site}}"
       ]}
   ],
   segundo: [
     { nome: "O follow-up com oferta nova",
-      as: "[[sobre a ideia do vídeo]]",
+      as: "sobre a ideia do conteúdo pro [[produto:m|produto]] de vocês",
       ps: [
-        "Oiê, [[(pessoa ou nome da marca)]]! Voltando rapidinho por causa da ideia que eu mandei [[semana passada]].",
-        "Se ajudar a decidir, eu gravo [[um teste curto antes de qualquer acordo]], pra vocês verem como fica com o produto de vocês na mão. Sem compromisso nenhum.",
+        "Oiê, [[pessoa|(pessoa ou nome da marca)]]! Voltando rapidinho por causa da ideia que eu mandei [[quando|semana passada]].",
+        "Se ajudar a decidir, eu gravo um teste curto antes de qualquer acordo, pra vocês verem como fica com o produto de vocês na mão. Sem compromisso nenhum.",
         "Me conta se faz sentido. {{nome}} {{arroba}}"
       ]},
     { nome: "O follow-up com ideia nova",
-      as: "[[mais uma ideia pro produto de vocês]]",
+      as: "mais uma ideia pro [[produto:m|produto]] de vocês",
       ps: [
-        "Oiê, [[(pessoa ou nome da marca)]]! Como vocês não responderam a primeira, eu vim com outra ideia, porque eu realmente acho que dá match.",
-        "[[Pensei num vídeo curto comparando o antes e o depois do espaço com o produto de vocês instalado.]] É o tipo de conteúdo que funciona bem [[em anúncio de fim de ano]].",
-        "Se não for o momento, me diz que eu volto a falar [[em janeiro]], sem problema nenhum. Meu portfólio segue aqui: {{site}}",
+        "Oiê, [[pessoa|(pessoa ou nome da marca)]]! Como vocês não responderam a primeira, eu vim com outra ideia, porque eu realmente acho que dá match.",
+        "[[ideia2:f|Pensei num conteúdo curto comparando o antes e o depois com o produto de vocês]] É o tipo de conteúdo que funciona bem [[gancho:m|em anúncio de fim de ano]].",
+        "Se não for o momento, me diz que eu volto a falar [[quando2|em janeiro]], sem problema nenhum. Meu portfólio segue aqui: {{site}}",
         "{{nome}} {{arroba}}"
       ]}
   ]
@@ -322,13 +350,17 @@ var caixa = document.getElementById("campos");
 caixa.innerHTML = CAMPOS.map(function(g){
   return '<div class="grupo">' + g.grupo + '</div>' + g.itens.map(function(c){
     var v = (dados[c.id] || "").replace(/"/g, "&quot;");
-    return '<div class="campo"><label for="c_' + c.id + '">' + c.rot + '</label>' +
-      '<input id="c_' + c.id + '" data-id="' + c.id + '" type="text" value="' + v + '" placeholder="' + c.ph + '">' +
-      (c.ajuda ? '<div class="ajuda">' + c.ajuda + '</div>' : '') + '</div>';
+    var entrada = c.area
+      ? '<textarea id="c_' + c.id + '" data-id="' + c.id + '" placeholder="' + c.ph + '">' + (dados[c.id] || "") + '</textarea>'
+      : '<input id="c_' + c.id + '" data-id="' + c.id + '" type="text" value="' + v + '" placeholder="' + c.ph + '">';
+    return '<div class="campo"><label for="c_' + c.id + '">' + c.rot + '</label>' + entrada +
+           (c.ajuda ? '<div class="ajuda">' + c.ajuda + '</div>' : '') + '</div>';
   }).join("");
 }).join("");
 
 var salvoEl = document.getElementById("salvo"), relogio;
+var avisoGerar = document.getElementById("avisoGerar");
+var btGerar = document.getElementById("btGerar");
 function salvarDados(){
   try{ localStorage.setItem(CHAVE, JSON.stringify(dados)); }catch(e){}
   salvoEl.textContent = "Salvo no seu navegador";
@@ -340,47 +372,75 @@ caixa.addEventListener("input", function(e){
   if(!el.dataset.id) return;
   dados[el.dataset.id] = el.value;
   salvarDados();
-  desenhar();
+  btGerar.classList.add("pisca");
+  avisoGerar.textContent = "Você mudou uma resposta. Clica em criar modelo de e-mail pra o texto se atualizar.";
 });
 document.getElementById("btnLimpar").addEventListener("click", function(){
-  if(!confirm("Isso apaga os seus dados e as suas edições no texto. Tem certeza?")) return;
+  if(!confirm("Isso apaga as suas respostas e o que você escreveu no texto. Tem certeza?")) return;
   dados = {}; edicoes = {};
   try{ localStorage.removeItem(CHAVE); localStorage.removeItem(CHAVE_DOC); }catch(e){}
   [].slice.call(caixa.querySelectorAll("[data-id]")).forEach(function(el){ el.value = ""; });
   desenhar();
 });
 
-/* ═════════ montar o documento ═════════ */
+/* ═════════ montar o texto ═════════ */
 var aba = "email", indice = { email:0, dm:0, segundo:0 };
 var doc = document.getElementById("doc"), docAs = document.getElementById("docAs");
 var conta = document.getElementById("conta"), dica = document.getElementById("dica");
 var qual = document.getElementById("qualVersao"), linhaAs = document.getElementById("linhaAs");
 
 function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
-function campo(k){
+function tiraPonto(t){ return String(t).trim().replace(/[.!?]+$/, ""); }
+function comPonto(t){ t = String(t).trim(); return /[.!?]$/.test(t) ? t : t + "."; }
+function baixa(t){ t = String(t).trim(); return t ? t.charAt(0).toLowerCase() + t.slice(1) : ""; }
+function alta(t){ t = String(t).trim(); return t ? t.charAt(0).toUpperCase() + t.slice(1) : ""; }
+
+function campoFixo(k){
   var t = (dados[k] || "").trim();
   if(t) return esc(t);
   var vazio = { nome:"seu nome", arroba:"@ do seu instagram", nicho:"o seu nicho", site:"link do seu portfólio" }[k] || k;
   return '<span class="slot" data-orig="' + vazio + '">' + vazio + '</span>';
 }
+
 function marcar(txt){
   return esc(txt)
-    .replace(/\{\{(\w+)\}\}/g, function(m, k){ return campo(k); })
-    .replace(/\[\[([^\]]+)\]\]/g, function(m, t){ return '<span class="slot" data-orig="' + t + '">' + t + '</span>'; });
+    .replace(/\{\{(\w+)\}\}/g, function(m, k){ return campoFixo(k); })
+    .replace(/\[\[(\w+)(?::(\w))?\|([^\]]+)\]\]/g, function(m, id, modo, exemplo){
+      var meu = (dados[id] || "").trim();
+      if(meu){
+        if(modo === "m") meu = baixa(tiraPonto(meu));
+        if(modo === "f") meu = comPonto(alta(meu));
+        return '<span class="meu">' + esc(meu) + '</span>';
+      }
+      var ex = exemplo;
+      if(modo === "f") ex = comPonto(alta(ex));
+      return '<span class="slot" data-orig="' + esc(ex) + '">' + esc(ex) + '</span>';
+    });
 }
+
 function modelo(){ return MODELOS[aba][indice[aba]]; }
 function id(){ return aba + ":" + indice[aba]; }
 
-function desenhar(){
-  var m = modelo(), salvo = edicoes[id()];
+function gerarHtml(){
+  var m = modelo();
+  return {
+    html: m.ps.map(function(p){ return "<p>" + marcar(p) + "</p>"; }).join(""),
+    as: m.as ? marcar(m.as) : ""
+  };
+}
+
+function desenhar(usarEdicao){
+  var m = modelo();
+  var salvo = usarEdicao === false ? null : edicoes[id()];
   qual.textContent = "Versão " + (indice[aba]+1) + " de " + MODELOS[aba].length + " · " + m.nome;
   linhaAs.style.display = m.as ? "block" : "none";
   if(salvo){
     doc.innerHTML = salvo.html;
     docAs.innerHTML = salvo.as || "";
   } else {
-    doc.innerHTML = m.ps.map(function(p){ return "<p>" + marcar(p) + "</p>"; }).join("");
-    docAs.innerHTML = m.as ? marcar(m.as) : "";
+    var novo = gerarHtml();
+    doc.innerHTML = novo.html;
+    docAs.innerHTML = novo.as;
   }
   atualizarSlots();
   contar();
@@ -396,7 +456,7 @@ function atualizarSlots(){
 function contar(){
   var txt = doc.innerText.replace(/\s+/g, " ").trim();
   var palavras = txt ? txt.split(" ").length : 0;
-  var gordo = aba === "email" && palavras > 280;
+  var gordo = aba === "email" && palavras > 320;
   var faltam = [].slice.call(document.querySelectorAll(".slot")).filter(function(s){
     return s.textContent.trim() === (s.dataset.orig || "").trim();
   }).length;
@@ -404,8 +464,8 @@ function contar(){
     + (gordo ? " · ficou longo pra um primeiro e-mail, corta uma frase" : (aba === "email" ? " · bom tamanho" : ""))
     + (faltam ? " · " + faltam + " grifo" + (faltam > 1 ? "s" : "") + " ainda pra trocar" : " · nenhum grifo em aberto");
   dica.innerHTML = faltam
-    ? "<b>O que está grifado de amarelo é seu.</b> Clica em cima e escreve por cima, com as suas palavras. Quando você troca, o amarelo some. O resto do texto também pode ser mudado: é um documento, não um formulário."
-    : "<b>Pronto, nenhum grifo em aberto.</b> Lê em voz alta antes de mandar: se tiver uma frase que você não falaria, troca. E o botão de outra versão traz o mesmo padrão escrito de outro jeito.";
+    ? "<b>O que está grifado de amarelo ainda é exemplo meu.</b> Responde a pergunta do lado direito e clica em criar modelo de e-mail, ou clica em cima do grifo e escreve por cima. As duas coisas funcionam."
+    : "<b>Pronto, o e-mail é todo seu.</b> Lê em voz alta antes de mandar: se tiver uma frase que você não falaria, troca. E o botão de outra versão traz o mesmo padrão escrito de outro jeito, com as suas respostas dentro.";
 }
 
 doc.addEventListener("input", function(){ guardar(); atualizarSlots(); contar(); });
@@ -430,16 +490,31 @@ function guardar(){
 document.getElementById("btOutra").addEventListener("click", function(){
   indice[aba] = (indice[aba] + 1) % MODELOS[aba].length;
   desenhar();
-  aviso("Mesma estrutura, outro jeito de falar. O que você já tinha escrito na outra versão continua salvo lá.");
+  aviso("Mesma estrutura, outro jeito de falar, com as suas respostas dentro.");
 });
 
 document.getElementById("btVoltar").addEventListener("click", function(){
   if(!edicoes[id()]){ aviso("Essa versão já está como veio."); return; }
-  if(!confirm("Isso apaga o que você escreveu nesta versão e volta pro texto original. Tem certeza?")) return;
+  if(!confirm("Isso apaga o que você escreveu por cima nesta versão e monta de novo com as suas respostas. Tem certeza?")) return;
   delete edicoes[id()];
   try{ localStorage.setItem(CHAVE_DOC, JSON.stringify(edicoes)); }catch(e){}
   desenhar();
-  aviso("Voltou pro original.");
+  aviso("Montado de novo com as suas respostas.");
+});
+
+/* o botão principal: monta o e-mail com o que ela respondeu */
+btGerar.addEventListener("click", function(){
+  delete edicoes[id()];
+  try{ localStorage.setItem(CHAVE_DOC, JSON.stringify(edicoes)); }catch(e){}
+  desenhar(false);
+  btGerar.classList.remove("pisca");
+  avisoGerar.textContent = "";
+  var t = btGerar.textContent;
+  btGerar.textContent = "Modelo criado ✓";
+  btGerar.classList.add("feito");
+  setTimeout(function(){ btGerar.textContent = t; btGerar.classList.remove("feito"); }, 2200);
+  document.querySelector(".papel").scrollIntoView({ behavior:"smooth", block:"start" });
+  aviso("Pronto. Lê com calma e escreve por cima do que não estiver com a sua cara.");
 });
 
 /* ═════════ copiar ═════════ */
@@ -469,7 +544,6 @@ document.getElementById("btCopiar").addEventListener("click", function(){
   } else velho();
 });
 
-/* cola sem trazer formatação de fora */
 [doc, docAs].forEach(function(el){
   el.addEventListener("paste", function(e){
     e.preventDefault();
