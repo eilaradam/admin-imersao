@@ -170,17 +170,17 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 <header class="capa">
   <div class="selo">Dia 2 · Tarde</div>
   <h1 class="titulo">Responde quatro coisas. O e-mail se escreve.</h1>
-  <p class="sub">Você escreve do jeito que você falaria, sem se preocupar com começo, meio e fim. O site lê as suas respostas, reescreve com jeito de e-mail e devolve o texto inteiro dentro da estrutura que a gente usa aqui, pronto pra copiar e mandar.</p>
+  <p class="sub">Responde cinco perguntas curtas do jeito que você falaria. O site reescreve tudo na estrutura da aula e devolve o e-mail pronto pra copiar.</p>
 
-  <h2 class="bloco">As quatro perguntas são os quatro parágrafos</h2>
+  <h2 class="bloco">A estrutura do e-mail</h2>
   <div class="passo4">
-    <div><div class="q">Parágrafo 1</div><div class="t">Seus diferenciais</div><div class="d">O que você faz e o que te faz diferente. Com convicção, não pedindo licença.</div></div>
-    <div><div class="q">Parágrafo 2</div><div class="t">A conexão</div><div class="d">Por que você e essa marca dão match agora. É a parte que faz ela ler até o fim.</div></div>
-    <div><div class="q">Parágrafo 3</div><div class="t">A ideia</div><div class="d">O conteúdo que você já pensou pra ela. Nada de "quero fazer uma parceria".</div></div>
-    <div><div class="q">Parágrafo 4</div><div class="t">Observações extras</div><div class="d">O que mais você quiser dizer. Esse é opcional, e entra antes da pergunta final.</div></div>
+    <div><div class="q">Parágrafo 1</div><div class="t">Quem você é</div><div class="d">E como você chegou nessa marca.</div></div>
+    <div><div class="q">Parágrafo 2</div><div class="t">A conexão</div><div class="d">Por que vocês dão match agora.</div></div>
+    <div><div class="q">Parágrafo 3</div><div class="t">A ideia</div><div class="d">O conteúdo que você já pensou.</div></div>
+    <div><div class="q">Parágrafo 4</div><div class="t">O convite</div><div class="d">A pergunta e o seu portfólio.</div></div>
   </div>
 
-  <div class="aviso"><b>A pergunta final e o portfólio já vêm prontos</b>, porque é sempre igual: uma pergunta que gera curiosidade e o link do seu trabalho. O que muda de marca pra marca fica grifado de amarelo no texto, e você troca clicando em cima. Só não vale número inventado: se você ainda não atendeu marca nenhuma, fala do que você domina.</div>
+  <div class="aviso"><b>O que muda de marca pra marca fica grifado de amarelo.</b> Clica em cima e escreve. Nada do que você não escrever é inventado: se você ainda não atendeu marca nenhuma, o e-mail sai sem isso.</div>
 </header>
 
 <main class="oficina">
@@ -218,7 +218,7 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
     </div>
 
     <aside class="form">
-      <p class="form__intro">Quatro perguntas. Escreve corrido, sem se preocupar com a ordem nem com frase bonita: quem arruma é a escrita automática, do lado de cá.</p>
+      <p class="form__intro">Responde do jeito que você falaria. Do resto eu cuido.</p>
       <div id="camposFixos"></div>
       <div id="campos"></div>
       <button class="bt bt-gerar" id="btGerar" type="button">Criar modelo de e-mail</button>
@@ -239,28 +239,28 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 
 /* ═════════ as quatro perguntas ═════════ */
 var PERGUNTAS = [
-  { id:"dif", n:"Parágrafo 1", rot:"Descreva os seus diferenciais",
-    ph:"sou criadora de conteúdo UGC há 2 anos, gravo na minha casa de verdade com luz natural, entrego em até 7 dias e já trabalhei com mais de 10 marcas de casa e decoração",
-    ajuda:"Quem você é e o que te faz diferente. Escreve como se estivesse se apresentando pra uma amiga." },
-  { id:"detalhe", n:"Parágrafo 2", rot:"O que você viu no site dessa marca",
-    ph:"na linha que não solta revestimento",
-    ajuda:"Uma coisa específica que só quem entrou no site saberia. É o que prova que você olhou de verdade, e é o que muda a cada marca." },
-  { id:"conexao", n:"Parágrafo 3", rot:"Descreva o seu ponto de conexão com a empresa",
-    ph:"Estou no fim da minha transição capilar, vou cortar o cabelo e adoraria fazer a primeira finalização dos cachos com o produto de vocês!",
-    ajuda:"Por que essa marca e não outra, e por que AGORA. É a parte mais importante do e-mail." },
-  { id:"ideia", n:"Parágrafo 4", rot:"Descreva a sua ideia de conteúdo",
-    ph:"gravar a chegada da caixa, a primeira vez usando e depois o resultado, em tempo real e sem corte mágico",
-    ajuda:"Quanto mais específico e sensorial, mais fácil da marca dizer sim." },
-  { id:"extras", n:"Parágrafo 5", rot:"Observações extras que você queira adicionar",
-    ph:"tenho disponibilidade nas próximas duas semanas",
-    ajuda:"Opcional. Prazo e disponibilidade entram junto com os seus diferenciais, não num parágrafo solto." }
+  { id:"dif", n:"01", rot:"Seus diferenciais",
+    ph:"gravo em casa com luz natural, entrego em 5 dias, já fiz pra 20 marcas",
+    ajuda:"O que te faz diferente." },
+  { id:"detalhe", n:"02", rot:"O que você viu no site deles",
+    ph:"a linha que não solta revestimento",
+    ajuda:"Uma coisa específica. É o que prova que você olhou." },
+  { id:"conexao", n:"03", rot:"Por que essa marca, e por que agora",
+    ph:"me mudei e estou montando a cozinha do zero",
+    ajuda:"A parte que faz ela responder." },
+  { id:"ideia", n:"04", rot:"Sua ideia de conteúdo",
+    ph:"a chegada da caixa, o primeiro uso e a lavagem, em tempo real",
+    ajuda:"Quanto mais específica, melhor." },
+  { id:"extras", n:"05", rot:"Mais alguma coisa?",
+    ph:"tenho as próximas duas semanas livres",
+    ajuda:"Opcional." }
 ];
 
 var FIXOS = [
-  { id:"nome",   rot:"Seu nome", ph:"Lara" },
-  { id:"arroba", rot:"@ do seu Instagram", ph:"@eilaradam" },
-  { id:"site",   rot:"Link do seu portfólio", ph:"seunome.github.io/portfolio" },
-  { id:"cidade", rot:"Sua cidade ou região", ph:"São José dos Campos" }
+  { id:"nome",   rot:"Nome", ph:"Lara" },
+  { id:"arroba", rot:"@", ph:"@eilaradam" },
+  { id:"site",   rot:"Portfólio", ph:"seunome.github.io/portfolio" },
+  { id:"cidade", rot:"Cidade", ph:"São José dos Campos" }
 ];
 
 var CHAVE = "admin-imersao:dados";
