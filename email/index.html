@@ -258,7 +258,8 @@ var PERGUNTAS = [
 var FIXOS = [
   { id:"nome",   rot:"Seu nome", ph:"Lara" },
   { id:"arroba", rot:"@ do seu Instagram", ph:"@eilaradam" },
-  { id:"site",   rot:"Link do seu portfólio", ph:"seunome.github.io/portfolio" }
+  { id:"site",   rot:"Link do seu portfólio", ph:"seunome.github.io/portfolio" },
+  { id:"cidade", rot:"Sua cidade ou região", ph:"São José dos Campos" }
 ];
 
 var CHAVE = "admin-imersao:dados";
@@ -296,7 +297,7 @@ function chamarIA(estilo){
     headers: { "Content-Type": "application/json", apikey: IA.key, Authorization: "Bearer " + IA.key },
     body: JSON.stringify({
       palavra: "imersao2", estilo: estilo,
-      nome: (dados.nome||"").trim(), arroba: (dados.arroba||"").trim(), site: (dados.site||"").trim(),
+      nome: (dados.nome||"").trim(), arroba: (dados.arroba||"").trim(), site: (dados.site||"").trim(), cidade: (dados.cidade||"").trim(),
       dif: (dados.dif||"").trim(), conexao: (dados.conexao||"").trim(),
       ideia: (dados.ideia||"").trim(), extras: (dados.extras||"").trim()
     })
@@ -466,6 +467,9 @@ function marcarSaidaIA(txt){
   return esc(txt)
     .replace(/\{\{\s*pessoa\s*\}\}/gi, '<span class="slot" data-orig="(pessoa ou nome da marca)">(pessoa ou nome da marca)</span>')
     .replace(/\{\{\s*produto\s*\}\}/gi, '<span class="slot" data-orig="(nome do produto)">(nome do produto)</span>')
+    .replace(/\{\{\s*detalhe\s*\}\}/gi, '<span class="slot" data-orig="(algo que você viu no site de verdade)">(algo que você viu no site de verdade)</span>')
+    .replace(/\{\{\s*link\s*\}\}/gi, '<span class="slot" data-orig="(link do produto)">(link do produto)</span>')
+    .replace(/\{\{\s*data\s*\}\}/gi, '<span class="slot" data-orig="(a data)">(a data)</span>')
     .replace(/\{\{\s*nome\s*\}\}/gi, function(){ return campoFixo("nome"); })
     .replace(/\{\{\s*site\s*\}\}/gi, function(){ return campoFixo("site"); });
 }
@@ -532,7 +536,7 @@ function contar(){
   dica.innerHTML = r < 3
     ? "<b>Isso aqui ainda é exemplo meu.</b> Responde as perguntas do lado direito e clica em criar modelo de e-mail: o texto todo se refaz com as suas palavras, do começo ao fim."
     : (faltam
-      ? "<b>O e-mail já é seu.</b> O que sobrou grifado de amarelo é o que muda de marca pra marca. Clica em cima e escreve: se aquele grifo aparecer mais de uma vez, os outros mudam junto."
+      ? "<b>O e-mail já é seu.</b> O que sobrou grifado de amarelo é o que muda de marca pra marca: o nome de quem lê, o link do produto e aquela coisa específica que você viu no site. Clica em cima e escreve, e se o mesmo grifo aparecer duas vezes, os dois mudam junto."
       : "<b>Pronto pra mandar.</b> Lê em voz alta antes: se tiver uma frase que você não falaria, escreve por cima. E o botão de outra versão traz a mesma estrutura escrita de outro jeito, com as suas respostas dentro.");
 }
 
