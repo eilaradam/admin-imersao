@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Seu E-mail de Prospecção · Imersão</title>
-<meta name="description" content="Responda as perguntas e o seu e-mail de prospecção fica pronto, no padrão de quatro parágrafos.">
+<meta name="description" content="O e-mail de prospecção já escrito, pra você trocar o que está grifado e mandar.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✍️</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,36 +99,41 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-/* ---------- o e-mail montado ---------- */
-.abas{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.aba{font-family:var(--fm);font-size:12.5px;letter-spacing:.04em;padding:8px 14px;border-radius:9px;border:1px solid var(--line);background:var(--white);color:var(--muted);cursor:pointer}
+/* ---------- o documento ---------- */
+.topo-doc{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.abas{display:flex;gap:8px;flex-wrap:wrap}
+.aba{font-family:var(--fm);font-size:12.5px;padding:8px 14px;border-radius:9px;border:1px solid var(--line);background:var(--white);color:var(--muted);cursor:pointer}
 .aba.on{background:var(--ink);border-color:var(--ink);color:var(--white)}
 .papel{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 3px 0 rgba(27,27,27,.05)}
-.papel__topo{padding:14px 20px;border-bottom:1px solid var(--line);background:var(--cream2)}
-.papel__topo .de{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.papel__topo .as{font-family:var(--fh);font-weight:800;font-size:17px;line-height:1.3;margin-top:4px}
-.papel__corpo{padding:22px 24px;font-size:15.5px;line-height:1.72;white-space:pre-wrap;color:var(--ink);min-height:200px}
-.papel__pe{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 20px;border-top:1px solid var(--line);background:var(--cream)}
+.papel__topo{padding:13px 22px;border-bottom:1px solid var(--line);background:var(--cream2);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.papel__topo .qual{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+.papel__topo .btl{margin-left:auto;display:flex;gap:7px}
+.btl button{font-family:var(--fm);font-size:11px;padding:6px 11px;border-radius:7px;border:1px solid var(--line);background:var(--white);color:var(--muted);cursor:pointer}
+.btl button:hover{background:var(--soft);color:var(--red);border-color:var(--red)}
+.linha-as{padding:14px 22px 0}
+.linha-as .rot{font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.doc-as{font-family:var(--fh);font-weight:800;font-size:18px;line-height:1.3;outline:none;border-radius:6px;padding:2px 4px;margin:0 -4px}
+.doc{padding:16px 22px 24px;font-size:16px;line-height:1.8;outline:none;min-height:260px}
+.doc:focus,.doc-as:focus{background:rgba(255,240,232,.4)}
+.doc p{margin:0 0 15px}
+.doc p:last-child{margin-bottom:0}
+.slot{background:var(--butter);box-shadow:0 0 0 2px var(--butter);border-bottom:2px solid #E8D98A;border-radius:2px;cursor:text}
+.slot.mexido{background:transparent;box-shadow:none;border-bottom:2px solid rgba(200,68,26,.22)}
+.papel__pe{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:13px 20px;border-top:1px solid var(--line);background:var(--cream)}
 .papel__pe .cnt{font-family:var(--fm);font-size:12px;color:var(--muted);margin-right:auto}
 .papel__pe .cnt b{color:var(--green)}
 .papel__pe .cnt b.gordo{color:var(--red)}
-.bt{font-family:var(--fb);font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:9px;border:1px solid var(--ink);background:var(--ink);color:var(--white);cursor:pointer}
+.bt{font-family:var(--fb);font-weight:700;font-size:13.5px;padding:10px 17px;border-radius:9px;border:1px solid var(--ink);background:var(--ink);color:var(--white);cursor:pointer}
 .bt.fraco{background:var(--white);color:var(--ink)}
 .bt.feito{background:var(--green);border-color:var(--green)}
-.assuntos{margin-top:16px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
-.assuntos h4{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
-.assuntos .op{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px dashed var(--line);font-size:15px}
-.assuntos .op:first-of-type{border-top:0}
-.assuntos .op span{flex:1}
-.assuntos .op button{font-family:var(--fm);font-size:11px;padding:5px 10px;border-radius:7px;border:1px solid var(--line);background:var(--cream);color:var(--muted);cursor:pointer}
-.assuntos .op button:hover{background:var(--soft);color:var(--red)}
-.chaves{margin-top:14px;background:var(--butter);border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.6}
-.chaves b{font-family:var(--fm);font-size:12px;letter-spacing:.06em}
-.passo4{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:18px 0 0}
+.dica-doc{margin-top:12px;background:var(--soft);border-radius:12px;padding:13px 16px;font-size:14px;line-height:1.6;color:var(--muted)}
+.dica-doc b{color:var(--ink)}
+.passo4{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin:18px 0 0}
 .passo4 > div{background:var(--white);border:1px solid var(--line);border-left:5px solid var(--red);border-radius:10px;padding:13px 15px}
 .passo4 .q{font-family:var(--fm);font-size:11px;color:var(--red);letter-spacing:.1em}
 .passo4 .t{font-family:var(--fh);font-weight:800;font-size:15.5px;margin-top:3px}
 .passo4 .d{font-size:13.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+.form .mini{font-family:var(--fm);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:2px 0 10px}
 
 </style>
 </head>
@@ -149,53 +154,56 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 
 <header class="capa">
   <div class="selo">Dia 2 · Tarde</div>
-  <h1 class="titulo">Responde as perguntas e o seu e-mail fica pronto aqui.</h1>
-  <p class="sub">Você não precisa saber escrever e-mail comercial. Precisa responder o que só você sabe: por que essa marca, e que vídeo você faria pra ela. O texto se monta sozinho do lado, no padrão que funciona.</p>
+  <h1 class="titulo">O e-mail já está escrito. Você escreve por cima.</h1>
+  <p class="sub">Isso aqui não é formulário, é um documento. O que está grifado de amarelo é o que muda de marca pra marca, e você escreve em cima. O que não está grifado você também pode mudar: apaga, acrescenta, conta a sua história. Se bagunçar, o botão volta pro original.</p>
 
-  <h2 class="bloco">O padrão, em quatro parágrafos</h2>
+  <h2 class="bloco">A estrutura, que é sempre essa</h2>
   <div class="passo4">
-    <div><div class="q">01</div><div class="t">Gancho e o que eu faço</div><div class="d">O que você viu na marca, e quem é você em uma frase.</div></div>
-    <div><div class="q">02</div><div class="t">A conexão</div><div class="d">Por que essa marca e não outra. É a parte que faz ela responder.</div></div>
-    <div><div class="q">03</div><div class="t">A ideia</div><div class="d">O vídeo já pensado, pronto pra ela imaginar no feed.</div></div>
-    <div><div class="q">04</div><div class="t">Portfólio e pergunta</div><div class="d">O link do seu site e uma pergunta fácil de responder.</div></div>
+    <div><div class="q">Parágrafo 1</div><div class="t">Quem você é</div><div class="d">O que você faz e os seus diferenciais, na sua linguagem. Com convicção, não pedindo licença.</div></div>
+    <div><div class="q">Parágrafo 2</div><div class="t">A conexão</div><div class="d">O motivo real de vocês darem match. É a parte que faz a marca ler até o fim.</div></div>
+    <div><div class="q">Parágrafo 3</div><div class="t">A ideia</div><div class="d">A proposta e o vídeo que você já pensou. Nada de "quero fazer uma parceria".</div></div>
+    <div><div class="q">Parágrafo 4</div><div class="t">A pergunta</div><div class="d">Uma pergunta que gera curiosidade e o link do seu portfólio. Nunca termine sem pedir nada.</div></div>
   </div>
 
-  <div class="aviso"><b>Nada é inventado aqui:</b> o e-mail usa só o que você escreveu. Ele não cria número, prêmio nem cliente que você não tem. Quando você deixar um campo vazio, ele deixa uma chave no lugar, tipo <span class="mono">{marca}</span>, que é justamente o que a aba Prospecção troca sozinha na hora de mandar pra várias marcas.</div>
+  <div class="aviso"><b>Escreva com vontade:</b> a marca sente quando o e-mail foi escrito por obrigação. As versões aqui são de propósito diretas, faladas e com certeza do que você entrega. Se alguma frase não for verdade pra você, troca. O que nunca pode é número inventado: se você ainda não atendeu marca nenhuma, apaga essa parte e fala do que você domina.</div>
 </header>
 
 <main class="oficina">
   <h2 class="bloco">O seu e-mail</h2>
   <div class="duas">
     <div>
-      <div class="abas">
-        <button class="aba on" data-aba="email" type="button">E-mail</button>
-        <button class="aba" data-aba="dm" type="button">Versão de DM</button>
-        <button class="aba" data-aba="segundo" type="button">Segundo e-mail</button>
+      <div class="topo-doc">
+        <div class="abas">
+          <button class="aba on" data-aba="email" type="button">E-mail</button>
+          <button class="aba" data-aba="dm" type="button">Versão de DM</button>
+          <button class="aba" data-aba="segundo" type="button">Segundo e-mail</button>
+        </div>
       </div>
 
       <div class="papel">
         <div class="papel__topo">
-          <div class="de">Assunto</div>
-          <div class="as" id="oAssunto"></div>
+          <span class="qual" id="qualVersao"></span>
+          <span class="btl">
+            <button type="button" id="btOutra">Outra versão</button>
+            <button type="button" id="btVoltar">Voltar ao original</button>
+          </span>
         </div>
-        <div class="papel__corpo" id="oCorpo"></div>
+        <div class="linha-as" id="linhaAs">
+          <div class="rot">Assunto</div>
+          <div class="doc-as" id="docAs" contenteditable="true" spellcheck="true"></div>
+        </div>
+        <div class="doc" id="doc" contenteditable="true" spellcheck="true"></div>
         <div class="papel__pe">
-          <div class="cnt" id="oConta"></div>
-          <button class="bt fraco" id="btOutra" type="button">Outra versão</button>
+          <div class="cnt" id="conta"></div>
           <button class="bt" id="btCopiar" type="button">Copiar</button>
         </div>
       </div>
 
-      <div class="assuntos" id="caixaAssuntos">
-        <h4>Outros assuntos pra testar</h4>
-        <div id="listaAssuntos"></div>
-      </div>
-
-      <div class="chaves" id="avisoChaves" style="display:none"></div>
+      <div class="dica-doc" id="dica"></div>
     </div>
 
     <aside class="form">
-      <p class="form__intro">Responde do jeito que você falaria. Frase curta, sem enfeite. Tudo fica salvo no seu navegador.</p>
+      <p class="form__intro">Isso aqui entra sozinho em todas as versões. Preenche uma vez só.</p>
       <div id="campos"></div>
       <button class="btn-limpar" id="btnLimpar" type="button">Limpar meus dados</button>
       <p class="salvo" id="salvo"></p>
@@ -210,57 +218,118 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 (function(){
 "use strict";
 
+/* ═════════ os seus dados fixos ═════════ */
 var CAMPOS = [
-  { grupo: "Você", itens: [
+  { grupo: "Sobre você", itens: [
     { id:"nome",   rot:"Seu nome", ph:"Lara" },
     { id:"arroba", rot:"@ do seu Instagram", ph:"@eilaradam" },
-    { id:"grava",  rot:"O que você grava", ph:"vídeo caseiro de produto, do jeito que a cliente de vocês grava", area:true,
-      ajuda:"Complete a frase: eu gravo ___ pra marca usar no perfil e nos anúncios." },
-    { id:"dif",    rot:"Seu diferencial (se quiser)", ph:"gravo na minha casa de verdade, com luz natural", area:true,
-      ajuda:"Uma frase só. Pode deixar vazio." },
+    { id:"nicho",  rot:"O seu nicho", ph:"casa e decoração",
+      ajuda:"Complete a frase: sou especialista em ___" },
     { id:"site",   rot:"Link do seu portfólio", ph:"seunome.github.io/portfolio" }
-  ]},
-  { grupo: "A marca", itens: [
-    { id:"marca",   rot:"Nome da marca", ph:"deixa vazio pra virar {marca}",
-      ajuda:"Vazio vira {marca}, e aí o mesmo e-mail serve pra lista inteira." },
-    { id:"pessoa",  rot:"Nome de quem vai ler", ph:"deixa vazio pra virar {pessoa}" },
-    { id:"produto", rot:"O produto de que você vai falar", ph:"fogão de indução de duas bocas" },
-    { id:"gancho",  rot:"O que você viu na marca", ph:"o lançamento da linha de velas de coco", area:true,
-      ajuda:"Começa depois de Vi... Pode ser um lançamento, um post, uma novidade no site." }
-  ]},
-  { grupo: "Por que você", itens: [
-    { id:"conexao", rot:"Por que essa marca, de verdade", ph:"estou reformando a minha cozinha e fui atrás de marca de fogão de indução", area:true,
-      ajuda:"A parte mais importante. Tem que ser verdade, a marca sente quando não é." }
-  ]},
-  { grupo: "A ideia", itens: [
-    { id:"ideia",   rot:"O vídeo que você faria", ph:"instalar e usar pela primeira vez, mostrando quanto tempo a água leva pra ferver", area:true },
-    { id:"entrega", rot:"O que você entrega", ph:"um vídeo vertical de 40 segundos, com e sem legenda, em até 7 dias", area:true }
   ]}
 ];
 
 var CHAVE = "admin-imersao:dados";
-var dados = {};
+var CHAVE_DOC = "email-imersao:doc";
+var dados = {}, edicoes = {};
 try{ dados = JSON.parse(localStorage.getItem(CHAVE) || "{}") || {}; }catch(e){ dados = {}; }
+try{ edicoes = JSON.parse(localStorage.getItem(CHAVE_DOC) || "{}") || {}; }catch(e){ edicoes = {}; }
 try{
-  var daApostila = JSON.parse(localStorage.getItem("guia-imersao:aluna") || "{}") || {};
-  if(!dados.nome && daApostila.nome) dados.nome = daApostila.nome;
-  if(!dados.arroba && daApostila.arroba) dados.arroba = daApostila.arroba;
+  var apostila = JSON.parse(localStorage.getItem("guia-imersao:aluna") || "{}") || {};
+  if(!dados.nome && apostila.nome) dados.nome = apostila.nome;
+  if(!dados.arroba && apostila.arroba) dados.arroba = apostila.arroba;
 }catch(e){}
 
+/* ═════════ os modelos ═════════
+   [[assim]] vira um grifo que ela troca.  {{assim}} vem dos campos dela.        */
+
+var MODELOS = {
+  email: [
+    { nome: "A proposta direta",
+      as: "[[Ideia de vídeo pro fogão de indução de vocês]]",
+      ps: [
+        "Oiê, [[pessoa ou nome da marca]]! Aqui é a {{nome}}, sou criadora de conteúdo UGC: eu gravo vídeo de produto do jeito que a cliente de vocês grava, pra marca usar no perfil e nos anúncios. [[Já trabalhei com mais de 10 marcas]] e hoje eu sou especialista em {{nicho}}. Encontrei o site de vocês, dei uma olhada em tudo e saí de lá com uma ideia que eu precisava mandar.",
+        "Vou te contar por que eu vim falar com vocês e não com outra marca. [[Eu comecei a reforma da minha casa e nesse exato momento estou procurando um fogão de indução pra cozinha nova]]. Aí eu vi [[o modelo de duas bocas de vocês]], que é exatamente o que cabe no meu espaço: [[link do produto]]. Esse é um produto que vai aparecer em várias gravações minhas, não é um vídeo e acabou.",
+        "Por isso eu estou mandando essa proposta: [[uma parceria de conteúdo em formato UGC, em troca do produto]], pra vocês conhecerem o meu trabalho na prática. A ideia que eu já tenho é [[gravar o primeiro uso na cozinha real, mostrando quanto tempo a água leva pra ferver]], e isso serve tanto pro feed de vocês quanto [[pra campanha de Black Friday]].",
+        "Vocês estão abertos pra conversar sobre isso? Me conta como funciona o processo de vocês com criativos hoje, porque eu quero entrar nessa lista. Deixo aqui o meu portfólio pra você conhecer mais do meu trabalho: {{site}}",
+        "Fico no aguardo! {{nome}} {{arroba}}"
+      ]},
+    { nome: "Começando pela ideia",
+      as: "[[Pensei num vídeo pro lançamento de vocês]]",
+      ps: [
+        "Oiê, [[pessoa ou nome da marca]]! Aqui é a {{nome}}, criadora de conteúdo UGC. Antes de me apresentar direito, deixa eu te contar a ideia, porque foi ela que me fez escrever: [[um vídeo do primeiro uso do produto, na minha casa, sem estúdio e sem produção]]. Eu gravo esse tipo de conteúdo pra marca usar no perfil e nos anúncios, e {{nicho}} é onde eu sou mais forte.",
+        "Eu cheguei em vocês porque [[estou reformando a minha casa e fui atrás desse produto como cliente mesmo]]. Quando eu abri [[o site de vocês]] a ficha caiu: é exatamente o que eu ia comprar. E isso muda o vídeo inteiro, porque eu não preciso fingir que gosto.",
+        "A minha proposta é [[fechar uma parceria de conteúdo UGC em troca do produto]], pra vocês verem como fica na prática. Eu entrego [[o vídeo em vertical, com e sem legenda, em até 7 dias]], e vocês usam [[no Instagram e na página do produto]], sem prazo pra tirar do ar.",
+        "Faz sentido pra vocês? Me conta se tem campanha chegando, [[tipo Black Friday]], que eu já penso o formato certo pra ela. Meu portfólio está aqui: {{site}}",
+        "Qualquer coisa é só responder esse e-mail. {{nome}} {{arroba}}"
+      ]},
+    { nome: "A que fala de resultado",
+      as: "[[Vídeo pra página de produto de vocês]]",
+      ps: [
+        "Oiê, [[pessoa ou nome da marca]]! Aqui é a {{nome}}, criadora de conteúdo UGC. Eu faço o tipo de vídeo que parece feito por cliente e não por campanha: [[a pessoa usando o produto em casa, sem estúdio, com a luz que tem]]. É o formato que prende nos primeiros segundos, e é nele que eu me especializei dentro de {{nicho}}.",
+        "Vim falar com vocês por um motivo específico: [[eu vi que o produto de vocês tem foto boa e quase nenhum vídeo de gente usando]]. E como [[eu estou atrás exatamente desse produto pra minha casa agora]], a conversa fica fácil dos dois lados: eu uso de verdade e vocês ganham o vídeo que falta.",
+        "A proposta é [[eu gravar de 1 a 3 vídeos em formato UGC em troca do produto]], pra vocês testarem sem risco. A ideia que eu tenho é [[mostrar o antes e o depois do espaço com o produto instalado]], e dá pra cortar em versões curtas pros anúncios.",
+        "Vocês estão testando criativo novo agora? Se estiverem, eu quero estar nesse teste. Deixo o meu portfólio pra você dar uma olhada: {{site}}",
+        "Me diz se faz sentido que eu mando os formatos e os valores. {{nome}} {{arroba}}"
+      ]},
+    { nome: "A curtinha",
+      as: "[[Uma ideia de vídeo pra vocês]]",
+      ps: [
+        "Oiê, [[pessoa ou nome da marca]]! Aqui é a {{nome}}, criadora de conteúdo UGC em {{nicho}}. Eu gravo vídeo de produto do jeito que a sua cliente grava.",
+        "[[Estou reformando a minha cozinha e fui atrás do produto de vocês como cliente mesmo.]] Foi assim que eu cheguei aqui.",
+        "Pensei num vídeo: [[o primeiro uso, na cozinha real, em 40 segundos]]. A proposta é [[gravar em troca do produto]] e vocês usarem onde quiserem.",
+        "Faz sentido? Meu portfólio: {{site}}",
+        "{{nome}} {{arroba}}"
+      ]}
+  ],
+  dm: [
+    { nome: "A DM direta",
+      as: "",
+      ps: [
+        "Oiê! Aqui é a {{nome}}, criadora de conteúdo UGC em {{nicho}}.",
+        "[[Estou reformando a minha casa e vim atrás do produto de vocês de verdade, como cliente.]]",
+        "Pensei num vídeo: [[o primeiro uso, na cozinha real, mostrando o que ninguém mostra]]. A ideia é [[gravar em troca do produto]], pra vocês conhecerem o meu trabalho.",
+        "Topam conversar? Meu portfólio: {{site}}"
+      ]},
+    { nome: "A DM de duas linhas",
+      as: "",
+      ps: [
+        "Oiê! Sou a {{nome}}, gravo vídeo de produto em formato UGC. [[Vi o lançamento de vocês]] e já pensei num vídeo pra ele.",
+        "Posso te mandar a ideia por aqui ou prefere por e-mail? Meu portfólio: {{site}}"
+      ]}
+  ],
+  segundo: [
+    { nome: "O follow-up com oferta nova",
+      as: "[[sobre a ideia do vídeo]]",
+      ps: [
+        "Oiê, [[pessoa ou nome da marca]]! Voltando rapidinho por causa da ideia que eu mandei [[semana passada]].",
+        "Se ajudar a decidir, eu gravo [[um teste curto antes de qualquer acordo]], pra vocês verem como fica com o produto de vocês na mão. Sem compromisso nenhum.",
+        "Me conta se faz sentido. {{nome}} {{arroba}}"
+      ]},
+    { nome: "O follow-up com ideia nova",
+      as: "[[mais uma ideia pro produto de vocês]]",
+      ps: [
+        "Oiê, [[pessoa ou nome da marca]]! Como vocês não responderam a primeira, eu vim com outra ideia, porque eu realmente acho que dá match.",
+        "[[Pensei num vídeo curto comparando o antes e o depois do espaço com o produto de vocês instalado.]] É o tipo de conteúdo que funciona bem [[em anúncio de fim de ano]].",
+        "Se não for o momento, me diz que eu volto a falar [[em janeiro]], sem problema nenhum. Meu portfólio segue aqui: {{site}}",
+        "{{nome}} {{arroba}}"
+      ]}
+  ]
+};
+
+/* ═════════ campos ═════════ */
 var caixa = document.getElementById("campos");
 caixa.innerHTML = CAMPOS.map(function(g){
   return '<div class="grupo">' + g.grupo + '</div>' + g.itens.map(function(c){
     var v = (dados[c.id] || "").replace(/"/g, "&quot;");
-    var entrada = c.area
-      ? '<textarea id="c_' + c.id + '" data-id="' + c.id + '" placeholder="' + c.ph + '">' + (dados[c.id] || "") + '</textarea>'
-      : '<input id="c_' + c.id + '" data-id="' + c.id + '" type="text" value="' + v + '" placeholder="' + c.ph + '">';
-    return '<div class="campo"><label for="c_' + c.id + '">' + c.rot + '</label>' + entrada +
-           (c.ajuda ? '<div class="ajuda">' + c.ajuda + '</div>' : '') + '</div>';
+    return '<div class="campo"><label for="c_' + c.id + '">' + c.rot + '</label>' +
+      '<input id="c_' + c.id + '" data-id="' + c.id + '" type="text" value="' + v + '" placeholder="' + c.ph + '">' +
+      (c.ajuda ? '<div class="ajuda">' + c.ajuda + '</div>' : '') + '</div>';
   }).join("");
 }).join("");
 
 var salvoEl = document.getElementById("salvo"), relogio;
-function salvar(){
+function salvarDados(){
   try{ localStorage.setItem(CHAVE, JSON.stringify(dados)); }catch(e){}
   salvoEl.textContent = "Salvo no seu navegador";
   clearTimeout(relogio);
@@ -270,219 +339,122 @@ caixa.addEventListener("input", function(e){
   var el = e.target;
   if(!el.dataset.id) return;
   dados[el.dataset.id] = el.value;
-  salvar(); montar();
+  salvarDados();
+  desenhar();
 });
 document.getElementById("btnLimpar").addEventListener("click", function(){
-  if(!confirm("Isso apaga tudo o que você preencheu aqui. Tem certeza?")) return;
-  dados = {};
-  try{ localStorage.removeItem(CHAVE); }catch(e){}
+  if(!confirm("Isso apaga os seus dados e as suas edições no texto. Tem certeza?")) return;
+  dados = {}; edicoes = {};
+  try{ localStorage.removeItem(CHAVE); localStorage.removeItem(CHAVE_DOC); }catch(e){}
   [].slice.call(caixa.querySelectorAll("[data-id]")).forEach(function(el){ el.value = ""; });
-  montar();
+  desenhar();
 });
 
-/* ═════════ o e-mail ═════════ */
-var variacao = 0;
-var abaAtual = "email";
+/* ═════════ montar o documento ═════════ */
+var aba = "email", indice = { email:0, dm:0, segundo:0 };
+var doc = document.getElementById("doc"), docAs = document.getElementById("docAs");
+var conta = document.getElementById("conta"), dica = document.getElementById("dica");
+var qual = document.getElementById("qualVersao"), linhaAs = document.getElementById("linhaAs");
 
-function v(id, vazio){ var t = (dados[id] || "").trim(); return t || (vazio || ""); }
-function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-function pick(lista){ return lista[variacao % lista.length]; }
-function ponto(t){ t = String(t).trim(); if(!t) return ""; return /[.!?]$/.test(t) ? t : t + "."; }
-function minuscula(t){ t = String(t).trim(); return t ? t.charAt(0).toLowerCase() + t.slice(1) : ""; }
-function maiuscula(t){ t = String(t).trim(); return t ? t.charAt(0).toUpperCase() + t.slice(1) : ""; }
-
-function montarEmail(){
-  var nome    = v("nome", "{seu nome}");
-  var arroba  = v("arroba", "");
-  var grava   = v("grava", "vídeo de produto");
-  var dif     = v("dif", "");
-  var site    = v("site", "{link do seu portfólio}");
-  var marca   = v("marca", "{marca}");
-  var pessoa  = v("pessoa", "{pessoa}");
-  var produto = v("produto", "{produto}");
-  var gancho  = v("gancho", "");
-  var conexao = v("conexao", "");
-  var ideia   = v("ideia", "");
-  var entrega = v("entrega", "");
-
-  /* 1. gancho e o que eu faço */
-  var abertura = "Oi, " + pessoa + "!";
-  var p1 = [abertura];
-  if(gancho){
-    p1.push(pick([
-      "Vi " + minuscula(gancho) + " e já pensei num vídeo.",
-      "Vi " + minuscula(gancho) + " e fiquei com uma ideia na cabeça.",
-      "Vi " + minuscula(gancho) + " e vim trazer uma ideia."
-    ]));
-  }
-  p1.push(pick([
-    "Sou a " + nome + ", criadora de conteúdo UGC: eu gravo " + minuscula(grava) + ", pra marca usar no perfil e nos anúncios.",
-    "Sou a " + nome + " e faço conteúdo UGC. Eu gravo " + minuscula(grava) + ", pra usar no Instagram e nos anúncios de vocês.",
-    "Meu nome é " + nome + " e eu sou criadora de conteúdo UGC: gravo " + minuscula(grava) + ", pra marca usar no perfil e nos anúncios."
-  ]));
-  if(dif) p1.push(ponto(maiuscula(dif)));
-
-  /* 2. a conexão */
-  var p2 = [];
-  if(conexao){
-    p2.push(ponto(maiuscula(conexao)));
-    p2.push(pick([
-      "Foi assim que eu cheguei em vocês.",
-      "Por isso eu vim falar com vocês, e não com outra marca.",
-      "É por isso que eu quero fazer esse vídeo com vocês."
-    ]));
-  }
-
-  /* 3. a ideia */
-  var p3 = [];
-  if(ideia){
-    p3.push(pick([
-      "A ideia: " + minuscula(ponto(ideia)),
-      "O que eu pensei: " + minuscula(ponto(ideia)),
-      "A minha ideia é " + minuscula(ponto(ideia))
-    ]));
-  }
-  if(entrega) p3.push(pick([
-    "Entrego " + minuscula(ponto(entrega)),
-    "Eu entrego " + minuscula(ponto(entrega)),
-    "Na entrega vai " + minuscula(ponto(entrega))
-  ]));
-
-  /* 4. portfólio e pergunta */
-  var p4 = ["Meus trabalhos estão aqui: " + site + "\n"];
-  p4.push(pick([
-    "Faz sentido pra vocês? Eu mando os valores e os formatos.",
-    "Se fizer sentido, eu já mando os valores e os formatos.",
-    "Posso mandar os valores e os formatos?"
-  ]));
-
-  var assina = nome + (arroba ? " · " + arroba : "");
-  var paragrafos = [p1.join(" "), p2.join(" "), p3.join(" "), p4.join("")].filter(function(t){ return t.trim(); });
-  return paragrafos.join("\n\n") + "\n\n" + assina;
+function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function campo(k){
+  var t = (dados[k] || "").trim();
+  if(t) return esc(t);
+  var vazio = { nome:"seu nome", arroba:"@ do seu instagram", nicho:"o seu nicho", site:"link do seu portfólio" }[k] || k;
+  return '<span class="slot" data-orig="' + vazio + '">' + vazio + '</span>';
 }
-
-function assuntos(){
-  var marca   = v("marca", "{marca}");
-  var produto = v("produto", "{produto}");
-  var gancho  = v("gancho", "");
-  var lista = [
-    "Ideia de vídeo pro " + produto + " de vocês",
-    gancho ? "Vi " + minuscula(gancho) + " e tive uma ideia" : "Uma ideia de vídeo pra " + marca,
-    "Vídeo caseiro pro " + produto + " de vocês",
-    "Conteúdo pra página do produto de vocês"
-  ];
-  var vistos = {}, saida = [];
-  lista.forEach(function(a){ var k = a.toLowerCase(); if(!vistos[k]){ vistos[k] = 1; saida.push(a); } });
-  return saida;
+function marcar(txt){
+  return esc(txt)
+    .replace(/\{\{(\w+)\}\}/g, function(m, k){ return campo(k); })
+    .replace(/\[\[([^\]]+)\]\]/g, function(m, t){ return '<span class="slot" data-orig="' + t + '">' + t + '</span>'; });
 }
+function modelo(){ return MODELOS[aba][indice[aba]]; }
+function id(){ return aba + ":" + indice[aba]; }
 
-function montarDM(){
-  var nome    = v("nome", "{seu nome}");
-  var grava   = v("grava", "vídeo de produto");
-  var site    = v("site", "{link do seu portfólio}");
-  var conexao = v("conexao", "");
-  var ideia   = v("ideia", "");
-  var linhas = ["Oi! Sou a " + nome + ", criadora de conteúdo UGC, gravo " + minuscula(grava) + "."];
-  if(conexao) linhas.push(ponto(maiuscula(conexao)));
-  if(ideia)   linhas.push("Pensei num vídeo: " + minuscula(ponto(ideia)));
-  linhas.push("Meus trabalhos: " + site + "\nFaz sentido pra vocês?");
-  return linhas.join("\n");
-}
-
-function montarSegundo(){
-  var nome    = v("nome", "{seu nome}");
-  var pessoa  = v("pessoa", "{pessoa}");
-  var produto = v("produto", "{produto}");
-  return "Oi, " + pessoa + "! Passando rapidinho pra saber se a ideia do vídeo do " + produto + " faz sentido pra vocês."
-    + "\n\nSe for melhor, eu gravo um teste curto antes de qualquer acordo, pra vocês verem como fica com o produto de vocês na mão."
-    + "\n\nQualquer coisa eu fico por aqui. " + nome;
-}
-
-var elAssunto = document.getElementById("oAssunto");
-var elCorpo   = document.getElementById("oCorpo");
-var elConta   = document.getElementById("oConta");
-var elLista   = document.getElementById("listaAssuntos");
-var elCxAss   = document.getElementById("caixaAssuntos");
-var elChaves  = document.getElementById("avisoChaves");
-
-function textoAtual(){
-  if(abaAtual === "dm") return montarDM();
-  if(abaAtual === "segundo") return montarSegundo();
-  return montarEmail();
-}
-
-function montar(){
-  var corpo = textoAtual();
-  var ass = assuntos();
-  if(abaAtual === "email"){
-    elAssunto.textContent = ass[0];
-    document.querySelector(".papel__topo .de").textContent = "Assunto";
-    elCxAss.style.display = "block";
-    elLista.innerHTML = ass.slice(1).map(function(a){
-      return '<div class="op"><span>' + esc(a) + '</span><button type="button" data-ass="' + esc(a) + '">usar</button></div>';
-    }).join("");
-  } else if(abaAtual === "dm"){
-    elAssunto.textContent = "Primeira mensagem na DM";
-    document.querySelector(".papel__topo .de").textContent = "Instagram";
-    elCxAss.style.display = "none";
+function desenhar(){
+  var m = modelo(), salvo = edicoes[id()];
+  qual.textContent = "Versão " + (indice[aba]+1) + " de " + MODELOS[aba].length + " · " + m.nome;
+  linhaAs.style.display = m.as ? "block" : "none";
+  if(salvo){
+    doc.innerHTML = salvo.html;
+    docAs.innerHTML = salvo.as || "";
   } else {
-    elAssunto.textContent = "sobre o vídeo do " + v("produto", "{produto}");
-    document.querySelector(".papel__topo .de").textContent = "Assunto · 5 dias depois";
-    elCxAss.style.display = "none";
+    doc.innerHTML = m.ps.map(function(p){ return "<p>" + marcar(p) + "</p>"; }).join("");
+    docAs.innerHTML = m.as ? marcar(m.as) : "";
   }
-  elCorpo.textContent = corpo;
+  atualizarSlots();
+  contar();
+}
 
-  var palavras = corpo.split(/\s+/).filter(Boolean).length;
-  var gordo = palavras > 150 && abaAtual === "email";
-  elConta.innerHTML = '<b class="' + (gordo ? "gordo" : "") + '">' + palavras + ' palavras</b>'
-    + (abaAtual === "email" ? (gordo ? " · passou de 150, corta uma frase" : " · cabe na tela do celular") : "");
+function atualizarSlots(){
+  [].slice.call(document.querySelectorAll(".slot")).forEach(function(s){
+    var orig = s.dataset.orig || "";
+    s.classList.toggle("mexido", s.textContent.trim() !== orig.trim());
+  });
+}
 
-  var faltando = (corpo.match(/\{[a-zç ]+\}/gi) || []);
-  if(faltando.length){
-    var unicos = faltando.filter(function(x,i){ return faltando.indexOf(x) === i; });
-    elChaves.style.display = "block";
-    elChaves.innerHTML = "<b>Antes de enviar:</b> ainda tem " + unicos.join(", ")
-      + " no texto. Se for mandar pra uma marca só, preenche o campo. Se for usar no disparo em massa, deixa assim: a aba Prospecção troca sozinha, marca por marca.";
-  } else {
-    elChaves.style.display = "none";
-  }
+function contar(){
+  var txt = doc.innerText.replace(/\s+/g, " ").trim();
+  var palavras = txt ? txt.split(" ").length : 0;
+  var gordo = aba === "email" && palavras > 280;
+  var faltam = [].slice.call(document.querySelectorAll(".slot")).filter(function(s){
+    return s.textContent.trim() === (s.dataset.orig || "").trim();
+  }).length;
+  conta.innerHTML = '<b class="' + (gordo ? "gordo" : "") + '">' + palavras + " palavras</b>"
+    + (gordo ? " · ficou longo pra um primeiro e-mail, corta uma frase" : (aba === "email" ? " · bom tamanho" : ""))
+    + (faltam ? " · " + faltam + " grifo" + (faltam > 1 ? "s" : "") + " ainda pra trocar" : " · nenhum grifo em aberto");
+  dica.innerHTML = faltam
+    ? "<b>O que está grifado de amarelo é seu.</b> Clica em cima e escreve por cima, com as suas palavras. Quando você troca, o amarelo some. O resto do texto também pode ser mudado: é um documento, não um formulário."
+    : "<b>Pronto, nenhum grifo em aberto.</b> Lê em voz alta antes de mandar: se tiver uma frase que você não falaria, troca. E o botão de outra versão traz o mesmo padrão escrito de outro jeito.";
+}
+
+doc.addEventListener("input", function(){ guardar(); atualizarSlots(); contar(); });
+docAs.addEventListener("input", function(){ guardar(); atualizarSlots(); });
+function guardar(){
+  edicoes[id()] = { html: doc.innerHTML, as: docAs.innerHTML };
+  try{ localStorage.setItem(CHAVE_DOC, JSON.stringify(edicoes)); }catch(e){}
+  salvoEl.textContent = "Salvo no seu navegador";
+  clearTimeout(relogio);
+  relogio = setTimeout(function(){ salvoEl.textContent = ""; }, 2000);
 }
 
 [].slice.call(document.querySelectorAll(".aba")).forEach(function(b){
   b.addEventListener("click", function(){
     [].slice.call(document.querySelectorAll(".aba")).forEach(function(x){ x.classList.remove("on"); });
     b.classList.add("on");
-    abaAtual = b.dataset.aba;
-    montar();
+    aba = b.dataset.aba;
+    desenhar();
   });
 });
 
-elLista.addEventListener("click", function(e){
-  var b = e.target.closest("button[data-ass]");
-  if(!b) return;
-  elAssunto.textContent = b.dataset.ass;
-  aviso("Assunto trocado. O copiar já leva esse.");
+document.getElementById("btOutra").addEventListener("click", function(){
+  indice[aba] = (indice[aba] + 1) % MODELOS[aba].length;
+  desenhar();
+  aviso("Mesma estrutura, outro jeito de falar. O que você já tinha escrito na outra versão continua salvo lá.");
 });
 
-document.getElementById("btOutra").addEventListener("click", function(){
-  variacao++;
-  montar();
-  aviso("Outra versão. As frases de ligação mudaram, o seu conteúdo é o mesmo.");
+document.getElementById("btVoltar").addEventListener("click", function(){
+  if(!edicoes[id()]){ aviso("Essa versão já está como veio."); return; }
+  if(!confirm("Isso apaga o que você escreveu nesta versão e volta pro texto original. Tem certeza?")) return;
+  delete edicoes[id()];
+  try{ localStorage.setItem(CHAVE_DOC, JSON.stringify(edicoes)); }catch(e){}
+  desenhar();
+  aviso("Voltou pro original.");
 });
 
 /* ═════════ copiar ═════════ */
 var toast = document.getElementById("toast"), relogio2;
 function aviso(t){
   toast.textContent = t; toast.classList.add("on");
-  clearTimeout(relogio2); relogio2 = setTimeout(function(){ toast.classList.remove("on"); }, 2600);
+  clearTimeout(relogio2); relogio2 = setTimeout(function(){ toast.classList.remove("on"); }, 3000);
 }
 document.getElementById("btCopiar").addEventListener("click", function(){
   var b = this;
-  var txt = abaAtual === "dm" ? elCorpo.textContent
-          : "Assunto: " + elAssunto.textContent + "\n\n" + elCorpo.textContent;
+  var corpo = doc.innerText.replace(/\n{3,}/g, "\n\n").trim();
+  var txt = (modelo().as && docAs.innerText.trim() ? "Assunto: " + docAs.innerText.trim() + "\n\n" : "") + corpo;
   function ok(){
     b.textContent = "Copiado ✓"; b.classList.add("feito");
-    aviso(abaAtual === "dm" ? "Copiado. Cola na DM da marca." : "Copiado com o assunto. Cola no seu e-mail.");
+    aviso(aba === "dm" ? "Copiado. Cola na DM da marca." : "Copiado com o assunto. Cola no seu e-mail.");
     setTimeout(function(){ b.textContent = "Copiar"; b.classList.remove("feito"); }, 2400);
   }
   function velho(){
@@ -497,7 +469,16 @@ document.getElementById("btCopiar").addEventListener("click", function(){
   } else velho();
 });
 
-montar();
+/* cola sem trazer formatação de fora */
+[doc, docAs].forEach(function(el){
+  el.addEventListener("paste", function(e){
+    e.preventDefault();
+    var t = (e.clipboardData || window.clipboardData).getData("text/plain");
+    document.execCommand("insertText", false, t);
+  });
+});
+
+desenhar();
 
 /* ═════════ porteira ═════════ */
 var portao = document.getElementById("portao");
