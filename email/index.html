@@ -110,6 +110,11 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 .papel__topo .btl{margin-left:auto;display:flex;gap:7px}
 .btl button{font-family:var(--fm);font-size:11px;padding:6px 11px;border-radius:7px;border:1px solid var(--line);background:var(--white);color:var(--muted);cursor:pointer}
 .btl button:hover{background:var(--soft);color:var(--red);border-color:var(--red)}
+.btl .btl-forte{background:var(--red);border-color:var(--red);color:#fff}
+.btl .btl-forte:hover{background:var(--red-dark);border-color:var(--red-dark);color:#fff}
+.papel.carregando .doc{opacity:.45}
+.tarja{display:flex;align-items:center;gap:10px;padding:11px 24px;background:var(--butter);border-bottom:1px solid var(--line);font-size:14px}
+.tarja b{font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
 .linha-as{padding:18px 34px 0}
 .linha-as .rot{font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
 .doc-as{font-family:var(--fh);font-weight:800;font-size:18px;line-height:1.3;outline:none;border-radius:6px;padding:2px 4px;margin:0 -4px}
@@ -200,6 +205,7 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
         <div class="papel__topo">
           <span class="qual" id="qualVersao"></span>
           <span class="btl">
+            <button type="button" id="btEscrever" class="btl-forte">Escrever pra mim</button>
             <button type="button" id="btOutra">Outra versão</button>
             <button type="button" id="btVoltar">Voltar ao original</button>
           </span>
@@ -292,7 +298,7 @@ try{ IA.cache = JSON.parse(localStorage.getItem("email-imersao:ia") || "{}") || 
 /* quando eu mexo no gerador, o texto velho guardado aqui vira lixo: some com ele
    pra ninguem ficar olhando um e-mail antigo achando que a pagina nao atualizou.
    As respostas dela nao se perdem, so o texto gerado. */
-var VERSAO_GERADOR = "2026-09-20-b";
+var VERSAO_GERADOR = "2026-09-20-c";
 var atualizouAgora = false;
 try{
   if(localStorage.getItem("email-imersao:v") !== VERSAO_GERADOR){
@@ -331,7 +337,7 @@ var MODELOS = {
         "Oieee [[pessoa|(pessoa ou nome da marca)]], tudo bem?",
         "Aqui é a {{nome}}, criadora de conteúdo UGC{{deCidade}} ({{arroba}}). Cheguei em vocês pesquisando [[produto|(produto)]] e acabei ficando um tempão no site, principalmente [[detalhe:m|(o que você viu no site)]].",
         "[[conexao:f|Acabei de me mudar e estou montando a casa do zero, e o produto de vocês é o que falta aqui]] É esse aqui ó: [[link|(link do produto)]].",
-        "Quero gravar [[ideia:m|a chegada, o primeiro uso e o resultado, em tempo real]]. Isso vira vídeo vertical e fotos pra vocês usarem como UGC e em tráfego pago, e eu documento no meu perfil com @ e link.",
+        "A ideia: [[ideia:f|gravar a chegada, o primeiro uso e o resultado, em tempo real]] Isso vira vídeo vertical e fotos pra vocês usarem como UGC e em tráfego pago, e eu documento no meu perfil com @ e link.",
         "[[dif:f|Gravo em casa com luz natural e entrego rápido]] ?extras? [[extras:f|]]",
         "Se fizer sentido, vai ser incrível ter vocês nesse projeto :)\nPortfólio: {{site}}",
         "Att, {{nome}} / {{arroba}}",
@@ -632,6 +638,12 @@ function guardar(){
   });
 });
 
+document.getElementById("btEscrever").addEventListener("click", function(){
+  if(!respondidas()){ aviso("Responde pelo menos a primeira pergunta do lado direito e eu escrevo o resto."); return; }
+  if(aba !== "email"){ document.querySelector('.aba[data-aba="email"]').click(); }
+  escrever(ESTILOS[indice.email]);
+});
+
 document.getElementById("btOutra").addEventListener("click", function(){
   indice[aba] = (indice[aba] + 1) % nVersoes();
   var estilo = ESTILOS[indice.email];
@@ -654,7 +666,10 @@ document.getElementById("btVoltar").addEventListener("click", function(){
 });
 
 function escrever(estilo, silencioso){
+  var btTopo = document.getElementById("btEscrever");
   btGerar.disabled = true;
+  if(btTopo){ btTopo.disabled = true; btTopo.textContent = "Escrevendo..."; }
+  document.querySelector(".papel").classList.add("carregando");
   btGerar.textContent = "Escrevendo o seu e-mail...";
   btGerar.classList.remove("pisca");
   avisoGerar.textContent = "";
@@ -678,6 +693,8 @@ function escrever(estilo, silencioso){
     btGerar.textContent = "Montei sem a IA";
     aviso(motivo + " Montei o e-mail aqui mesmo com as suas respostas, e você pode escrever por cima.");
   }).then(function(){
+    document.querySelector(".papel").classList.remove("carregando");
+    if(btTopo){ btTopo.disabled = false; btTopo.textContent = "Escrever pra mim"; }
     setTimeout(function(){
       btGerar.disabled = false;
       btGerar.textContent = "Criar modelo de e-mail";
@@ -742,13 +759,20 @@ document.getElementById("btCopiar").addEventListener("click", function(){
 
 protegerSlot(doc); protegerSlot(docAs);
 desenhar();
-if(atualizouAgora){
-  setTimeout(function(){
-    aviso("Atualizei o gerador. Clica em criar modelo de e-mail pra refazer o texto com as suas respostas.");
-    btGerar.classList.add("pisca");
-    avisoGerar.textContent = "O gerador mudou. Clica aqui pra refazer o e-mail.";
-  }, 700);
-}
+/* se ela ja respondeu e ainda nao tem e-mail escrito, escreve sozinho:
+   ninguem deveria precisar descobrir onde fica o botao pra ver o texto dela. */
+(function(){
+  var estilo = ESTILOS[indice.email];
+  if(respondidas() >= 2 && !IA.cache[estilo] && !edicoes["email:0"]){
+    setTimeout(function(){ escrever(estilo, true); }, 350);
+  } else if(atualizouAgora){
+    setTimeout(function(){
+      aviso("Atualizei o gerador. Clica em escrever pra mim pra refazer o texto.");
+      btGerar.classList.add("pisca");
+      avisoGerar.textContent = "O gerador mudou. Clica aqui pra refazer o e-mail.";
+    }, 700);
+  }
+})();
 
 /* ═════════ porteira ═════════ */
 var portao = document.getElementById("portao");
