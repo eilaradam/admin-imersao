@@ -170,7 +170,7 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
 <header class="capa">
   <div class="selo">Dia 2 · Tarde</div>
   <h1 class="titulo">Responde quatro coisas. O e-mail se escreve.</h1>
-  <p class="sub">Você escreve do jeito que você falaria, sem se preocupar com começo, meio e fim. O site encaixa o que você escreveu na estrutura que a gente usa aqui e devolve o e-mail inteiro, pronto pra copiar e mandar.</p>
+  <p class="sub">Você escreve do jeito que você falaria, sem se preocupar com começo, meio e fim. O site lê as suas respostas, reescreve com jeito de e-mail e devolve o texto inteiro dentro da estrutura que a gente usa aqui, pronto pra copiar e mandar.</p>
 
   <h2 class="bloco">As quatro perguntas são os quatro parágrafos</h2>
   <div class="passo4">
@@ -218,7 +218,7 @@ h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-r
     </div>
 
     <aside class="form">
-      <p class="form__intro">Quatro perguntas. Escreve corrido, sem se preocupar com a ordem nem com frase bonita: isso é comigo.</p>
+      <p class="form__intro">Quatro perguntas. Escreve corrido, sem se preocupar com a ordem nem com frase bonita: quem arruma é a escrita automática, do lado de cá.</p>
       <div id="campos"></div>
       <button class="bt bt-gerar" id="btGerar" type="button">Criar modelo de e-mail</button>
       <p class="aviso-gerar" id="avisoGerar"></p>
@@ -277,10 +277,36 @@ try{
    ?campo? no começo        o parágrafo só existe se ela respondeu aquilo
    {{nome}}                 os dados dela                                                    */
 
+/* ═════════ a IA que escreve ═════════
+   A chave da OpenAI mora num segredo da função no Supabase, nunca aqui.
+   Esta chave abaixo é a PÚBLICA do projeto, a mesma que já está no site. */
+var IA = {
+  url: "https://mfrmnquvwwuxraqgemyh.supabase.co/functions/v1/escrever-email",
+  key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1mcm1ucXV2d3d1eHJhcWdlbXloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDI1NDIsImV4cCI6MjA4NzYxODU0Mn0.zmsi08dV5L1IlXJSr34vOii71w0g0OsD5_5DKio5g-o",
+  cache: {}
+};
+try{ IA.cache = JSON.parse(localStorage.getItem("email-imersao:ia") || "{}") || {}; }catch(e){ IA.cache = {}; }
+var ESTILOS = ["direta", "ideia", "resultado", "curta"];
+
+function salvarIA(){ try{ localStorage.setItem("email-imersao:ia", JSON.stringify(IA.cache)); }catch(e){} }
+
+function chamarIA(estilo){
+  return fetch(IA.url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", apikey: IA.key, Authorization: "Bearer " + IA.key },
+    body: JSON.stringify({
+      palavra: "imersao2", estilo: estilo,
+      nome: (dados.nome||"").trim(), arroba: (dados.arroba||"").trim(), site: (dados.site||"").trim(),
+      dif: (dados.dif||"").trim(), conexao: (dados.conexao||"").trim(),
+      ideia: (dados.ideia||"").trim(), extras: (dados.extras||"").trim()
+    })
+  }).then(function(r){ return r.json(); });
+}
+
 var MODELOS = {
   email: [
     { nome: "A proposta direta",
-      as: "Ideia de conteúdo pro [[produto|(produto de vocês)]]",
+      as: "Ideia de conteúdo pro [[produto|(nome do produto)]]",
       ps: [
         "Oiê, [[pessoa|(pessoa ou nome da marca)]]! Aqui é a {{nome}}{{souCreator}} [[dif:f|Gravo na minha casa de verdade, com luz natural, entrego em até 7 dias e já trabalhei com mais de 10 marcas]] Encontrei o site de vocês, dei uma olhada em tudo e saí de lá com uma ideia que eu precisava mandar 👀",
         "Vou te contar por que eu vim falar com vocês e não com outra marca. [[conexao:f|Estou reformando a minha casa e nesse exato momento estou procurando um fogão de indução pra cozinha nova, e o modelo de vocês é exatamente o que cabe no meu espaço]] É por isso que faz sentido ser agora, e não daqui a seis meses.",
@@ -290,7 +316,7 @@ var MODELOS = {
         "Fico no aguardo! {{nome}} {{arroba}}"
       ]},
     { nome: "Começando pela ideia",
-      as: "Pensei num conteúdo pro [[produto|(produto de vocês)]]",
+      as: "Pensei num conteúdo pro [[produto|(nome do produto)]]",
       ps: [
         "Oiê, [[pessoa|(pessoa ou nome da marca)]]! Aqui é a {{nome}}{{souCreator}} Deixa eu começar pela ideia, porque foi ela que me fez escrever: [[ideia:m|gravar a instalação e o dia a dia com o produto]] 👀",
         "Antes que você ache que é mais um e-mail igual, deixa eu me apresentar direito. [[dif:f|Gravo na minha casa de verdade, com luz natural, entrego em até 7 dias e já trabalhei com mais de 10 marcas]]",
@@ -301,7 +327,7 @@ var MODELOS = {
         "Qualquer coisa é só responder esse e-mail. {{nome}} {{arroba}}"
       ]},
     { nome: "A que fala de resultado",
-      as: "Conteúdo pra página do [[produto|(produto de vocês)]]",
+      as: "Conteúdo pra página do [[produto|(nome do produto)]]",
       ps: [
         "Oiê, [[pessoa|(pessoa ou nome da marca)]]! Aqui é a {{nome}}{{souCreator}} Eu faço o tipo de conteúdo que parece feito por cliente e não por campanha, que é justamente o que segura a atenção nos primeiros segundos. [[dif:f|Gravo na minha casa de verdade, com luz natural, entrego em até 7 dias e já trabalhei com mais de 10 marcas]]",
         "Vim falar com vocês porque tem uma coisa aqui que ninguém mais consegue gravar igual agora. [[conexao:f|Estou reformando a minha casa e nesse exato momento estou procurando um fogão de indução pra cozinha nova]] Ou seja: eu uso o produto de verdade, no momento certo, e isso aparece na tela.",
@@ -311,7 +337,7 @@ var MODELOS = {
         "Me diz se faz sentido que eu mando os formatos e os valores. {{nome}} {{arroba}}"
       ]},
     { nome: "A curtinha",
-      as: "Uma ideia de conteúdo pro [[produto|(produto de vocês)]]",
+      as: "Uma ideia de conteúdo pro [[produto|(nome do produto)]]",
       ps: [
         "Oiê, [[pessoa|(pessoa ou nome da marca)]]! Aqui é a {{nome}}{{souCreator}} [[dif:f|Gravo na minha casa de verdade, com luz natural, e entrego em até 7 dias]] 👀",
         "[[conexao:f|Estou reformando a minha casa e nesse exato momento estou procurando um fogão de indução pra cozinha nova]] Foi assim que eu cheguei em vocês.",
@@ -383,13 +409,15 @@ document.querySelector(".form").addEventListener("input", function(e){
   if(!el.dataset.id) return;
   dados[el.dataset.id] = el.value;
   salvarDados();
+  IA.cache = {}; salvarIA();
   btGerar.classList.add("pisca");
-  avisoGerar.textContent = "Você mudou uma resposta. Clica em criar modelo de e-mail pra o texto se atualizar.";
+  avisoGerar.textContent = "Você mudou uma resposta. Clica em criar modelo de e-mail pra ele escrever de novo.";
 });
 document.getElementById("btnLimpar").addEventListener("click", function(){
   if(!confirm("Isso apaga as suas respostas e o que você escreveu no texto. Tem certeza?")) return;
   dados = {}; edicoes = {};
-  try{ localStorage.removeItem(CHAVE); localStorage.removeItem(CHAVE_DOC); }catch(e){}
+  IA.cache = {};
+  try{ localStorage.removeItem(CHAVE); localStorage.removeItem(CHAVE_DOC); localStorage.removeItem("email-imersao:ia"); }catch(e){}
   [].slice.call(document.querySelectorAll(".form [data-id]")).forEach(function(el){ el.value = ""; });
   desenhar();
 });
@@ -434,6 +462,13 @@ function marcar(txt){
     });
 }
 
+function marcarSaidaIA(txt){
+  return esc(txt)
+    .replace(/\{\{\s*pessoa\s*\}\}/gi, '<span class="slot" data-orig="(pessoa ou nome da marca)">(pessoa ou nome da marca)</span>')
+    .replace(/\{\{\s*produto\s*\}\}/gi, '<span class="slot" data-orig="(nome do produto)">(nome do produto)</span>')
+    .replace(/\{\{\s*nome\s*\}\}/gi, function(){ return campoFixo("nome"); })
+    .replace(/\{\{\s*site\s*\}\}/gi, function(){ return campoFixo("site"); });
+}
 function modelo(){ return MODELOS[aba][indice[aba]]; }
 function id(){ return aba + ":" + indice[aba]; }
 
@@ -455,9 +490,14 @@ function desenhar(usarEdicao){
   var salvo = usarEdicao === false ? null : edicoes[id()];
   qual.textContent = "Versão " + (indice[aba]+1) + " de " + MODELOS[aba].length + " · " + m.nome;
   linhaAs.style.display = m.as ? "block" : "none";
+  var daIA = (aba === "email") ? IA.cache[ESTILOS[indice.email]] : null;
   if(salvo){
     doc.innerHTML = salvo.html;
     docAs.innerHTML = salvo.as || "";
+  } else if(daIA){
+    doc.innerHTML = daIA.paragrafos.map(function(t){ return "<p>" + marcarSaidaIA(t) + "</p>"; }).join("");
+    docAs.innerHTML = marcarSaidaIA(daIA.assunto || "");
+    qual.textContent = "Versão " + (indice[aba]+1) + " de " + MODELOS[aba].length + " · " + m.nome + " · escrita pra você";
   } else {
     var novo = gerarHtml();
     doc.innerHTML = novo.html;
@@ -492,12 +532,59 @@ function contar(){
   dica.innerHTML = r < 3
     ? "<b>Isso aqui ainda é exemplo meu.</b> Responde as perguntas do lado direito e clica em criar modelo de e-mail: o texto todo se refaz com as suas palavras, do começo ao fim."
     : (faltam
-      ? "<b>O e-mail já é seu.</b> O que sobrou grifado de amarelo é o que muda de marca pra marca, tipo o nome de quem vai ler. Clica em cima e escreve, ou deixa assim se for usar no disparo em massa."
+      ? "<b>O e-mail já é seu.</b> O que sobrou grifado de amarelo é o que muda de marca pra marca. Clica em cima e escreve: se aquele grifo aparecer mais de uma vez, os outros mudam junto."
       : "<b>Pronto pra mandar.</b> Lê em voz alta antes: se tiver uma frase que você não falaria, escreve por cima. E o botão de outra versão traz a mesma estrutura escrita de outro jeito, com as suas respostas dentro.");
 }
 
-doc.addEventListener("input", function(){ guardar(); atualizarSlots(); contar(); });
-docAs.addEventListener("input", function(){ guardar(); atualizarSlots(); });
+/* quando ela seleciona o grifo inteiro e digita, o navegador apagaria o grifo
+   junto com o texto. Aqui a gente escreve dentro dele e o grifo sobrevive,
+   que é o que faz os iguais continuarem andando juntos. */
+function protegerSlot(alvoEl){
+  alvoEl.addEventListener("beforeinput", function(e){
+    if(e.inputType !== "insertText" || !e.data) return;
+    var sel = window.getSelection();
+    if(!sel.rangeCount || sel.isCollapsed) return;
+    var r = sel.getRangeAt(0);
+    var no = r.startContainer.nodeType === 1 ? r.startContainer : r.startContainer.parentNode;
+    var slot = no && no.closest ? no.closest(".slot") : null;
+    if(!slot || !slot.contains(r.endContainer)) return;
+    e.preventDefault();
+    /* os offsets podem ser de nó ou de caractere, então mede com Range mesmo */
+    var rAntes = document.createRange();
+    rAntes.selectNodeContents(slot);
+    rAntes.setEnd(r.startContainer, r.startOffset);
+    var antes = rAntes.toString();
+    var rDepois = document.createRange();
+    rDepois.selectNodeContents(slot);
+    rDepois.setStart(r.endContainer, r.endOffset);
+    var depois = rDepois.toString();
+    slot.textContent = antes + e.data + depois;
+    var pos = antes.length + e.data.length;
+    var nr = document.createRange();
+    if(slot.firstChild) nr.setStart(slot.firstChild, Math.min(pos, slot.firstChild.length));
+    else nr.selectNodeContents(slot);
+    nr.collapse(true);
+    sel.removeAllRanges(); sel.addRange(nr);
+    slot.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+}
+
+function sincronizarSlots(){
+  var sel = window.getSelection();
+  if(!sel || !sel.anchorNode) return;
+  var no = sel.anchorNode.nodeType === 1 ? sel.anchorNode : sel.anchorNode.parentNode;
+  var alvo = no && no.closest ? no.closest(".slot") : null;
+  if(!alvo) return;
+  var orig = alvo.dataset.orig, txt = alvo.textContent;
+  [].slice.call(doc.querySelectorAll(".slot")).forEach(function(s){
+    if(s !== alvo && s.dataset.orig === orig && s.textContent !== txt) s.textContent = txt;
+  });
+  [].slice.call(docAs.querySelectorAll(".slot")).forEach(function(s){
+    if(s !== alvo && s.dataset.orig === orig && s.textContent !== txt) s.textContent = txt;
+  });
+}
+doc.addEventListener("input", function(){ sincronizarSlots(); guardar(); atualizarSlots(); contar(); });
+docAs.addEventListener("input", function(){ sincronizarSlots(); guardar(); atualizarSlots(); });
 function guardar(){
   edicoes[id()] = { html: doc.innerHTML, as: docAs.innerHTML };
   try{ localStorage.setItem(CHAVE_DOC, JSON.stringify(edicoes)); }catch(e){}
@@ -517,6 +604,12 @@ function guardar(){
 
 document.getElementById("btOutra").addEventListener("click", function(){
   indice[aba] = (indice[aba] + 1) % MODELOS[aba].length;
+  var estilo = ESTILOS[indice.email];
+  if(aba === "email" && respondidas() && !IA.cache[estilo] && !edicoes[id()]){
+    desenhar();
+    escrever(estilo, true).then(function(){ aviso("Outra versão, escrita do zero com as suas respostas."); });
+    return;
+  }
   desenhar();
   aviso("Mesma estrutura, outro jeito de falar, com as suas respostas dentro.");
 });
@@ -530,19 +623,46 @@ document.getElementById("btVoltar").addEventListener("click", function(){
   aviso("Montado de novo com as suas respostas.");
 });
 
-btGerar.addEventListener("click", function(){
-  if(!respondidas()){ aviso("Responde pelo menos a primeira pergunta e eu monto o resto."); return; }
-  delete edicoes[id()];
-  try{ localStorage.setItem(CHAVE_DOC, JSON.stringify(edicoes)); }catch(e){}
-  desenhar(false);
+function escrever(estilo, silencioso){
+  btGerar.disabled = true;
+  btGerar.textContent = "Escrevendo o seu e-mail...";
   btGerar.classList.remove("pisca");
   avisoGerar.textContent = "";
-  var t = "Criar modelo de e-mail";
-  btGerar.textContent = "Modelo criado ✓";
-  btGerar.classList.add("feito");
-  setTimeout(function(){ btGerar.textContent = t; btGerar.classList.remove("feito"); }, 2200);
+  return chamarIA(estilo).then(function(r){
+    if(!r || !r.ok || !r.paragrafos || !r.paragrafos.length) throw r || {};
+    IA.cache[estilo] = { assunto: r.assunto || "", paragrafos: r.paragrafos };
+    salvarIA();
+    delete edicoes[id()];
+    try{ localStorage.setItem(CHAVE_DOC, JSON.stringify(edicoes)); }catch(e){}
+    desenhar(false);
+    btGerar.textContent = "Modelo criado ✓";
+    btGerar.classList.add("feito");
+    if(!silencioso) aviso("Pronto. Lê com calma e escreve por cima do que não estiver com a sua cara.");
+  }).catch(function(err){
+    /* sem internet, limite batido ou IA fora do ar: monta pelo modelo daqui mesmo */
+    delete edicoes[id()];
+    desenhar(false);
+    var motivo = (err && err.error === "limite_ip") ? "Você já criou muitos modelos hoje."
+      : (err && err.error === "limite_dia") ? "O limite de hoje bateu."
+      : "A escrita automática não respondeu agora.";
+    btGerar.textContent = "Montei sem a IA";
+    aviso(motivo + " Montei o e-mail aqui mesmo com as suas respostas, e você pode escrever por cima.");
+  }).then(function(){
+    setTimeout(function(){
+      btGerar.disabled = false;
+      btGerar.textContent = "Criar modelo de e-mail";
+      btGerar.classList.remove("feito");
+    }, 2200);
+  });
+}
+
+btGerar.addEventListener("click", function(){
+  if(!respondidas()){ aviso("Responde pelo menos a primeira pergunta e eu escrevo o resto."); return; }
+  if(aba !== "email"){
+    document.querySelector('.aba[data-aba="email"]').click();
+  }
+  escrever(ESTILOS[indice.email]);
   document.querySelector(".papel").scrollIntoView({ behavior:"smooth", block:"start" });
-  aviso("Pronto. Lê com calma e escreve por cima do que não estiver com a sua cara.");
 });
 
 /* ═════════ copiar ═════════ */
@@ -580,6 +700,7 @@ document.getElementById("btCopiar").addEventListener("click", function(){
   });
 });
 
+protegerSlot(doc); protegerSlot(docAs);
 desenhar();
 
 /* ═════════ porteira ═════════ */
