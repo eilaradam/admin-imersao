@@ -315,10 +315,10 @@ var MODELOS = {
         "Oieee [[pessoa|(pessoa ou nome da marca)]], tudo bem?",
         "Aqui é a {{nome}}, criadora de conteúdo UGC{{deCidade}} ({{arroba}}). Cheguei em vocês pesquisando [[produto|(produto)]] e acabei ficando um tempão no site, principalmente [[detalhe:m|(o que você viu no site)]].",
         "[[conexao:f|Acabei de me mudar e estou montando a casa do zero, e o produto de vocês é o que falta aqui]] É esse aqui ó: [[link|(link do produto)]].",
-        "A ideia que eu já tenho na cabeça é [[ideia:m|gravar a chegada, o primeiro uso e o resultado, em tempo real]]. Isso vira vídeo vertical e fotos em arquivo pra vocês usarem como UGC, inclusive em tráfego pago, e eu documento o processo no meu perfil, marcando vocês e com link nos stories.",
+        "Quero gravar [[ideia:m|a chegada, o primeiro uso e o resultado, em tempo real]]. Isso vira vídeo vertical e fotos pra vocês usarem como UGC e em tráfego pago, e eu documento no meu perfil com @ e link.",
         "[[dif:f|Gravo em casa com luz natural e entrego rápido]] ?extras? [[extras:f|]]",
         "Se fizer sentido, vai ser incrível ter vocês nesse projeto :)\nPortfólio: {{site}}",
-        "Att, {{nome}}\n{{arroba}}",
+        "Att, {{nome}} / {{arroba}}",
         "P.S.: independente dessa collab, me conta como funciona o processo de vocês com criativos hoje? Se tiverem lista de creators, quero entrar nela."
       ]},
     { nome: "Rascunho curto",
@@ -330,7 +330,7 @@ var MODELOS = {
         "Minha ideia: [[ideia:m|gravar a chegada, o primeiro uso e o resultado]]. Vira vídeo vertical em arquivo pra vocês usarem como quiserem, e eu mostro o processo no meu perfil marcando vocês.",
         "[[dif:f|Gravo em casa com luz natural e entrego rápido]] ?extras? [[extras:f|]]",
         "Se fizer sentido, vai ser incrível ter vocês nesse projeto :)\nPortfólio: {{site}}",
-        "Att, {{nome}}\n{{arroba}}",
+        "Att, {{nome}} / {{arroba}}",
         "P.S.: independente dessa collab, me conta como funciona o processo de vocês com criativos hoje? Se tiverem lista de creators, quero entrar nela."
       ]}
   ],
@@ -356,7 +356,7 @@ var MODELOS = {
       ps: [
         "Oieee [[pessoa|(pessoa ou nome da marca)]]! Voltando rapidinho por causa da ideia que eu mandei [[quando|semana passada]].",
         "Se ajudar a decidir, eu gravo um teste curto antes de qualquer acordo, pra vocês verem como fica com o produto de vocês na mão. Sem compromisso nenhum.",
-        "Att, {{nome}}\n{{arroba}}"
+        "Att, {{nome}} / {{arroba}}"
       ]},
     { nome: "O follow-up com ideia nova",
       as: "mais uma ideia pra vocês",
@@ -364,7 +364,7 @@ var MODELOS = {
         "Oieee [[pessoa|(pessoa ou nome da marca)]]! Como eu não tive retorno da primeira, vim com outra ideia, porque eu realmente acho que dá match.",
         "[[ideia2:f|Pensei num conteúdo curto comparando o antes e o depois com o produto de vocês]]",
         "Se não for o momento, me diz que eu volto a falar mais pra frente, sem problema nenhum. Portfólio: {{site}}",
-        "Att, {{nome}}\n{{arroba}}"
+        "Att, {{nome}} / {{arroba}}"
       ]}
   ]
 };
@@ -532,12 +532,12 @@ function respondidas(){
 function contar(){
   var txt = doc.innerText.replace(/\s+/g, " ").trim();
   var palavras = txt ? txt.split(" ").length : 0;
-  var gordo = aba === "email" && palavras > 320;
+  var gordo = aba === "email" && palavras > 200;
   var faltam = [].slice.call(document.querySelectorAll(".slot")).filter(function(s){
     return s.textContent.trim() === (s.dataset.orig || "").trim();
   }).length;
   conta.innerHTML = '<b class="' + (gordo ? "gordo" : "") + '">' + palavras + " palavras</b>"
-    + (gordo ? " · ficou longo pra um primeiro e-mail, corta uma frase" : (aba === "email" ? " · bom tamanho" : ""))
+    + (gordo ? " · longo pra um primeiro contato, corta uma frase" : (aba === "email" ? " · bom tamanho pra ler no celular" : ""))
     + (faltam ? " · " + faltam + " grifo" + (faltam > 1 ? "s" : "") + " ainda pra trocar" : " · nenhum grifo em aberto");
   var r = respondidas();
   dica.innerHTML = r < 3
