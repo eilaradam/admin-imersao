@@ -298,7 +298,7 @@ try{ IA.cache = JSON.parse(localStorage.getItem("email-imersao:ia") || "{}") || 
 /* quando eu mexo no gerador, o texto velho guardado aqui vira lixo: some com ele
    pra ninguem ficar olhando um e-mail antigo achando que a pagina nao atualizou.
    As respostas dela nao se perdem, so o texto gerado. */
-var VERSAO_GERADOR = "2026-09-20-c";
+var VERSAO_GERADOR = "2026-09-20-d";
 var atualizouAgora = false;
 try{
   if(localStorage.getItem("email-imersao:v") !== VERSAO_GERADOR){
@@ -554,14 +554,14 @@ function respondidas(){
 function contar(){
   var txt = doc.innerText.replace(/\s+/g, " ").trim();
   var palavras = txt ? txt.split(" ").length : 0;
-  var gordo = aba === "email" && palavras > 220;
-  var curto = aba === "email" && palavras > 0 && palavras < 170;
+  var gordo = aba === "email" && palavras > 200;
+  var curto = aba === "email" && palavras > 0 && palavras < 140;
   var faltam = [].slice.call(document.querySelectorAll(".slot")).filter(function(s){
     return s.textContent.trim() === (s.dataset.orig || "").trim();
   }).length;
   conta.innerHTML = '<b class="' + (gordo ? "gordo" : (curto ? "curto" : "")) + '">' + palavras + " palavras</b>"
     + (gordo ? " · longo pra um primeiro contato, corta uma frase"
-       : curto ? " · ficou curto, o ideal é entre 180 e 220"
+       : curto ? " · ficou curto, o ideal é entre 150 e 190"
        : (aba === "email" ? " · bom tamanho pra ler no celular" : ""))
     + (faltam ? " · " + faltam + " grifo" + (faltam > 1 ? "s" : "") + " ainda pra trocar" : " · nenhum grifo em aberto");
   var r = respondidas();
