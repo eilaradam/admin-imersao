@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prompt do Disparo de E-mail · Imersão</title>
+<meta name="description" content="Copie o prompt e cole no seu Claude Code pra ter disparo de e-mail em massa dentro do seu admin.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📨</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C8441A; --red-dark:#A3360F; --ink:#1B1B1B; --cream:#FFF8F2; --cream2:#F3EFE9;
+  --line:#E8E0D8; --muted:#5A5550; --white:#fff; --soft:#FFF0E8; --butter:#FEF7CF; --green:#1C7A4E;
+  --fh:'Montserrat',Arial,sans-serif; --fb:'DM Sans',Arial,sans-serif; --fm:'DM Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font-family:var(--fb);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+::selection{background:var(--butter)}
+a{color:var(--red)}
+
+/* ---------- porteira ---------- */
+#portao{position:fixed;inset:0;z-index:100;background:var(--ink);display:flex;align-items:center;justify-content:center;padding:24px}
+#portao.fora{display:none}
+.portao__caixa{background:var(--cream);border-radius:14px;padding:clamp(30px,5vw,46px) clamp(24px,4vw,42px);max-width:480px;width:100%;text-align:center}
+.portao__selo{font-family:var(--fm);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:13px}
+.portao__caixa h1{font-family:var(--fh);font-weight:900;font-size:clamp(28px,6vw,40px);letter-spacing:-.025em;line-height:1.05;margin-bottom:12px}
+.portao__caixa p{color:var(--muted);font-size:16px;max-width:34ch;margin:0 auto}
+#portaoForm{display:flex;gap:10px;margin-top:26px}
+#portaoForm input{flex:1;min-width:0;border:2px solid var(--ink);border-radius:9px;padding:14px 16px;font-family:var(--fb);font-size:16px;background:var(--white)}
+#portaoForm input:focus{outline:3px solid var(--red);outline-offset:1px}
+#portaoForm button{background:var(--red);color:#fff;border:0;border-radius:9px;padding:14px 26px;font-family:var(--fh);font-weight:800;font-size:15px;cursor:pointer}
+#portaoErro{visibility:hidden;color:var(--red);font-weight:600;font-size:15px;margin-top:15px}
+#portaoErro.on{visibility:visible}
+
+/* ---------- pagina ---------- */
+.capa{max-width:1180px;margin:0 auto;padding:52px 6vw 0}
+.selo{font-family:var(--fm);font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+h1.titulo{font-family:var(--fh);font-weight:900;font-size:clamp(30px,4.6vw,52px);line-height:1.04;letter-spacing:-.025em;max-width:20ch}
+.sub{margin-top:15px;font-size:clamp(16px,1.8vw,20px);color:var(--muted);max-width:62ch}
+
+h2.bloco{font-family:var(--fh);font-weight:800;font-size:clamp(18px,2.1vw,24px);letter-spacing:-.015em;margin:48px 0 16px;display:flex;align-items:center;gap:10px}
+h2.bloco::before{content:"";width:22px;height:4px;background:var(--red);border-radius:2px;flex:0 0 auto}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin-top:18px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:18px;box-shadow:0 3px 0 rgba(27,27,27,.06)}
+.card h3{font-family:var(--fh);font-weight:800;font-size:16px;margin-bottom:6px}
+.card p{font-size:14.5px;color:var(--muted)}
+.card .n{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--red);margin-bottom:7px}
+
+.passos{list-style:none;counter-reset:ps;display:grid;gap:12px;margin-top:18px}
+.passos>li{counter-increment:ps;position:relative;padding:16px 18px 16px 60px;background:var(--white);border:1px solid var(--line);border-radius:8px}
+.passos>li::before{content:counter(ps);position:absolute;left:18px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:13px}
+.passos>li b{display:block;font-family:var(--fh);font-weight:800;font-size:15.5px;margin-bottom:3px}
+.passos>li span{font-size:14.5px;color:var(--muted)}
+.mono{font-family:var(--fm)}
+
+.aviso{background:var(--soft);border:1px solid #F3C7B3;border-radius:8px;padding:16px 18px 16px 50px;position:relative;margin-top:20px;font-size:15px}
+.aviso::before{content:"⚠️";position:absolute;left:17px;top:15px;font-size:18px}
+.aviso b{font-family:var(--fh);font-weight:800}
+
+/* ---------- oficina ---------- */
+.oficina{max-width:1180px;margin:0 auto;padding:0 6vw 90px}
+.duas{display:grid;grid-template-columns:1.25fr .75fr;gap:26px;align-items:start;margin-top:18px}
+.prompt{background:var(--ink);border-radius:10px;overflow:hidden;position:sticky;top:20px}
+.prompt__topo{display:flex;align-items:center;gap:12px;padding:13px 16px;background:#000}
+.prompt__topo .lbl{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:#FF9166;flex:1}
+.prompt__topo button{background:var(--red);color:#fff;border:0;border-radius:7px;padding:9px 18px;font-family:var(--fh);font-weight:800;font-size:13.5px;cursor:pointer}
+.prompt__topo button:hover{background:var(--red-dark)}
+.prompt__topo button.feito{background:var(--green)}
+#promptTexto{margin:0;padding:20px;color:#F2ECE6;font-family:var(--fm);font-size:13.5px;line-height:1.62;white-space:pre-wrap;word-break:break-word;max-height:68vh;overflow:auto}
+#promptTexto mark{background:rgba(255,145,102,.22);color:#FFB08C;padding:1px 4px;border-radius:3px}
+
+.form{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:22px;box-shadow:0 3px 0 rgba(27,27,27,.06)}
+.form__intro{font-size:14.5px;color:var(--muted);margin-bottom:18px}
+.grupo{font-family:var(--fm);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:20px 0 9px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.grupo:first-of-type{margin-top:0}
+.campo{margin-bottom:12px}
+.campo label{display:block;font-size:12.5px;font-weight:600;margin-bottom:4px}
+.campo input,.campo textarea{width:100%;border:1px solid var(--line);border-radius:7px;padding:10px 12px;font-family:var(--fb);font-size:14.5px;background:var(--cream);color:var(--ink)}
+.campo textarea{min-height:64px;resize:vertical}
+.campo input:focus,.campo textarea:focus{outline:2px solid var(--red);outline-offset:0;background:var(--white)}
+.campo .ajuda{font-size:11.5px;color:var(--muted);margin-top:4px}
+.btn-limpar{margin-top:16px;background:none;border:1px solid var(--line);border-radius:7px;padding:9px 14px;font-family:var(--fb);font-size:13px;color:var(--muted);cursor:pointer}
+.btn-limpar:hover{border-color:var(--ink);color:var(--ink)}
+.salvo{font-size:12.5px;color:var(--green);margin-top:10px;min-height:18px;font-weight:600}
+
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);background:var(--ink);color:#fff;padding:13px 22px;border-radius:9px;font-family:var(--fh);font-weight:700;font-size:14.5px;z-index:90;transition:transform .3s}
+#toast.on{transform:translate(-50%,0)}
+
+.rodape{border-top:1px solid var(--line);margin-top:20px;padding-top:20px;font-size:13.5px;color:var(--muted)}
+
+@media (max-width:920px){
+  .duas{grid-template-columns:1fr}
+  .form{order:1}
+  .prompt{order:2;position:static}
+  #promptTexto{max-height:60vh}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div id="portao">
+  <div class="portao__caixa">
+    <div class="portao__selo">Imersão Claude pra Creator</div>
+    <h1>Disparo de E-mail</h1>
+    <p>A parte da tarde do dia 2. Digite a palavra que eu falei na aula.</p>
+    <form id="portaoForm">
+      <input id="senha" type="text" autocomplete="off" placeholder="a palavra da aula" aria-label="senha">
+      <button type="submit">Entrar</button>
+    </form>
+    <p id="portaoErro">Não é essa. Tenta de novo 💛</p>
+  </div>
+</div>
+
+<header class="capa">
+  <div class="selo">Dia 2 · Tarde</div>
+  <h1 class="titulo">O seu e-mail saindo pra cinquenta marcas de uma vez.</h1>
+  <p class="sub">Esse é o prompt da aba de disparo. Ele entra no admin que você já construiu ontem e transforma a sua base de marcas em e-mail enviado. Preenche os campos da direita, copia e cola no seu Claude Code, na mesma pasta do seu site.</p>
+
+  <h2 class="bloco">O que ele vai construir</h2>
+  <div class="cards">
+    <div class="card"><div class="n">01</div><h3>📨 Aba Prospecção</h3><p>Escolhe as marcas, escreve o e-mail uma vez e manda pra todas com um clique.</p></div>
+    <div class="card"><div class="n">02</div><h3>👋 Nome de cada uma</h3><p>Você escreve {{nome}} no texto e cada marca recebe chamando ela pelo nome dela.</p></div>
+    <div class="card"><div class="n">03</div><h3>🧪 Teste primeiro</h3><p>Um botão que manda só pra você, pra conferir no celular antes de qualquer envio.</p></div>
+    <div class="card"><div class="n">04</div><h3>🔒 Chave escondida</h3><p>A chave do Resend fica guardada no Supabase. Ela nunca entra no seu site.</p></div>
+    <div class="card"><div class="n">05</div><h3>📋 Histórico</h3><p>Quem recebeu, quando e se deu erro. E a opção de pular quem já recebeu.</p></div>
+    <div class="card"><div class="n">06</div><h3>✍️ Plano B sem domínio</h3><p>Enquanto você não tiver domínio próprio, ele monta o e-mail pronto e abre no seu Gmail.</p></div>
+  </div>
+
+  <h2 class="bloco">Antes de colar</h2>
+  <ul class="passos">
+    <li><b>Esteja na pasta do seu site</b><span>A mesma de ontem, a que tem a pasta admin dentro. Se abrir em pasta nova, ele não acha o seu painel.</span></li>
+    <li><b>Tenha marcas com e-mail na sua base</b><span>A aba Marcas precisa ter pelo menos algumas empresas com e-mail preenchido, senão não tem pra quem mandar.</span></li>
+    <li><b>Crie a sua conta no Resend</b><span>É o carteiro. Conta gratuita em <span class="mono">resend.com</span>. Gere a chave e guarde num lugar seguro, porque ela aparece uma vez só.</span></li>
+  </ul>
+  <div class="aviso"><b>Leia isso antes de sonhar com o disparo:</b> o Resend só entrega e-mail pra outras pessoas depois que você verifica um domínio seu. Sem domínio próprio, ele manda só pra você mesma, e isso serve pra testar. Por isso o prompt já pede um plano B: o modo rascunho, que monta o e-mail de cada marca personalizado e abre no seu Gmail pronto pra enviar. Funciona hoje, de graça, sem domínio nenhum.</div>
+</header>
+
+<main class="oficina">
+  <h2 class="bloco">Seu prompt</h2>
+  <div class="duas">
+    <div class="prompt">
+      <div class="prompt__topo">
+        <span class="lbl">Prompt do disparo</span>
+        <button id="btnCopiar" type="button">Copiar prompt</button>
+      </div>
+      <pre id="promptTexto"></pre>
+    </div>
+    <aside class="form">
+      <p class="form__intro">Preencha o que você já tem. O prompt do lado vai se completando sozinho, e fica salvo no seu navegador.</p>
+      <div id="campos"></div>
+      <button class="btn-limpar" id="btnLimpar" type="button">Limpar meus dados</button>
+      <p class="salvo" id="salvo"></p>
+      <div class="rodape"><strong>@eilaradam</strong><br>Imersão Claude pra Creator · Dia 2</div>
+    </aside>
+  </div>
+</main>
+
+<div id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ═════════ campos ═════════ */
+var CAMPOS = [
+  { grupo: "Seus dados", itens: [
+    { id:"nome",  rot:"Seu nome", ph:"Lara Dam" }
+  ]},
+  { grupo: "Seu site", itens: [
+    { id:"site",  rot:"Endereço do seu site já publicado", ph:"seunome.github.io/portfolio",
+      ajuda:"O mesmo do prompt do admin. É lá dentro que a aba nova vai entrar." }
+  ]},
+  { grupo: "Seus e-mails", itens: [
+    { id:"login", rot:"E-mail do seu login no admin", ph:"voce@email.com",
+      ajuda:"O mesmo que você usa pra entrar no seu /login. Só ele vai poder disparar." },
+    { id:"contato", rot:"E-mail que as marcas respondem", ph:"contato@voce.com",
+      ajuda:"Pode ser o mesmo. É pra onde volta a resposta da marca quando ela clicar em responder." }
+  ]},
+  { grupo: "Se quiser", itens: [
+    { id:"extraDisparo", rot:"Mais alguma coisa que você quer nessa aba", ph:"quero poder salvar 3 modelos de e-mail diferentes", area:true }
+  ]}
+];
+
+var CHAVE = "admin-imersao:dados";
+var dados = {};
+
+/* reaproveita o que ela ja preencheu na apostila, que mora no mesmo endereco */
+function daApostila(){
+  try{
+    var x = JSON.parse(localStorage.getItem("guia-imersao:aluna") || "null");
+    if(!x) return;
+    if(!dados.nome && x.nome)    dados.nome = x.nome;
+    if(!dados.insta && x.arroba) dados.insta = "@" + x.arroba;
+  }catch(e){}
+}
+try{ dados = JSON.parse(localStorage.getItem(CHAVE) || "{}") || {}; }catch(e){ dados = {}; }
+daApostila();
+
+var caixa = document.getElementById("campos");
+caixa.innerHTML = CAMPOS.map(function(g){
+  return '<div class="grupo">' + g.grupo + '</div>' + g.itens.map(function(c){
+    var v = (dados[c.id] || "").replace(/"/g, "&quot;");
+    var entrada = c.area
+      ? '<textarea id="c_' + c.id + '" data-id="' + c.id + '" placeholder="' + c.ph + '">' + (dados[c.id] || "") + '</textarea>'
+      : '<input id="c_' + c.id + '" data-id="' + c.id + '" type="text" value="' + v + '" placeholder="' + c.ph + '">';
+    return '<div class="campo"><label for="c_' + c.id + '">' + c.rot + '</label>' + entrada +
+           (c.ajuda ? '<div class="ajuda">' + c.ajuda + '</div>' : '') + '</div>';
+  }).join("");
+}).join("");
+
+var salvoEl = document.getElementById("salvo"), relogio;
+function salvar(){
+  try{ localStorage.setItem(CHAVE, JSON.stringify(dados)); }catch(e){}
+  salvoEl.textContent = "Salvo no seu navegador";
+  clearTimeout(relogio);
+  relogio = setTimeout(function(){ salvoEl.textContent = ""; }, 2000);
+}
+caixa.addEventListener("input", function(e){
+  var el = e.target;
+  if(!el.dataset.id) return;
+  dados[el.dataset.id] = el.value;
+  salvar(); montar();
+});
+document.getElementById("btnLimpar").addEventListener("click", function(){
+  if(!confirm("Isso apaga tudo o que você preencheu aqui. Tem certeza?")) return;
+  dados = {};
+  try{ localStorage.removeItem(CHAVE); }catch(e){}
+  [].slice.call(caixa.querySelectorAll("[data-id]")).forEach(function(el){ el.value = ""; });
+  montar();
+});
+
+/* ═════════ o prompt ═════════ */
+function v(id, padrao){
+  var t = (dados[id] || "").trim();
+  return t ? t : padrao;
+}
+function texto(){
+  var v = function(id, vazio){ var t = (dados[id] || "").trim(); return t || vazio; };
+  var nome    = v("nome",    "[SEU NOME]");
+  var site    = v("site",    "[ENDEREÇO DO SEU SITE]");
+  var login   = v("login",   "[E-MAIL DO SEU LOGIN]");
+  var contato = v("contato", "[SEU E-MAIL DE CONTATO]");
+  var extra   = (dados.extraDisparo || "").trim();
+  var base = "Você vai acrescentar uma aba nova no meu admin, dentro da MESMA pasta do meu site. Não crie pasta nova e não mexa no que já funciona.\n\nEu não programo. Fale comigo em português simples, me avise antes de mudar qualquer coisa grande e, no fim, me explique o que você fez.\n\n== QUEM SOU EU ==\nNome: [SEU NOME]\nMeu site já publicado: [ENDEREÇO DO SEU SITE]\nO e-mail do meu login no admin: [E-MAIL DO SEU LOGIN]\nO e-mail que eu quero que as marcas respondam: [SEU E-MAIL DE CONTATO]\n\n== O QUE EU QUERO ==\nUma aba chamada PROSPECÇÃO, que manda o meu e-mail de apresentação para várias marcas da minha base de uma vez, chamando cada uma pelo nome, sem eu copiar e colar uma por uma.\n\n== ANTES DE COMEÇAR, OLHE O QUE JÁ EXISTE ==\nAbra o meu admin e a minha tabela de marcas no Supabase antes de escrever qualquer código.\nUse as colunas que já existem. A coluna de situação pode se chamar situacao ou status, e os valores podem ser lead, conversando, cliente, parada ou outros. Descubra e use o que está lá, não invente nome novo e não recrie tabela que já existe.\nSe faltar alguma coluna que você precise, acrescente com ALTER TABLE, sem apagar nada.\n\n== PARTE 1: O CARTEIRO ==\nO meu admin não sabe mandar e-mail sozinho, então crie uma função no Supabase (Edge Function) chamada enviar-emails, que manda pelo Resend.\n\nA CHAVE DO RESEND É SECRETA. Ela fica guardada como segredo da função, no painel do Supabase, com o nome RESEND_API_KEY. Ela NUNCA pode aparecer em arquivo nenhum do meu site, nem em js/banco.js, nem no HTML, nem em comentário. Se em algum momento você precisar dela, me peça pra colar no painel, nunca no código.\n\nA função tem que:\n1. Recusar quem não está logado. Ela confere o token do Supabase Auth e só aceita o meu usuário, o do e-mail [E-MAIL DO SEU LOGIN]. Qualquer outro recebe recusa.\n2. Receber a lista de destinatários, o assunto e o texto em HTML.\n3. Aceitar no máximo 250 destinatários por chamada, pra não estourar.\n4. Trocar {{nome}} pelo primeiro nome de cada marca antes de enviar, e {{marca}} pelo nome completo da marca.\n5. Pular quem estiver na tabela de descadastro.\n6. Esperar 200 milissegundos entre um envio e outro, que é mais ou menos 5 por segundo, que é o ritmo seguro do Resend.\n7. Mandar o e-mail com reply_to no meu e-mail de contato, pra resposta da marca cair na minha caixa de sempre.\n8. Colocar o cabeçalho List-Unsubscribe apontando pro meu e-mail com o assunto SAIR.\n9. Gravar UMA LINHA POR DESTINATÁRIO na tabela de registro, com e-mail, assunto, se deu certo, o erro quando der errado e o id que o Resend devolve. Isso não é firula: sem isso, quando um disparo morre no meio, eu não tenho como saber quem recebeu e quem não recebeu.\n10. Se o Resend responder daily_quota_exceeded, que é a cota diária acabando, PARAR na hora, não continuar tentando, e me devolver quantos foram enviados e quantos ficaram faltando.\n11. Devolver no fim: quantos enviados, quantos falharam, quantos foram pulados e se a cota acabou.\n\n== PARTE 2: AS DUAS TABELAS NOVAS ==\nEscreva o SQL num arquivo chamado disparo.sql, comentado em português, e me diga exatamente onde colar no Supabase.\n\nemail_envios: e-mail, assunto, status (ok ou erro), o erro, o id do Resend e a data.\nemail_optout: o e-mail de quem pediu pra não receber mais, e a data.\n\nLigue o RLS nas duas. Só eu, logada, leio e escrevo. Ninguém deslogado enxerga nada.\n\n== PARTE 3: A ABA PROSPECÇÃO ==\nA aba entra no menu do admin, com o mesmo visual das outras, e tem duas partes.\n\nESCOLHER PRA QUEM VAI\nUma listinha de opções: só pra mim (teste), todas as marcas que têm e-mail, e uma opção pra cada situação da minha base (só os leads, só quem está conversando, só quem já é cliente).\nEmbaixo, o número de marcas daquela seleção, ao vivo.\nQuando duas marcas tiverem o mesmo e-mail, que acontece quando é o e-mail de uma agência, manda uma vez só.\nUma caixinha marcada por padrão: pular quem já recebeu este mesmo assunto. Serve pra continuar um disparo que parou no meio sem mandar duas vezes pra mesma pessoa.\n\nESCREVER O E-MAIL\nCampo de assunto.\nCampo de texto grande, onde eu escrevo o e-mail e uso {{nome}} e {{marca}} onde eu quiser que entre o nome da marca.\nUm campo opcional de botão (texto do botão e link), que vira um botão bonito no e-mail.\nUma pré-visualização do lado, mostrando como vai chegar, já com um nome de exemplo no lugar das chaves.\nO e-mail sai num modelo simples e limpo, que abre bem no celular: fundo branco, letra escura, largura máxima de 560 pixels, um link só, nenhum anexo, e um rodapé pequenininho dizendo que é só responder com SAIR pra não receber mais.\n\nENVIAR\nUm botão \"enviar teste pra mim\", que manda só pro meu e-mail, e que eu tenho que usar antes de tudo.\nUm botão de disparar que, antes de mandar, abre uma confirmação escrita assim: vai para X marcas, da lista tal, e não dá pra desfazer.\nO envio acontece em lotes de 100, com uma barra de progresso mostrando quantos já foram.\nQuando terminar, um resumo: enviados, falhas, pulados.\nSe a cota diária do Resend acabar no meio, a tela precisa explicar isso com todas as letras e me dizer pra voltar amanhã, colar o mesmo assunto e o mesmo texto e deixar marcada a caixinha de pular quem já recebeu, que aí ele manda só pros que faltaram.\nDepois de enviar, marque cada marca como enviada, com a data de hoje, na minha tabela de marcas.\n\nO HISTÓRICO\nEmbaixo, uma tabela com tudo que já saiu: pra quem, qual assunto, quando e se deu erro. Com busca por e-mail.\n\n== SE EU AINDA NÃO TIVER DOMÍNIO PRÓPRIO ==\nIsso é importante: o Resend só deixa enviar pra outras pessoas depois que eu verifico um domínio meu. Enquanto eu não tiver domínio verificado, ele só entrega e-mail pra mim mesma.\nEntão a aba precisa ter TAMBÉM um segundo modo, o modo rascunho, que funciona sem Resend nenhum:\n- eu seleciono as marcas do mesmo jeito,\n- ele monta o e-mail de cada uma, já com o nome dela dentro,\n- e me mostra uma fila, uma marca por vez, com o assunto e o texto prontos, um botão de copiar o texto e um botão que abre o Gmail já com o destinatário, o assunto e o corpo preenchidos, pra eu só clicar em enviar,\n- quando eu marco como enviada, ela sai da fila e vira enviada na minha base, com a data.\nEsse modo é o meu plano B e ele tem que funcionar mesmo que eu nunca configure o Resend.\n\n== AS TRAVAS QUE NÃO PODEM FALTAR ==\n1. Nunca enviar sem eu confirmar numa janela que diz o número de destinatários.\n2. Nunca mandar duas vezes pro mesmo e-mail no mesmo disparo.\n3. Quem respondeu SAIR entra no descadastro e nunca mais recebe, e isso vale pros próximos disparos também.\n4. E-mail que voltar com erro fica registrado, pra eu poder limpar a base depois.\n5. Nenhuma chave secreta em lugar nenhum do site.\n6. Se faltar alguma tabela, a aba não pode abrir em branco: ela avisa o que falta e continua funcionando no resto.\n\n== O VISUAL ==\nIgual ao resto do meu admin: mesmas cores, mesma fonte, mesmos cantos arredondados. Nada de tela cheia de texto sem respiro. Nunca use travessão em texto nenhum.\n\n== PRA TERMINAR ==\n1. Me dê o passo a passo, em português simples, do que eu preciso fazer com as minhas próprias mãos: criar a conta no Resend, gerar a chave, onde exatamente colar essa chave no painel do Supabase e como subir a função.\n2. Me explique, em duas linhas, o que muda quando eu tiver um domínio meu verificado, e o que eu consigo fazer enquanto não tiver.\n3. Me ensine a trocar o texto do e-mail depois, sem mexer em código.\n4. Me diga como eu testo que deu certo: mandar o teste pra mim mesma, abrir no celular e conferir que o meu nome e o nome da marca entraram nos lugares certos.\n5. Publique no GitHub e me mande o endereço da aba.\n\nComece me dizendo o que você entendeu e o que vai fazer primeiro. Depois pode começar.";
+  var t = base
+    .split("[SEU NOME]").join(nome)
+    .split("[ENDEREÇO DO SEU SITE]").join(site)
+    .split("[E-MAIL DO SEU LOGIN]").join(login)
+    .split("[SEU E-MAIL DE CONTATO]").join(contato);
+  if(extra){ t = t.replace("== PRA TERMINAR ==", "== O QUE EU AINDA QUERO ==\n" + extra + "\n\n== PRA TERMINAR =="); }
+  return t;
+}
+
+var alvo = document.getElementById("promptTexto");
+function montar(){ alvo.textContent = texto(); }
+montar();
+
+/* ═════════ copiar ═════════ */
+var toast = document.getElementById("toast"), relogio2;
+function aviso(t){
+  toast.textContent = t; toast.classList.add("on");
+  clearTimeout(relogio2); relogio2 = setTimeout(function(){ toast.classList.remove("on"); }, 2400);
+}
+document.getElementById("btnCopiar").addEventListener("click", function(){
+  var b = this, txt = alvo.textContent;
+  function ok(){
+    b.textContent = "Copiado ✓"; b.classList.add("feito");
+    aviso("Prompt copiado. Cole no seu Claude Code, na pasta do portfólio.");
+    setTimeout(function(){ b.textContent = "Copiar prompt"; b.classList.remove("feito"); }, 2400);
+  }
+  function velho(){
+    var ta = document.createElement("textarea");
+    ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); ok(); }catch(e){ aviso("Não deu pra copiar. Seleciona o texto na mão."); }
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(ok).catch(velho);
+  } else velho();
+});
+
+/* ═════════ porteira ═════════ */
+var portao = document.getElementById("portao");
+var liberado = false;
+try{ liberado = localStorage.getItem("imersaoOk") === "1"; }catch(e){}
+if(liberado){ portao.classList.add("fora"); }
+else {
+  setTimeout(function(){ try{ document.getElementById("senha").focus(); }catch(e){} }, 160);
+  document.getElementById("portaoForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var campo = document.getElementById("senha");
+    var t = campo.value.trim().toLowerCase().replace(/\s+/g, "");
+    if(t === "imersao" || t === "imersao2" || t === "turma2"){
+      try{ localStorage.setItem("imersaoOk", "1"); }catch(e){}
+      portao.classList.add("fora");
+    } else {
+      document.getElementById("portaoErro").classList.add("on");
+      campo.select();
+    }
+  });
+}
+})();
+</script>
+</body>
+</html>
